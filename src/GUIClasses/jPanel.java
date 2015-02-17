@@ -87,18 +87,25 @@ public class jPanel extends JPanel {
 
  
     public JScrollPane addTextArea(String[] text, Rectangle location, boolean edit) {
-        //JTextArea textArea = new JTextArea(text);
-        //textArea.setEditable(edit);
+        
     	
-    	JList list = new JList(text);
-        JScrollPane scrollPane = new JScrollPane(list);
+    	JList list = new JList(text); //Populates list with array
+        JScrollPane scrollPane = new JScrollPane(list); //Populates scrollpane with list information in initialisation 
         scrollPane.setBounds(location);
         add(scrollPane);
         return scrollPane;
     }
     
+    public JLabel addLabel(String labelText){
+    	JLabel label = new JLabel(labelText);
+    	
+    	
+    	return label;
+    }
+    
     public JMenuBar addMenuBar(String[] text){
     	JMenuBar menuBar = new JMenuBar();
+    	
     	JMenuItem[] menuItems = new JMenuItem[text.length];
     	for (int i = 0; i<text.length; i++){
     		menuItems[i] = new JMenuItem(text[i].toString());
