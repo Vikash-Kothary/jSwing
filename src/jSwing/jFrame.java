@@ -114,13 +114,16 @@ public class jFrame extends JFrame {
 	}
 
 	public JMenu addMenu(String menuTitle, String[] menuItems) {
-        JMenu menu = new JMenu(menuTitle);
-        for (String itemTitle : menuItems) {
-            JMenuItem menuItem = new JMenuItem(itemTitle);
-            menu.add(menuItem);
-        }
-        menuBar.add(menu);
-        return menu;
+		if(menuItems!=null){
+	        JMenu menu = new JMenu(menuTitle);
+	        for (String itemTitle : menuItems) {
+	            JMenuItem menuItem = new JMenuItem(itemTitle);
+	            menu.add(menuItem);
+	        }
+	        menuBar.add(menu);
+	        return menu;
+		}
+		return null;
     }
 
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {

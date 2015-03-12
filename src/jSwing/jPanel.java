@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -92,6 +93,12 @@ public class jPanel extends JPanel {
         add(button, format);
         buttons.add(button);
         return button;
+    }
+    
+    public JTextField addTextField(String text, String format){
+    	JTextField textField = new JTextField("");
+    	add(textField, format);
+    	return textField;
     }
 
 //    public JScrollPane addTextArea(String text, Rectangle location, boolean edit) {
@@ -173,12 +180,15 @@ public class jPanel extends JPanel {
         return label;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JScrollPane addList(String[] text) {
-        JList list = new JList(text);
-        JScrollPane scrollPane = new JScrollPane(list);
-        add(scrollPane);
-        return scrollPane;
+		if(text!=null){
+	        JList list = new JList(text);
+	        JScrollPane scrollPane = new JScrollPane(list);
+	        add(scrollPane);
+	        return scrollPane;
+		}
+		return null;
     }
 
     public void setPadding(int top, int left, int bottom, int right) {
