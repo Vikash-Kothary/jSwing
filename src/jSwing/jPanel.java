@@ -27,6 +27,7 @@ public class jPanel extends JPanel {
 	private int width, height;
     private ArrayList<JLabel> labels;
     private ArrayList<JButton> buttons;
+	private ArrayList<JList> lists;
 
     // Constructor
     public jPanel() {
@@ -41,6 +42,7 @@ public class jPanel extends JPanel {
     private void _init() {
         labels = new ArrayList<>();
         buttons = new ArrayList<>();
+        lists = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -73,6 +75,15 @@ public class jPanel extends JPanel {
             }
         }
         return null;
+    }
+    
+    public JList getList(String text){
+    	for(JList list : lists){
+    		if (list.getName().contains(text)){
+    			return list;
+    		}
+    	}
+		return null;
     }
 
 //    public JButton addButton(String name, Rectangle location) {
@@ -181,12 +192,14 @@ public class jPanel extends JPanel {
     }
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public JScrollPane addList(String[] text) {
+	public JList addList(String[] text, String name) {
 		if(text!=null){
 	        JList list = new JList(text);
+	        list.setName(name);
 	        JScrollPane scrollPane = new JScrollPane(list);
 	        add(scrollPane);
-	        return scrollPane;
+	        lists.add(list);
+	        return list;
 		}
 		return null;
     }
