@@ -17,6 +17,8 @@ public class InformationPopup extends jFrame {
 		student  = _student;
 		
 		jPanel container = new jPanel();
+		jPanel topPanel = new jPanel();
+		jPanel bottomPanel = new jPanel();
 		container.setLayout(new GridLayout(4,1));
 		
 		JLabel studentName = new JLabel(student.getFullName());
@@ -28,7 +30,7 @@ public class InformationPopup extends jFrame {
 		JLabel studentNumber = new JLabel("Student No.: "+student.getStudentNumber());
 		studentNumber.setHorizontalAlignment(SwingConstants.LEFT);
 		container.add(studentNumber);
-		JLabel tutorEmail = new JLabel("Tutor: ");
+		JLabel tutorEmail = new JLabel("Tutor: " + student.getTutorEmail());
 		tutorEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		container.add(tutorEmail);
 		

@@ -28,6 +28,9 @@ public class jPanel extends JPanel {
     private ArrayList<JLabel> labels;
     private ArrayList<JButton> buttons;
 	private ArrayList<JList> lists;
+	private ArrayList<JTextArea> textAreas;
+	private ArrayList<JTextField> textFields;
+	private ArrayList<JScrollPane> scrollPanes;
 
     // Constructor
     public jPanel() {
@@ -43,6 +46,9 @@ public class jPanel extends JPanel {
         labels = new ArrayList<>();
         buttons = new ArrayList<>();
         lists = new ArrayList<>();
+        textAreas = new ArrayList<>();
+        textFields = new ArrayList<>();
+        scrollPanes = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -85,6 +91,34 @@ public class jPanel extends JPanel {
     	}
 		return null;
     }
+    
+    public JTextArea getTextArea(String text){
+    	for(JTextArea tArea : textAreas){
+    		if(tArea.getName().contains(text)){
+    			return tArea;
+    		}
+    	}
+		return null;
+    }
+    
+    public JTextField getTextField(String text){
+    	for(JTextField tField : textFields){
+    		if(tField.getName().contains(text)){
+    			return tField;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JScrollPane getScrollPane(String text){
+    	for(JScrollPane sPane : scrollPanes){
+    		if(sPane.getName().contains(text)){
+    			return sPane;
+    		}
+    	}
+    	return null;
+    }
+    
 
 //    public JButton addButton(String name, Rectangle location) {
 //        JButton button = new JButton(name);
@@ -106,9 +140,13 @@ public class jPanel extends JPanel {
         return button;
     }
     
-    public JTextField addTextField(String text, String format){
-    	JTextField textField = new JTextField("");
+    public JTextField addTextField(String text, String name, String format){
+    	JTextField textField = new JTextField();
+    	textField.setText(text);
+    	textField.setName(name);
+    	textFields.add(textField);
     	add(textField, format);
+    	
     	return textField;
     }
 
@@ -120,12 +158,14 @@ public class jPanel extends JPanel {
 //        add(scrollPane);
 //        return scrollPane;
 //    }
-    public JScrollPane addTextArea(String text) {
+    public JTextArea addTextArea(String text) {
         JTextArea textArea = new JTextArea(text);
+        textArea.setName(text);
         JScrollPane scrollPane = new JScrollPane(textArea);
+        textAreas.add(textArea);
         add(scrollPane);
 //        components.add(scrollPane);
-        return scrollPane;
+        return textArea;
     }
 
 //    public void addImage(String path, Rectangle location) {
@@ -192,17 +232,28 @@ public class jPanel extends JPanel {
     }
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public JList addList(String[] text, String name) {
+	public JList addList(String[] text, String listName, String scrollName) {
 		if(text!=null){
 	        JList list = new JList(text);
-	        list.setName(name);
+	        list.setName(listName);
 	        JScrollPane scrollPane = new JScrollPane(list);
+	        scrollPane.setName(scrollName);
+	        scrollPanes.add(scrollPane);
 	        add(scrollPane);
 	        lists.add(list);
 	        return list;
 		}
 		return null;
     }
+	
+	public JList setList(String[] text, JList list, JScrollPane scrollPane){
+	
+		list.setListData(text);
+		scrollPane.setViewportView(list);
+		scrollPane.revalidate();
+		scrollPane.repaint();
+		return null;
+	}
 
     public void setPadding(int top, int left, int bottom, int right) {
         setBorder(new EmptyBorder(top, left, bottom, right));
