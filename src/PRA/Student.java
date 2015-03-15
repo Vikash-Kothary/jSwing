@@ -6,12 +6,14 @@ public class Student {
 	private String lastName;
 	private String studentNumber;
 	private String emailAddress;
+	private String tutorEmail;
 	
-	public Student(String _firstName, String _lastName, String _studentNumber, String _emailAddress){
+	public Student(String _firstName, String _lastName, String _studentNumber, String _emailAddress, String _tutorEmail){
 		firstName = _firstName;
 		lastName = _lastName;
 		studentNumber = _studentNumber;
 		emailAddress = _emailAddress;
+		tutorEmail = _tutorEmail;
 	}
 
 	/**
@@ -74,6 +76,20 @@ public class Student {
 		this.emailAddress = emailAddress;
 	}
 
+	/**
+	 * @return the tutorEmail
+	 */
+	public String getTutorEmail() {
+		return tutorEmail;
+	}
+	
+	/**
+	 * @param tutorEmail the tutorEmail to set
+	 */
+	public void setTutorEmail(String tutorEmail){
+		this.tutorEmail = tutorEmail;
+	}
+	
 	
 	
 }
