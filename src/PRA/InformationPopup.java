@@ -6,6 +6,7 @@ import jSwing.jPanel;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class InformationPopup extends jFrame {
@@ -16,16 +17,21 @@ public class InformationPopup extends jFrame {
 		student  = _student;
 		
 		jPanel container = new jPanel();
-		container.setLayout(new GridLayout(1,4));
+		container.setLayout(new GridLayout(4,1));
 		
 		JLabel studentName = new JLabel(student.getFullName());
+		studentName.setHorizontalAlignment(SwingConstants.CENTER);
 		container.add(studentName);
 		JLabel studentEmail = new JLabel("<html><i>"+student.getEmailAddress()+"</i></html>");
+		studentEmail.setHorizontalAlignment(SwingConstants.CENTER);
 		container.add(studentEmail);
 		JLabel studentNumber = new JLabel("Student No.: "+student.getStudentNumber());
+		studentNumber.setHorizontalAlignment(SwingConstants.LEFT);
 		container.add(studentNumber);
-		JLabel tutorEmail = new JLabel();
+		JLabel tutorEmail = new JLabel("Tutor: ");
+		tutorEmail.setHorizontalAlignment(SwingConstants.LEFT);
 		container.add(tutorEmail);
+		
 		
 		this.setContainer(container);
 		
