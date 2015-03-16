@@ -19,7 +19,7 @@ public class InterfaceWindow extends jFrame {
 
 	public InterfaceWindow(final StudentList mainList) {
 		super("PRA Coursework - Deep Vein Thrombosis");
-		this.setSize(1000, 600); // delete afterwards
+		this.setSize(1000, 600); // delete afterwards or should i
 
 		initMenu();
 
@@ -42,6 +42,7 @@ public class InterfaceWindow extends jFrame {
 					new InformationPopup(mainList.getStudent(students
 							.getList("studentList").getList()
 							.getSelectedIndex()));
+					// returns list index
 				}
 			}
 		});
