@@ -70,27 +70,7 @@ public class InterfaceWindow extends jFrame {
 			}
 		});
 
-		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				
-				final JFileChooser fc = new JFileChooser();
-					
-				int returnVal = fc.showOpenDialog(InterfaceWindow.this);
-				
-				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-						java.io.File file = fc.getSelectedFile();
-						String fileName = file.toString();
-						
-						JOptionPane.showMessageDialog(InterfaceWindow.this, fileName); //Temporary, to display file path
-				}
-			}
-		});
-		
-		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.exit(0);
-			}
-		});
+
 		
 		this.setContainer(container);
 
