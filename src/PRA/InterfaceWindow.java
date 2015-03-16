@@ -139,13 +139,13 @@ public class InterfaceWindow extends jFrame {
 		BufferedReader br = null;
 		String line = " ";
 		String cvsSplitBy = ",";
-		String[] country = null;
+		String[] student = null;
 		int lengthOfFile = 0;
 		try {
 	 
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {    
-				country = line.split(cvsSplitBy); 					 
+				student = line.split(cvsSplitBy); 					 
 			}
 			
 	
@@ -164,7 +164,7 @@ public class InterfaceWindow extends jFrame {
 			}
 		}
 	 
-		return country;
+		return student;
 	}
 }
 
