@@ -21,13 +21,13 @@ import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
-
+	
     private Image bgImage = null;
 	private int width, height;
     private ArrayList<JLabel> labels;
     private ArrayList<JButton> buttons;
-	private ArrayList<JScrollPane> lists;
-	private ArrayList<JScrollPane> textAreas;
+	private ArrayList<jScrollPane> lists;
+	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
 
     // Constructor
@@ -84,23 +84,23 @@ public class jPanel extends JPanel {
         return null;
     }
     
-    public JScrollPane getList(String text){
-    	for(JScrollPane list : lists){
-    		if (list.getName().contains(text)){
-    			return list;
-    		}
-    	}
-		return null;
-    }
-    
-    public JScrollPane getTextArea(String text){
-    	for(JScrollPane tArea : textAreas){
-    		if(tArea.getName().contains(text)){
-    			return tArea;
-    		}
-    	}
-		return null;
-    }
+//    public JScrollPane getList(String text){
+//    	for(JScrollPane list : lists){
+//    		if (list.getName().contains(text)){
+//    			return list;
+//    		}
+//    	}
+//		return null;
+//    }
+//    
+//    public JScrollPane getTextArea(String text){
+//    	for(JScrollPane tArea : textAreas){
+//    		if(tArea.getName().contains(text)){
+//    			return tArea;
+//    		}
+//    	}
+//		return null;
+//    }
     
     public JTextField getTextField(String text){
     	for(JTextField tField : textFields){
@@ -237,15 +237,7 @@ public class jPanel extends JPanel {
 		return null;
     }
 	
-	public JList setList(String[] text, JList list, JScrollPane scrollPane){
 	
-		list.setListData(text);
-		scrollPane.setViewportView(list);
-		scrollPane.revalidate();
-		scrollPane.repaint();
-		return null;
-	}
-
     public void setPadding(int top, int left, int bottom, int right) {
         setBorder(new EmptyBorder(top, left, bottom, right));
     }
