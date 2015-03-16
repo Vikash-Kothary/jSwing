@@ -86,8 +86,8 @@ public class jPanel extends JPanel {
         return null;
     }
     
-    public JList getList(String name){
-    	for(JList list : temps){
+    public jScrollPane getList(String name){
+    	for(jScrollPane list : lists){
     		if (list.getName().equals(name)){
     			return list;
     		}

@@ -37,12 +37,11 @@ public class InterfaceWindow extends jFrame {
 
 		container.add(students, BorderLayout.WEST);
 
-		students.getList("studentList").addMouseListener(new MouseAdapter() {
+		students.getList("studentList").getList().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				System.out.println("a;lskdf");
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					new InformationPopup(mainList.getStudent(students
-							.getList("studentList")
+							.getList("studentList").getList()
 							.getSelectedIndex()));
 					// returns list index
 				}
