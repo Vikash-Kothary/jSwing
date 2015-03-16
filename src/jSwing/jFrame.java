@@ -48,8 +48,7 @@ public class jFrame extends JFrame {
 	}
 
 	private void initFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when
-														// exits frame
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
 		setJMenuBar(menuBar);
 	}
 
@@ -65,35 +64,36 @@ public class jFrame extends JFrame {
 		repaint();
 	}
 
-	// public jPanel getContainer(){
-	// return
-	// }
+	 public jPanel getFrameContainer(){
+		 return (jPanel) getContentPane().getComponent(0);
+	 }
 
-	// // logs mouse location when clicked
-	// public void mouseLogger() {
-	// this.addMouseListener(new MouseListener() {
-	// @Override
-	// public void mouseClicked(MouseEvent e) {
-	// System.out.println("x: " + e.getX() + " y: " + e.getY());
-	// }
-	//
-	// @Override
-	// public void mousePressed(MouseEvent e) {
-	// }
-	//
-	// @Override
-	// public void mouseReleased(MouseEvent e) {
-	// }
-	//
-	// @Override
-	// public void mouseEntered(MouseEvent e) {
-	// }
-	//
-	// @Override
-	// public void mouseExited(MouseEvent e) {
-	// }
-	// });
-	// }
+//	 // logs mouse location when clicked
+//	 public void mouseLogger() {
+//		 this.addMouseListener(new MouseListener() {
+//			 @Override
+//			 public void mouseClicked(MouseEvent e) {
+//				 System.out.println("x: " + e.getX() + " y: " + e.getY());
+//			 }
+//			
+//			 @Override
+//			 public void mousePressed(MouseEvent e) {
+//			 }
+//			
+//			 @Override
+//			 public void mouseReleased(MouseEvent e) {
+//			 }
+//			
+//			 @Override
+//			 public void mouseEntered(MouseEvent e) {
+//			 }
+//			
+//			 @Override
+//			 public void mouseExited(MouseEvent e) {
+//			 }
+//		 });
+//	 }
+	
 	// maximise frame
 	public void maximiseFrame() {
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH); // maximise
@@ -101,6 +101,7 @@ public class jFrame extends JFrame {
 
 	// frame's location is set to the centre to the screen
 	public void centreFrame() {
+		// TODO multiple screens: should appear in the centre of the primary screen
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
 		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
@@ -109,8 +110,9 @@ public class jFrame extends JFrame {
 
 	public void exitFrame() {
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		// setVisible(false);
-		// dispose();
+//		// Alternative method to close frame
+//		setVisible(false);
+//		dispose();
 	}
 
 	public JMenu addMenu(String menuTitle, String[] menuItems) {
