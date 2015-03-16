@@ -84,23 +84,23 @@ public class jPanel extends JPanel {
         return null;
     }
     
-//    public JScrollPane getList(String text){
-//    	for(JScrollPane list : lists){
-//    		if (list.getName().contains(text)){
-//    			return list;
-//    		}
-//    	}
-//		return null;
-//    }
-//    
-//    public JScrollPane getTextArea(String text){
-//    	for(JScrollPane tArea : textAreas){
-//    		if(tArea.getName().contains(text)){
-//    			return tArea;
-//    		}
-//    	}
-//		return null;
-//    }
+    public jScrollPane getList(String name){
+    	for(jScrollPane list : lists){
+    		if (list.getName().equals(name)){
+    			return list;
+    		}
+    	}
+		return null;
+    }
+    
+    public jScrollPane getTextArea(String name){
+    	for(jScrollPane tArea : textAreas){
+    		if(tArea.getName().equals(name)){
+    			return tArea;
+    		}
+    	}
+		return null;
+    }
     
     public JTextField getTextField(String text){
     	for(JTextField tField : textFields){
@@ -152,10 +152,9 @@ public class jPanel extends JPanel {
 //        return scrollPane;
 //    }
     
-    public JScrollPane addTextArea(String text) {
+    public jScrollPane addTextArea(String text, String name) {
         JTextArea textArea = new JTextArea(text);
-        textArea.setName(text);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        jScrollPane scrollPane = new jScrollPane(textArea, name);
         textAreas.add(scrollPane);
         add(scrollPane);
         return scrollPane;
@@ -222,17 +221,13 @@ public class jPanel extends JPanel {
         return label;
     }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public JScrollPane addList(String[] text, String listName, String scrollName) {
+	public jScrollPane addList(String[] text, String name) {
 		if(text!=null){
 	        JList list = new JList(text);
-	        list.setName(listName);
-	        JScrollPane scrollPane = new JScrollPane(list);
-	        scrollPane.setName(scrollName);
+	        jScrollPane scrollPane = new jScrollPane(list, name);
 	        lists.add(scrollPane);
 	        add(scrollPane);
-//	        lists.add(list);
-//	        return list;
+	        return scrollPane;
 		}
 		return null;
     }

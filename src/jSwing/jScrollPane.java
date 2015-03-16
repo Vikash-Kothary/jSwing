@@ -18,8 +18,18 @@ public class jScrollPane extends JScrollPane{
 //		}
 	}
 	
+	public jScrollPane(Component _object, String _name){
+		super(_object);
+		object = _object;
+		name = _name;
+	}
+
 	public void setName(String _name){
 		name = _name;
+	}
+	
+	public String getName(){
+		return name;
 	}
 	
 	public Component getObject(){
