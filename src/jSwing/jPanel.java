@@ -23,32 +23,33 @@ import javax.swing.border.EmptyBorder;
 public class jPanel extends JPanel {
 
     private Image bgImage = null;
-    @SuppressWarnings("unused")
 	private int width, height;
     private ArrayList<JLabel> labels;
     private ArrayList<JButton> buttons;
-	private ArrayList<JList> lists;
-	private ArrayList<JTextArea> textAreas;
+	private ArrayList<JScrollPane> lists;
+	private ArrayList<JScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
-	private ArrayList<JScrollPane> scrollPanes;
 
     // Constructor
     public jPanel() {
+    	super();
         _init();
     }
 
+//    // use only for layout-less panel
 //    public jPanel(int _width, int _height) {
 //        width = _width;
 //        height = _height;
 //        _init();
+//    
 //    }
+    
     private void _init() {
         labels = new ArrayList<>();
         buttons = new ArrayList<>();
         lists = new ArrayList<>();
         textAreas = new ArrayList<>();
         textFields = new ArrayList<>();
-        scrollPanes = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -83,8 +84,8 @@ public class jPanel extends JPanel {
         return null;
     }
     
-    public JList getList(String text){
-    	for(JList list : lists){
+    public JScrollPane getList(String text){
+    	for(JScrollPane list : lists){
     		if (list.getName().contains(text)){
     			return list;
     		}
@@ -92,8 +93,8 @@ public class jPanel extends JPanel {
 		return null;
     }
     
-    public JTextArea getTextArea(String text){
-    	for(JTextArea tArea : textAreas){
+    public JScrollPane getTextArea(String text){
+    	for(JScrollPane tArea : textAreas){
     		if(tArea.getName().contains(text)){
     			return tArea;
     		}
@@ -110,15 +111,6 @@ public class jPanel extends JPanel {
     	return null;
     }
     
-    public JScrollPane getScrollPane(String text){
-    	for(JScrollPane sPane : scrollPanes){
-    		if(sPane.getName().contains(text)){
-    			return sPane;
-    		}
-    	}
-    	return null;
-    }
-    
 
 //    public JButton addButton(String name, Rectangle location) {
 //        JButton button = new JButton(name);
@@ -126,6 +118,7 @@ public class jPanel extends JPanel {
 //        add(button);
 //        return button;
 //    }
+    
     public JButton addButton(String text) {
         JButton button = new JButton(text);
         add(button);
@@ -158,14 +151,14 @@ public class jPanel extends JPanel {
 //        add(scrollPane);
 //        return scrollPane;
 //    }
-    public JTextArea addTextArea(String text) {
+    
+    public JScrollPane addTextArea(String text) {
         JTextArea textArea = new JTextArea(text);
         textArea.setName(text);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        textAreas.add(textArea);
+        textAreas.add(scrollPane);
         add(scrollPane);
-//        components.add(scrollPane);
-        return textArea;
+        return scrollPane;
     }
 
 //    public void addImage(String path, Rectangle location) {
@@ -180,13 +173,13 @@ public class jPanel extends JPanel {
 //            System.out.println(e);
 //        }
 //    }
+    
     public void addImage(File file) {
         try {
             Image image = ImageIO.read(file);
             JLabel picLabel = new JLabel(new ImageIcon(image));
 //            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
             add(picLabel);
-//            components.add(picLabel);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -198,7 +191,6 @@ public class jPanel extends JPanel {
             JLabel picLabel = new JLabel(new ImageIcon(image));
 //            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
             add(picLabel);
-//            components.add(picLabel);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -211,7 +203,6 @@ public class jPanel extends JPanel {
             JLabel picLabel = new JLabel(new ImageIcon(image));
 //            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
             add(picLabel);
-//            components.add(picLabel);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -232,16 +223,16 @@ public class jPanel extends JPanel {
     }
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public JList addList(String[] text, String listName, String scrollName) {
+	public JScrollPane addList(String[] text, String listName, String scrollName) {
 		if(text!=null){
 	        JList list = new JList(text);
 	        list.setName(listName);
 	        JScrollPane scrollPane = new JScrollPane(list);
 	        scrollPane.setName(scrollName);
-	        scrollPanes.add(scrollPane);
+	        lists.add(scrollPane);
 	        add(scrollPane);
-	        lists.add(list);
-	        return list;
+//	        lists.add(list);
+//	        return list;
 		}
 		return null;
     }

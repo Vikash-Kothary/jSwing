@@ -1,35 +1,19 @@
 package PRA;
+
 import java.util.ArrayList;
 
-public class StudentList {
+public class StudentList extends ArrayList<Student> {
 
-	ArrayList<Student> studentList = new ArrayList<Student>();
-	
-	public Student getStudent(int i){
-		return studentList.get(i);
+	public String getStudentString(int i) {
+		return get(i).toString();
 	}
-	
-	
-	public StudentList(){
-		
+
+	public StudentList() {
+
 	}
-	
-	public void addStudent(Student name){
-		studentList.add(name);
+
+	public int getSize() {
+		return size();
 	}
-	
-	public String toString(int i){
-		String returnString;
-		returnString = studentList.get(i).getFirstName() + " (";
-		
-		returnString += studentList.get(i).getStudentNumber() + ")";
-		
-		
-		return returnString;		
-	}
-	
-	public int getSize(){
-		return studentList.size();
-	}
-	
+
 }

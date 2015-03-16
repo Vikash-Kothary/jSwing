@@ -2,52 +2,31 @@ package PRA;
 
 public class Student {
 
-	private String firstName;
-	private String lastName;
+	private String studentName;
 	private String studentNumber;
 	private String emailAddress;
 	private String tutorEmail;
-	
-	public Student(String _firstName, String _lastName, String _studentNumber, String _emailAddress, String _tutorEmail){
-		firstName = _firstName;
-		lastName = _lastName;
+
+	public Student(String _studentName, String _studentNumber,
+			String _emailAddress, String _tutorEmail) {
+		studentName = _studentName;
 		studentNumber = _studentNumber;
 		emailAddress = _emailAddress;
 		tutorEmail = _tutorEmail;
 	}
 
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
+	public Student() {
+
 	}
 
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String getStudentName() {
+		return studentName;
 	}
 
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFullName(){
-		return this.firstName + " " + this.lastName;
-	}
-	
 	/**
 	 * @return the studentNumber
 	 */
@@ -56,7 +35,8 @@ public class Student {
 	}
 
 	/**
-	 * @param studentNumber the studentNumber to set
+	 * @param studentNumber
+	 *            the studentNumber to set
 	 */
 	public void setStudentNumber(String studentNumber) {
 		this.studentNumber = studentNumber;
@@ -70,7 +50,8 @@ public class Student {
 	}
 
 	/**
-	 * @param emailAddress the emailAddress to set
+	 * @param emailAddress
+	 *            the emailAddress to set
 	 */
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
@@ -82,15 +63,23 @@ public class Student {
 	public String getTutorEmail() {
 		return tutorEmail;
 	}
-	
+
 	/**
-	 * @param tutorEmail the tutorEmail to set
+	 * @param tutorEmail
+	 *            the tutorEmail to set
 	 */
-	public void setTutorEmail(String tutorEmail){
+	public void setTutorEmail(String tutorEmail) {
 		this.tutorEmail = tutorEmail;
 	}
-	
-	
-	
-}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return studentName + " (" + studentNumber + ")";
+	}
+
+}
