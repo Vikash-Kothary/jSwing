@@ -18,20 +18,29 @@ public class StudentList extends ArrayList<Student> {
 
 	// consider splitting into two functions: toStringArray and filterList
 	public String[] updateStudentList(String textField) {
-		String[] studentNames = new String[getSize()];
+		ArrayList<String> studentNamesArrayList = new ArrayList<String>();
+		int length = 0;
 		for (int i = 0; i < getSize(); i++) {
 			if (textField != "") {
 				if (get(i).toString().toUpperCase()
 						.contains(textField.toUpperCase())) {
-					studentNames[i] = get(i).toString();
+					studentNamesArrayList.add(get(i).toString());
+					length+=1;
 				}
 
 			} else {
-				studentNames[i] = get(i).toString();
+				studentNamesArrayList.add(get(i).toString());
 			}
 
 		}
-		return studentNames;
+		
+		String[] studentNamesArray = new String[studentNamesArrayList.size()];
+		for (String s : studentNamesArrayList){
+			studentNamesArray = studentNamesArrayList.toArray(studentNamesArray);
+		}
+		
+
+		return studentNamesArray;
 
 	}
 

@@ -55,21 +55,40 @@ public class InterfaceWindow extends jFrame {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-//				students.getList("studentList").
+				students.getList("studentList").updateList(mainList.updateStudentList(students.getTextField("studentSearchField").getText()));
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-//				students.setList(
-//						mainList.updateStudentList(students
-//								.getTextField("studentSearchField")
-//								.getText()), students
-//								.getList("studentList"), students
-//								.getScrollPane("scrollList")
-//				);
+				students.getList("studentList").updateList(mainList.updateStudentList(students.getTextField("studentSearchField").getText()));
+//						mainList.updateStudentList(students.getTextField("studentSearchField").getText()), 
+//												   students.getList("studentList"), 
+//												   students.getList("scrollList")
+//												   );
 			}
 		});
 
+		
+	
+		
+		
+		
+		this.setContainer(container);
+
+		// this.pack();
+		this.setVisible(true);
+	}
+
+	private void initMenu() {
+		this.addMenu("File", new String[] { "Load anonymous marking codes",
+				"Load exam results", "Exit" });
+		
+		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
+		
 		
 		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -86,22 +105,6 @@ public class InterfaceWindow extends jFrame {
 				}
 			}
 		});
-		
-		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.exit(0);
-			}
-		});
-		
-		this.setContainer(container);
-
-		// this.pack();
-		this.setVisible(true);
-	}
-
-	private void initMenu() {
-		this.addMenu("File", new String[] { "Load anonymous marking codes",
-				"Load exam results", "Exit" });
 	}
 	
 
