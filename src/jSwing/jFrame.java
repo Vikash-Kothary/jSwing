@@ -48,9 +48,9 @@ public class jFrame extends JFrame {
 	}
 
 	private void initFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
 		setJMenuBar(menuBar);
 	}
+	
 
 	// changes jpanel container in frame
 	public void setContainer(JPanel panel) {

@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -21,6 +22,8 @@ public class InterfaceWindow extends jFrame {
 
 	public InterfaceWindow(final StudentList mainList) {
 		super("PRA Coursework - Deep Vein Thrombosis");
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
 		this.setSize(1000, 600); // delete afterwards or should i
 
 		initMenu();
@@ -85,7 +88,7 @@ public class InterfaceWindow extends jFrame {
 		
 		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.exit(0);
+				exitFrame();
 			}
 		});
 		
