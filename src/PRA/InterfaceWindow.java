@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -39,7 +43,13 @@ public class InterfaceWindow extends jFrame {
 		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
 		students.addList(updateStudentList(mainList, students.getTextField("studentSearchField").getText()), "studentList", "scrollList");
 
+		final jPanel data = new jPanel();
+		String[] tempList = {"1", "2"};
+		String tempName = "temp";
+		data.addList(tempList, tempName, tempName);
+		
 		container.add(students, BorderLayout.WEST);
+		container.add(data, BorderLayout.EAST);
 		
 		
 		
@@ -82,8 +92,8 @@ public class InterfaceWindow extends jFrame {
 				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
 						java.io.File file = fc.getSelectedFile();
 						String fileName = file.toString();
+						data.setList((getCSV(fileName)),data.getList("temp"),data.getScrollPane("temp"));
 						
-						JOptionPane.showMessageDialog(InterfaceWindow.this, fileName); //Temporary, to display file path
 				}
 			}
 		});
@@ -122,6 +132,39 @@ public class InterfaceWindow extends jFrame {
 	
 		return studentNames;
 	
+	}
+	
+	public String[] getCSV(String filePath){
+		String csvFile = filePath;
+		BufferedReader br = null;
+		String line = " ";
+		String cvsSplitBy = ",";
+		String[] country = null;
+		int lengthOfFile = 0;
+		try {
+	 
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {    
+				country = line.split(cvsSplitBy); 					 
+			}
+			
+	
+	 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	 
+		return country;
 	}
 }
 
