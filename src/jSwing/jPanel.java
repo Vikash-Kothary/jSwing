@@ -29,6 +29,7 @@ public class jPanel extends JPanel {
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
+	private ArrayList<JList> temps;
 
     // Constructor
     public jPanel() {
@@ -50,6 +51,7 @@ public class jPanel extends JPanel {
         lists = new ArrayList<>();
         textAreas = new ArrayList<>();
         textFields = new ArrayList<>();
+        temps = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -84,8 +86,8 @@ public class jPanel extends JPanel {
         return null;
     }
     
-    public jScrollPane getList(String name){
-    	for(jScrollPane list : lists){
+    public JList getList(String name){
+    	for(JList list : temps){
     		if (list.getName().equals(name)){
     			return list;
     		}
@@ -224,7 +226,9 @@ public class jPanel extends JPanel {
 	public jScrollPane addList(String[] text, String name) {
 		if(text!=null){
 	        JList list = new JList(text);
+	        list.setName("studentList");
 	        jScrollPane scrollPane = new jScrollPane(list, name);
+	        temps.add(list);
 	        lists.add(scrollPane);
 	        add(scrollPane);
 	        return scrollPane;

@@ -31,16 +31,16 @@ public class InterfaceWindow extends jFrame {
 		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
 		students.addList(
 				mainList.updateStudentList(students.getTextField("studentSearchField").getText()),
-				"studentList"
-				);
+				"studentList");
 
 		container.add(students, BorderLayout.WEST);
 
 		students.getList("studentList").addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
+				System.out.println("a;lskdf");
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					new InformationPopup(mainList.getStudent(students
-							.getList("studentList").getList()
+							.getList("studentList")
 							.getSelectedIndex()));
 					// returns list index
 				}
