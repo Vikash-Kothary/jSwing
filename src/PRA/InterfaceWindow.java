@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -70,7 +72,28 @@ public class InterfaceWindow extends jFrame {
 			
 		});
 		
-
+		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				final JFileChooser fc = new JFileChooser();
+					
+				int returnVal = fc.showOpenDialog(InterfaceWindow.this);
+				
+				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+						java.io.File file = fc.getSelectedFile();
+						String fileName = file.toString();
+						
+						JOptionPane.showMessageDialog(InterfaceWindow.this, fileName); //Temporary, to display file path
+				}
+			}
+		});
+		
+		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
+	
 		
 		this.setContainer(container);
 		
