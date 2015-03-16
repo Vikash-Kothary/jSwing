@@ -41,6 +41,10 @@ public class jScrollPane extends JScrollPane{
 		return object;
 	}
 	
+	public JList getList(){
+		return (JList) object;
+	}
+	
 	public void updateList(String[] text){
 		if(object instanceof JList){
 			((JList)object).setListData(text);

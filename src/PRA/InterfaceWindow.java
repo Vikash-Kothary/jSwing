@@ -30,51 +30,43 @@ public class InterfaceWindow extends jFrame {
 		students.setLayout(new BorderLayout());
 		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
 		students.addList(
-				updateStudentList(mainList,
-						students.getTextField("studentSearchField").getText()),
-				"studentList", "scrollList");
+				mainList.updateStudentList(students.getTextField("studentSearchField").getText()),
+				"studentList"
+				);
 
 		container.add(students, BorderLayout.WEST);
-//
-		
-//		students.getList("studentList").addMouseListener(new MouseAdapter() {
-//			public void mousePressed(MouseEvent e) {
-//				if (e.getButton() == MouseEvent.BUTTON1) {
-//					new InformationPopup(mainList.getStudent((students
-//							.getList("studentList").getSelectedIndex())));
-//				}
-//			}
-//		});
 
-//		students.getTextField("studentSearchField").getDocument()
-//				.addDocumentListener(new DocumentListener() {
-//					@Override
-//					public void changedUpdate(DocumentEvent e) {
-//					}
-//
-//					@Override
-//					public void insertUpdate(DocumentEvent e) {
-//						// TODO Auto-generated method stub
-//						students.setList(
-//								updateStudentList(mainList, students
-//										.getTextField("studentSearchField")
-//										.getText()), students
-//										.getList("studentList"), students
-//										.getScrollPane("scrollList"));
-//					}
-//
-//					@Override
-//					public void removeUpdate(DocumentEvent e) {
-//						// TODO Auto-generated method stub
-//						students.setList(
-//								updateStudentList(mainList, students
-//										.getTextField("studentSearchField")
-//										.getText()), students
-//										.getList("studentList"), students
-//										.getScrollPane("scrollList"));
-//					}
-//
-//				});
+		students.getList("studentList").addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					new InformationPopup(mainList.getStudent(students
+							.getList("studentList").getList()
+							.getSelectedIndex()));
+				}
+			}
+		});
+
+		students.getTextField("studentSearchField").getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+//				students.getList("studentList").
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+//				students.setList(
+//						mainList.updateStudentList(students
+//								.getTextField("studentSearchField")
+//								.getText()), students
+//								.getList("studentList"), students
+//								.getScrollPane("scrollList")
+//				);
+			}
+		});
 
 		this.setContainer(container);
 
@@ -86,24 +78,6 @@ public class InterfaceWindow extends jFrame {
 		this.addMenu("File", new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" });
 	}
+	
 
-	public String[] updateStudentList(StudentList mainList, String textField) {
-
-		String[] studentNames = new String[mainList.getSize()];
-		for (int i = 0; i < mainList.getSize(); i++) {
-			if (textField != "") {
-				if (mainList.get(i).toString().toUpperCase()
-						.contains(textField.toUpperCase())) {
-					studentNames[i] = mainList.get(i).toString();
-				}
-
-			} else {
-				studentNames[i] = mainList.get(i).toString();
-			}
-
-		}
-
-		return studentNames;
-
-	}
 }
