@@ -30,31 +30,30 @@ public class InterfaceWindow extends jFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
 		this.setSize(1000, 600); // delete afterwards or should i
 
-		initMenu();
-
 		jPanel container = new jPanel();
+		final jPanel students = new jPanel();
+		final jPanel data = new jPanel();
+		initMenu(data);
+
+		
 		container.setLayout(new BorderLayout());
 
-		final jPanel students = new jPanel();
+		
 		students.setLayout(new BorderLayout());
 		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
 		students.addList(
 				mainList.updateStudentList(students.getTextField("studentSearchField").getText()),
 				"studentList");
 
-		final jPanel data = new jPanel();
+		
 		String[] tempList = {"1", "2"};
 		String tempName = "temp";
-		data.addList(tempList, tempName, tempName);
+		data.addList(tempList, tempName);
 		
 		container.add(students, BorderLayout.WEST);
-<<<<<<< HEAD
+
 		container.add(data, BorderLayout.EAST);
-		
-		
-		
-=======
->>>>>>> refs/remotes/origin/master
+
 
 		students.getList("studentList").getList().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -80,14 +79,45 @@ public class InterfaceWindow extends jFrame {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				students.getList("studentList").updateList(mainList.updateStudentList(students.getTextField("studentSearchField").getText()));
-//						mainList.updateStudentList(students.getTextField("studentSearchField").getText()), 
-//												   students.getList("studentList"), 
-//												   students.getList("scrollList")
-//												   );
+
 			}
 		});
 
-		
+		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				final JFileChooser fc = new JFileChooser();
+					
+				int returnVal = fc.showOpenDialog(InterfaceWindow.this);
+				String[][] csvFile = null;
+				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+						java.io.File file = fc.getSelectedFile();
+						String filePath = file.toString();
+						csvFile = getCSV(filePath);
+						
+						String Snumber;
+						String Acode;
+						int imports = 0;
+						
+						for (int i = 0; i < mainList.size(); i++){
+							for (int j = 0; j< csvFile.length; j++){
+								Acode = csvFile[j][0];
+								Snumber = mainList.getStudent(i).getStudentNumber();
+								if(Acode.equals(Snumber)){
+									mainList.getStudent(i).setAnonymousMarkingCode(csvFile[j][1]);
+									imports +=1;
+								}							
+							}
+						}
+						System.out.println("Anonymous marking codes impored. " + imports + 
+								" codes were for known students; " + ((csvFile.length)-imports) 
+								+ " codes were for unknown students");
+						
+
+
+				}
+			}
+		});
 	
 		
 		
@@ -98,7 +128,7 @@ public class InterfaceWindow extends jFrame {
 		this.setVisible(true);
 	}
 
-	private void initMenu() {
+	private void initMenu(final jPanel panel) {
 		this.addMenu("File", new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" });
 		
@@ -109,37 +139,32 @@ public class InterfaceWindow extends jFrame {
 		});
 		
 		
-		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				
-				final JFileChooser fc = new JFileChooser();
-					
-				int returnVal = fc.showOpenDialog(InterfaceWindow.this);
-				
-				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-						java.io.File file = fc.getSelectedFile();
-						String fileName = file.toString();
-						data.setList((getCSV(fileName)),data.getList("temp"),data.getScrollPane("temp"));
-						
-				}
-			}
-		});
+	
 	}
 	
 
 	
-	public String[] getCSV(String filePath){
+	public String[][] getCSV(String filePath){
 		String csvFile = filePath;
 		BufferedReader br = null;
 		String line = " ";
 		String cvsSplitBy = ",";
-		String[] student = null;
+		String[][] student = null;
 		int lengthOfFile = 0;
+		
 		try {
-	 
 			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {    
-				student = line.split(cvsSplitBy); 					 
+			while ((line = br.readLine()) != null) {
+				lengthOfFile+=1;
+			}
+			br = new BufferedReader(new FileReader(csvFile));
+			int inc = 0;
+			String[] studentLines;
+			student = new String[lengthOfFile][];	
+			while ((line = br.readLine()) != null) {	
+				studentLines = line.split(cvsSplitBy);
+				student[inc] = studentLines; 	
+				inc +=1;
 			}
 			
 	

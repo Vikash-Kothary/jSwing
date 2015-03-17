@@ -6,13 +6,15 @@ public class Student {
 	private String studentNumber;
 	private String emailAddress;
 	private String tutorEmail;
+	private String anonymousMarkingCode;
 
 	public Student(String _studentName, String _studentNumber,
-			String _emailAddress, String _tutorEmail) {
+			String _emailAddress, String _tutorEmail, String _anonymousMarkingCode) {
 		studentName = _studentName;
 		studentNumber = _studentNumber;
 		emailAddress = _emailAddress;
 		tutorEmail = _tutorEmail;
+		anonymousMarkingCode = _anonymousMarkingCode;
 	}
 
 	public Student() {
@@ -70,6 +72,14 @@ public class Student {
 	 */
 	public void setTutorEmail(String tutorEmail) {
 		this.tutorEmail = tutorEmail;
+	}
+	
+	public String getAnonymousMarkingCode(){
+		return anonymousMarkingCode;
+	}
+	
+	public void setAnonymousMarkingCode(String aMC){
+		this.anonymousMarkingCode = aMC;
 	}
 
 	/*
