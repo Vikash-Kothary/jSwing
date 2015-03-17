@@ -3,6 +3,7 @@ package jSwing;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -62,6 +63,19 @@ public class jFrame extends JFrame {
 		// refresh frame
 		revalidate(); // if error: validate();
 		repaint();
+	}
+	
+	public jPanel addContainer() {
+		jPanel panel = new jPanel();
+		getContentPane().removeAll(); // empties frame background
+		getContentPane().add(panel); // add panel to background
+		// refresh panel (optional)
+		panel.revalidate();
+		panel.repaint();
+		// refresh frame
+		revalidate(); // if error: validate();
+		repaint();
+		return panel;
 	}
 
 	 public jPanel getFrameContainer(){

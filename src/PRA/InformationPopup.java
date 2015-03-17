@@ -10,36 +10,28 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class InformationPopup extends jFrame {
-	private Student student;
 
-	public InformationPopup(Student _student){
+	public InformationPopup(Student student){
 		super("Information");
-		student  = _student;
 		
-		jPanel container = new jPanel();
-		jPanel topPanel = new jPanel();
-		jPanel bottomPanel = new jPanel();
+		jPanel container = addContainer();
 		container.setLayout(new GridLayout(4,1));
 		
-		JLabel studentName = new JLabel(student.getStudentName());
-		studentName.setHorizontalAlignment(SwingConstants.CENTER);
-		container.add(studentName);
-		JLabel studentEmail = new JLabel("<html><i>"+student.getEmailAddress()+"</i></html>");
-		studentEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		container.add(studentEmail);
-		JLabel studentNumber = new JLabel("Student No.: "+student.getStudentNumber());
-		studentNumber.setHorizontalAlignment(SwingConstants.LEFT);
-		container.add(studentNumber);
-		JLabel tutorEmail = new JLabel("Tutor: " + student.getTutorEmail());
-		tutorEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		container.add(tutorEmail);
+		container.addLabel(student.getStudentName())
+			.setHorizontalAlignment(SwingConstants.CENTER);
+
+		container.addLabel("<html><i>"+student.getEmailAddress()+"</i></html>")
+			.setHorizontalAlignment(SwingConstants.CENTER);
+
+		container.addLabel("Student No.: "+student.getStudentNumber())
+			.setHorizontalAlignment(SwingConstants.LEFT);
+
+		container.addLabel("Tutor: " + student.getTutorEmail())
+			.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		
-		this.setContainer(container);
-		
-		this.centreFrame();
-		this.pack();
-		this.setVisible(true);
+		centreFrame();
+		pack();
+		setVisible(true);
 	}
 
 }

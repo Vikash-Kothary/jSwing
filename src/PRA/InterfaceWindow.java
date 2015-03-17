@@ -20,155 +20,160 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 @SuppressWarnings("serial")
 public class InterfaceWindow extends jFrame {
+	private StudentList mainList;
 
-	public InterfaceWindow(final StudentList mainList) {
+	public InterfaceWindow(StudentList _mainList) {
 		super("PRA Coursework - Deep Vein Thrombosis");
+		mainList = _mainList;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
-		this.setSize(1000, 600); // delete afterwards or should i
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when frame is closed
+		setSize(1000, 600);
 
-		jPanel container = new jPanel();
-		final jPanel students = new jPanel();
-		final jPanel data = new jPanel();
-		initMenu(data);
-
-		
+		jPanel container = addContainer();
 		container.setLayout(new BorderLayout());
+		initMenu();
 
-		
+		jPanel students = container.addPanel("students", BorderLayout.WEST);
 		students.setLayout(new BorderLayout());
-		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
-		students.addList(
-				mainList.updateStudentList(students.getTextField("studentSearchField").getText()),
-				"studentList");
+		addStudentPanelElements();
 
-		
-		String[] tempList = {"1", "2"};
-		String tempName = "temp";
-		data.addList(tempList, tempName);
-		
-		container.add(students, BorderLayout.WEST);
-
-		container.add(data, BorderLayout.EAST);
+		jPanel data = container.addPanel("data", BorderLayout.EAST);
+		//		data.setLayout(null);
 
 
-		students.getList("studentList").getList().addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					new InformationPopup(mainList.getStudent(students
-							.getList("studentList").getList()
-							.getSelectedIndex()));
-					// returns list index
-				}
-			}
-		});
-
-		students.getTextField("studentSearchField").getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				students.getList("studentList").updateList(mainList.updateStudentList(students.getTextField("studentSearchField").getText()));
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				students.getList("studentList").updateList(mainList.updateStudentList(students.getTextField("studentSearchField").getText()));
-
-			}
-		});
-
-		getMenuItem("File", "Load anonymous marking codes").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				
-				final JFileChooser fc = new JFileChooser();
-					
-				int returnVal = fc.showOpenDialog(InterfaceWindow.this);
-				String[][] csvFile = null;
-				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-						java.io.File file = fc.getSelectedFile();
-						String filePath = file.toString();
-						csvFile = getCSV(filePath);
-						
-						String Snumber;
-						String Acode;
-						int imports = 0;
-						
-						for (int i = 0; i < mainList.size(); i++){
-							for (int j = 0; j< csvFile.length; j++){
-								Acode = csvFile[j][0];
-								Snumber = mainList.getStudent(i).getStudentNumber();
-								if(Acode.equals(Snumber)){
-									mainList.getStudent(i).setAnonymousMarkingCode(csvFile[j][1]);
-									imports +=1;
-								}							
-							}
-						}
-						System.out.println("Anonymous marking codes impored. " + imports + 
-								" codes were for known students; " + ((csvFile.length)-imports) 
-								+ " codes were for unknown students");
-						
-
-
-				}
-			}
-		});
-	
-		
-		
-		
-		this.setContainer(container);
-
-		// this.pack();
 		this.setVisible(true);
 	}
 
-	private void initMenu(final jPanel panel) {
-		this.addMenu("File", new String[] { "Load anonymous marking codes",
-				"Load exam results", "Exit" });
-		
-		getMenuItem("File", "Exit").addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+	private void initMenu() {
+		String[] fileMenu = new String[] { "Load anonymous marking codes",
+				"Load exam results", "Exit" };
+		addMenu("File", fileMenu);
+
+		getMenuItem("File", fileMenu[2]).addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				exitFrame();
 			}
+			
 		});
-		
-		
-	
-	}
-	
 
-	
-	public String[][] getCSV(String filePath){
+		getMenuItem("File", fileMenu[0]).addActionListener(new ActionListener() {
+			
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						final JFileChooser fc = new JFileChooser();
+						FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
+								"CSV files (*.csv)", "csv");
+						fc.setFileFilter(xmlfilter);
+						fc.setDialogTitle("Open anonymous marking codes");
+
+						int returnVal = fc.showOpenDialog(InterfaceWindow.this);
+						String[][] csvFile = null;
+						if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+							java.io.File file = fc.getSelectedFile();
+							String filePath = file.toString();
+							csvFile = getCSV(filePath);
+
+							String Snumber;
+							String Acode;
+							int imports = 0;
+
+							for (int i = 0; i < mainList.size(); i++) {
+								for (int j = 0; j < csvFile.length; j++) {
+									Acode = csvFile[j][0];
+									Snumber = mainList.getStudent(i)
+											.getStudentNumber();
+									if (Acode.equals(Snumber)) {
+										mainList.getStudent(i)
+												.setAnonymousMarkingCode(
+														csvFile[j][1]);
+										imports += 1;
+									}
+								}
+							}
+							System.out.println("Anonymous marking codes impored. "
+											+ imports
+											+ " codes were for known students; "
+											+ ((csvFile.length) - imports)
+											+ " codes were for unknown students");
+
+						}
+					}
+				});
+
+		getMenuItem("File", fileMenu[1]).addActionListener(new ExamResults(this));
+	}
+
+	private void addStudentPanelElements() {
+		final jPanel students = getFrameContainer().getPanel("students");
+		students.addTextField(null, "studentSearchField", BorderLayout.NORTH);
+		students.addList(
+				mainList.updateStudentList(students.getTextField(
+						"studentSearchField").getText()), "studentList");
+
+		students.getList("studentList").getList()
+				.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+						if (e.getButton() == MouseEvent.BUTTON1) {
+							new InformationPopup(mainList.getStudent(students
+									.getList("studentList").getList()
+									.getSelectedIndex()));
+						}
+					}
+				});
+
+		students.getTextField("studentSearchField").getDocument()
+				.addDocumentListener(new DocumentListener() {
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+					}
+
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						students.getList("studentList").updateList(
+								mainList.updateStudentList(students
+										.getTextField("studentSearchField")
+										.getText()));
+					}
+
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						students.getList("studentList").updateList(
+								mainList.updateStudentList(students
+										.getTextField("studentSearchField")
+										.getText()));
+
+					}
+				});
+	}
+
+	public String[][] getCSV(String filePath) {
 		String csvFile = filePath;
 		BufferedReader br = null;
 		String line = " ";
 		String cvsSplitBy = ",";
 		String[][] student = null;
 		int lengthOfFile = 0;
-		
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
-				lengthOfFile+=1;
+				lengthOfFile += 1;
 			}
-			br = new BufferedReader(new FileReader(csvFile));
 			int inc = 0;
 			String[] studentLines;
-			student = new String[lengthOfFile][];	
-			while ((line = br.readLine()) != null) {	
+			student = new String[lengthOfFile][];
+			while ((line = br.readLine()) != null) {
 				studentLines = line.split(cvsSplitBy);
-				student[inc] = studentLines; 	
-				inc +=1;
+				student[inc] = studentLines;
+				inc += 1;
 			}
-			
-	
-	 
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -182,7 +187,7 @@ public class InterfaceWindow extends jFrame {
 				}
 			}
 		}
-	 
+
 		return student;
 	}
 

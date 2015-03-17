@@ -24,12 +24,12 @@ public class jPanel extends JPanel {
 	
     private Image bgImage = null;
 	private int width, height;
+	private ArrayList<jPanel> panels;
     private ArrayList<JLabel> labels;
     private ArrayList<JButton> buttons;
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
-	private ArrayList<JList> temps;
 
     // Constructor
     public jPanel() {
@@ -46,12 +46,12 @@ public class jPanel extends JPanel {
 //    }
     
     private void _init() {
+    	panels = new ArrayList<>();
         labels = new ArrayList<>();
         buttons = new ArrayList<>();
         lists = new ArrayList<>();
         textAreas = new ArrayList<>();
         textFields = new ArrayList<>();
-        temps = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -66,6 +66,15 @@ public class jPanel extends JPanel {
         if (bgImage != null) {
             g.drawImage(bgImage, 0, 0, this);
         }
+    }
+    
+    public jPanel getPanel(String name){
+    	for (jPanel panel : panels) {
+            if (panel.getName().equals(name)) {
+                return panel;
+            }
+        }
+        return null;
     }
 
     public JLabel getLabel(String text) {
@@ -113,7 +122,21 @@ public class jPanel extends JPanel {
     	return null;
     }
     
-
+    public jPanel addPanel(String name){
+    	jPanel panel = new jPanel();
+    	panel.setName(name);
+    	add(panel);
+    	panels.add(panel);
+    	return panel;
+    }
+    
+    public jPanel addPanel(String name, String format){
+    	jPanel panel = new jPanel();
+    	panel.setName(name);
+    	add(panel, format);
+    	panels.add(panel);
+    	return panel;
+    }
 //    public JButton addButton(String name, Rectangle location) {
 //        JButton button = new JButton(name);
 //        button.setBounds(location);
@@ -228,15 +251,13 @@ public class jPanel extends JPanel {
 	        JList list = new JList(text);
 	        list.setName("studentList");
 	        jScrollPane scrollPane = new jScrollPane(list, name);
-	        temps.add(list);
 	        lists.add(scrollPane);
 	        add(scrollPane);
 	        return scrollPane;
 		}
 		return null;
     }
-	
-	
+
     public void setPadding(int top, int left, int bottom, int right) {
         setBorder(new EmptyBorder(top, left, bottom, right));
     }
