@@ -17,8 +17,6 @@ public class InformationPopup extends jFrame {
 		student  = _student;
 		
 		jPanel container = new jPanel();
-		jPanel topPanel = new jPanel();
-		jPanel bottomPanel = new jPanel();
 		container.setLayout(new GridLayout(4,1));
 		
 		JLabel studentName = new JLabel(student.getStudentName());

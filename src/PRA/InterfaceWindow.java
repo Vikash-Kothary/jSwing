@@ -15,9 +15,6 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -30,15 +27,15 @@ public class InterfaceWindow extends jFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when exits frame
 		this.setSize(1000, 600); // delete afterwards or should i
 
-		jPanel container = new jPanel();
-		final jPanel students = new jPanel();
-		final jPanel data = new jPanel();
-		initMenu(data);
-
 		
+		
+		
+		initMenu();
+
+		jPanel container = new jPanel();
 		container.setLayout(new BorderLayout());
 
-		
+		final jPanel students = new jPanel();
 		students.setLayout(new BorderLayout());
 		students.addTextField("", "studentSearchField", BorderLayout.NORTH);
 		students.addList(
@@ -46,13 +43,11 @@ public class InterfaceWindow extends jFrame {
 				"studentList");
 
 		
-		String[] tempList = {"1", "2"};
-		String tempName = "temp";
-		data.addList(tempList, tempName);
+
 		
 		container.add(students, BorderLayout.WEST);
 
-		container.add(data, BorderLayout.EAST);
+
 
 
 		students.getList("studentList").getList().addMouseListener(new MouseAdapter() {
@@ -93,29 +88,27 @@ public class InterfaceWindow extends jFrame {
 				if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
 						java.io.File file = fc.getSelectedFile();
 						String filePath = file.toString();
-						csvFile = getCSV(filePath);
 						
-						String Snumber;
-						String Acode;
+						csvFile = getCSV(filePath);
+						String studentNumber;
+						String arrayNumber;
 						int imports = 0;
 						
 						for (int i = 0; i < mainList.size(); i++){
 							for (int j = 0; j< csvFile.length; j++){
-								Acode = csvFile[j][0];
-								Snumber = mainList.getStudent(i).getStudentNumber();
-								if(Acode.equals(Snumber)){
+								arrayNumber = csvFile[j][0];
+								studentNumber = mainList.getStudent(i).getStudentNumber();
+								if(arrayNumber.equals(studentNumber)){
 									mainList.getStudent(i).setAnonymousMarkingCode(csvFile[j][1]);
 									imports +=1;
-								}							
+								}
+								
 							}
 						}
 						System.out.println("Anonymous marking codes impored. " + imports + 
 								" codes were for known students; " + ((csvFile.length)-imports) 
 								+ " codes were for unknown students");
-						
-
-
-				}
+						}
 			}
 		});
 	
@@ -128,7 +121,7 @@ public class InterfaceWindow extends jFrame {
 		this.setVisible(true);
 	}
 
-	private void initMenu(final jPanel panel) {
+	private void initMenu(  ) {
 		this.addMenu("File", new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" });
 		
