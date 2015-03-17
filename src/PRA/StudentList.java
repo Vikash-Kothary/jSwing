@@ -1,35 +1,47 @@
 package PRA;
+
 import java.util.ArrayList;
 
-public class StudentList {
+public class StudentList extends ArrayList<Student> {
 
-	ArrayList<Student> studentList = new ArrayList<Student>();
-	
-	public Student getStudent(int i){
-		return studentList.get(i);
+	public Student getStudent(int i) {
+		return get(i);
 	}
-	
-	
-	public StudentList(){
+
+	public StudentList() {
+
+	}
+
+	public int getSize() {
+		return size();
+	}
+
+	// consider splitting into two functions: toStringArray and filterList
+	public String[] updateStudentList(String textField) {
+		ArrayList<String> studentNamesArrayList = new ArrayList<String>();
+		int length = 0;
+		for (int i = 0; i < getSize(); i++) {
+			if (textField != "") {
+				if (get(i).toString().toUpperCase()
+						.contains(textField.toUpperCase())) {
+					studentNamesArrayList.add(get(i).toString());
+					length+=1;
+				}
+
+			} else {
+				studentNamesArrayList.add(get(i).toString());
+			}
+
+		}
 		
-	}
-	
-	public void addStudent(Student name){
-		studentList.add(name);
-	}
-	
-	public String toString(int i){
-		String returnString;
-		returnString = studentList.get(i).getFirstName() + " (";
+		String[] studentNamesArray = new String[studentNamesArrayList.size()];
+		for (String s : studentNamesArrayList){
+			studentNamesArray = studentNamesArrayList.toArray(studentNamesArray);
+		}
 		
-		returnString += studentList.get(i).getStudentNumber() + ")";
-		
-		
-		return returnString;		
+
+		return studentNamesArray;
+
 	}
-	
-	public int getSize(){
-		return studentList.size();
-	}
-	
+
 }
