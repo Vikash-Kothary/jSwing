@@ -50,7 +50,7 @@ public class InterfaceWindow extends jFrame {
 		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 		
 		
-		new ExamResults(this);
+		new CSVHandler(this);
 		
 		
 		this.setVisible(true);
@@ -116,7 +116,7 @@ public class InterfaceWindow extends jFrame {
 					}
 				});
 
-		getMenuItem("File", fileMenu[1]).addActionListener(new ExamResults(this));
+		getMenuItem("File", fileMenu[1]).addActionListener(new CSVHandler(this));
 		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 //				panel.getTabbedPane("resultsPane").addTab("Tab1", panel.addTable("Table", Results.getTableData(),Results.getColumns()));		

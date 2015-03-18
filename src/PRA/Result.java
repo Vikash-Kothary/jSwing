@@ -1,18 +1,19 @@
 package PRA;
 
-public class Results {
+public class Result {
 	private String examModule, assModule, candKey, examMark, examGrade;
 
-	public Results(String _examModule, String _assModule, String _candKey,
+	public Result(String _examModule, String _assModule, String _candKey,
 			String _examMark, String _examGrade) {
 		examModule = _examModule;
 		assModule = _assModule;
 		candKey = _candKey;
 		examMark = _examMark;
+		// TODO convert examGrade to enum datatype
 		examGrade = _examGrade;
 	}
 
-	public Results() {
+	public Result() {
 	}
 
 	public String getExamModule() {

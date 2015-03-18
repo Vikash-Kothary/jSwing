@@ -9,33 +9,30 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ExamResults implements ActionListener {
+public class CSVHandler implements ActionListener {
 	private jFrame frame;
+
 	
 	
-	
-	public ExamResults(jFrame _frame) {
+	public CSVHandler(jFrame _frame) {
 		frame = _frame;
 	}
-
-	public static Results[] getResults(){
-		return null;
-	}
-	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try{
 			String filePath = getFile();
-			Results[] data = null;
+			Result[] data = null;
 			if(filePath!=null){
 				data = getCSVData(filePath);
-		
+				ArrayList<Assessment> assData = new ArrayList<>();
+				for(Result result : data){
+				}
 				
 			}
 			if(data!=null){
@@ -63,7 +60,7 @@ public class ExamResults implements ActionListener {
 		return null;
 	}
 
-	public Results[] getCSVData(String filePath) throws IOException {
+	public Result[] getCSVData(String filePath) throws IOException {
 		String csvFile = filePath;
 		String line = "";
 		int lengthOfFile = 0;
@@ -72,17 +69,25 @@ public class ExamResults implements ActionListener {
 			lengthOfFile += 1;
 		}
 		BufferedReader br1 = new BufferedReader(new FileReader(csvFile));
-		
-		Results[] data = new Results[lengthOfFile];
+		String[] lineData = br1.readLine().split(",");
+		int[] headerLocation = new int[5];
+		for(int i=0; i < lineData.length; i++){
+			if(lineData[i].contains("Module")){
+				headerLocation[0] = i;
+			}else if(lineData[i].contains("Ass")){
+				headerLocation[1] = i;
+			}else if(lineData[i].contains("Cand Key")){
+				headerLocation[2] = i;
+			}else if(lineData[i].contains("Mark")){
+				headerLocation[3] = i;
+			}else if(lineData[i].contains("Grade")){
+				headerLocation[4] = i;
+			}
+		}
+		Result[] data = new Result[lengthOfFile];
 		for (int i = 1; i < lengthOfFile; i++) {
-			String[] lineData = br1.readLine().split(",");
-			data[i] = new Results();
-			data[i].setExamModule(lineData[2]);
-			data[i].setAssModule(lineData[5]);
-			data[i].setCandKey(lineData[6]);
-			data[i].setExamMark(lineData[9]);
-			data[i].setExamGrade(lineData[10]);
-			
+			lineData = br1.readLine().split(",");
+			data[i] = new Result(lineData[0], lineData[1], lineData[2], lineData[3], lineData[4]);
 		}
 		br1.close();
 		return data;

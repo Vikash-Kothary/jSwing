@@ -21,7 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import PRA.Results;
+import PRA.Result;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
