@@ -2,6 +2,7 @@ package jSwing;
 
 import java.awt.Component;
 
+import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -37,12 +38,19 @@ public class jScrollPane extends JScrollPane{
 			return (JTextArea) object;
 		}else if(object instanceof JList){
 			return (JList) object;
+		}else if(object instanceof jPanel){
+			return (jPanel) object;
 		}
+		
 		return object;
 	}
 	
 	public JList getList(){
 		return (JList) object;
+	}
+	
+	public jPanel getScrollPanel(){
+		return (jPanel) object;
 	}
 	
 	public void updateList(String[] text){
@@ -52,5 +60,10 @@ public class jScrollPane extends JScrollPane{
 			revalidate();
 			repaint();
 		}
+	}
+
+	public void setViewportview() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -13,7 +13,7 @@ public class InformationPopup extends jFrame {
 
 	public InformationPopup(Student student){
 		super("Information");
-		
+		setSize(300,300);
 		jPanel container = addContainer();
 		container.setLayout(new GridLayout(4,1));
 		
@@ -30,7 +30,7 @@ public class InformationPopup extends jFrame {
 			.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		centreFrame();
-		pack();
+		
 		setVisible(true);
 	}
 

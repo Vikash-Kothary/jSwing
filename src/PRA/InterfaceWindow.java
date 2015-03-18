@@ -1,6 +1,11 @@
 package PRA;
 
 import jSwing.jFrame;
+
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
+
 import jSwing.jPanel;
 
 import java.awt.BorderLayout;
@@ -13,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -32,6 +38,7 @@ public class InterfaceWindow extends jFrame {
 		super("PRA Coursework - Deep Vein Thrombosis");
 		mainList = _mainList;
 
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when frame is closed
 		setSize(1000, 600);
 
@@ -48,7 +55,7 @@ public class InterfaceWindow extends jFrame {
 		initMenu();
 		
 		//This is an example of how the addTable/addPane class works
-//		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
+		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 		
 		
 		new ExamResults(this);
@@ -61,8 +68,9 @@ public class InterfaceWindow extends jFrame {
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
 		addMenu("File", fileMenu);
-		String[] dataMenu = new String[] {"Compare To Average"};
+		String[] dataMenu = new String[] {"Compare To Average", "Email to Students", "Email Settings"};
 		addMenu("Data", dataMenu);
+		
 
 		getMenuItem("File", fileMenu[2]).addActionListener(new ActionListener() {
 			
@@ -72,7 +80,6 @@ public class InterfaceWindow extends jFrame {
 			}
 			
 		});
-		
 		
 		getMenuItem("Data", dataMenu[0]).addActionListener(new ActionListener(){
 			@Override
@@ -84,6 +91,17 @@ public class InterfaceWindow extends jFrame {
 			}
 		});
 		
+		getMenuItem("Data", dataMenu[1]).addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				new EmailPopup(mainList);
+			}
+		});
+		
+		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+			}
+		});
 		
 		getMenuItem("File", fileMenu[0]).addActionListener(new ActionListener() {
 			

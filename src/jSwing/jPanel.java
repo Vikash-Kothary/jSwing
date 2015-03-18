@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -45,6 +46,8 @@ public class jPanel extends JPanel {
 	private ArrayList<JTextField> textFields;
 	private ArrayList<JTabbedPane> tabbedPanes;
 	private ArrayList<JTable> tables;
+	private ArrayList<JCheckBox> checkBoxes;
+	
 	
 	private Random rand = new Random();
 	private final XYSeries series = new XYSeries("StudentData");
@@ -72,6 +75,7 @@ public class jPanel extends JPanel {
         textFields = new ArrayList<>();
         tabbedPanes = new ArrayList<>();
         tables = new ArrayList<>();
+        checkBoxes = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -133,6 +137,15 @@ public class jPanel extends JPanel {
 		return null;
     }
     
+    public jPanel getScrollPanel(String name){
+    	for(jPanel panel : panels){
+    		if(panel.getName().equals(name)){
+    			return panel;
+    		}
+    	}
+    	return null;
+    }
+    
     public JTextField getTextField(String text){
     	for(JTextField tField : textFields){
     		if(tField.getName().contains(text)){
@@ -146,6 +159,15 @@ public class jPanel extends JPanel {
     	for(JTabbedPane tPane : tabbedPanes){
     		if(tPane.getName().contains(text)){
     			return tPane;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JCheckBox getCheckBox(String text){
+    	for (JCheckBox cBox : checkBoxes){
+    		if(cBox.getText().contains(text)){
+    			return cBox;
     		}
     	}
     	return null;
@@ -278,7 +300,7 @@ public class jPanel extends JPanel {
 	public jScrollPane addList(String[] text, String name) {
 		if(text!=null){
 	        JList list = new JList(text);
-	        list.setName("studentList");
+	        list.setName(name);
 	        jScrollPane scrollPane = new jScrollPane(list, name);
 	        lists.add(scrollPane);
 	        add(scrollPane);
@@ -286,6 +308,29 @@ public class jPanel extends JPanel {
 		}
 		return null;
     }
+	
+	public jScrollPane addScrollPanel(String panelName, String paneName){
+		
+			jPanel panel = new jPanel();
+			panel.setName(panelName);
+			jScrollPane scrollPane = new jScrollPane(panel, paneName);
+			scrollPane.setName(paneName);
+			panels.add(panel);
+			add(scrollPane);
+			return scrollPane;
+		
+	}
+	
+	
+	
+	public JCheckBox addCheckBox(String text){
+		JCheckBox checkBox = new JCheckBox(text);
+		
+		add(checkBox);
+		checkBoxes.add(checkBox);
+		return checkBox;
+	}
+
 	
 	public JTabbedPane addPane(String text){
 		JTabbedPane pane = new JTabbedPane();
