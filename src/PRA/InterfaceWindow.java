@@ -17,6 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -35,20 +36,27 @@ public class InterfaceWindow extends jFrame {
 
 		jPanel container = addContainer();
 		container.setLayout(new BorderLayout());
-		initMenu();
+		
 
 		jPanel students = container.addPanel("students", BorderLayout.WEST);
 		students.setLayout(new BorderLayout());
 		addStudentPanelElements();
 
-		jPanel data = container.addPanel("data", BorderLayout.EAST);
-		//		data.setLayout(null);
-
-
+		jPanel data = container.addPanel("data", BorderLayout.CENTER);
+		data.addPane("resultsPane");
+		initMenu(data);
+		
+		//This is an example of how the addTable/addPane class works
+		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
+		
+		
+		new ExamResults(this);
+		
+		
 		this.setVisible(true);
 	}
 
-	private void initMenu() {
+	private void initMenu(final jPanel panel) {
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
 		addMenu("File", fileMenu);
@@ -61,7 +69,7 @@ public class InterfaceWindow extends jFrame {
 			}
 			
 		});
-
+		
 		getMenuItem("File", fileMenu[0]).addActionListener(new ActionListener() {
 			
 					@Override
@@ -79,7 +87,7 @@ public class InterfaceWindow extends jFrame {
 							java.io.File file = fc.getSelectedFile();
 							String filePath = file.toString();
 							csvFile = getCSV(filePath);
-
+							
 							String Snumber;
 							String Acode;
 							int imports = 0;
@@ -102,12 +110,19 @@ public class InterfaceWindow extends jFrame {
 											+ " codes were for known students; "
 											+ ((csvFile.length) - imports)
 											+ " codes were for unknown students");
-
+							
+							
 						}
 					}
 				});
 
 		getMenuItem("File", fileMenu[1]).addActionListener(new ExamResults(this));
+		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+//				panel.getTabbedPane("resultsPane").addTab("Tab1", panel.addTable("Table", Results.getTableData(),Results.getColumns()));		
+			}
+		});
+		
 	}
 
 	private void addStudentPanelElements() {
@@ -157,7 +172,7 @@ public class InterfaceWindow extends jFrame {
 		String csvFile = filePath;
 		BufferedReader br = null;
 		String line = " ";
-		String cvsSplitBy = ",";
+		
 		String[][] student = null;
 		int lengthOfFile = 0;
 		try {
@@ -168,8 +183,9 @@ public class InterfaceWindow extends jFrame {
 			int inc = 0;
 			String[] studentLines;
 			student = new String[lengthOfFile][];
+			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
-				studentLines = line.split(cvsSplitBy);
+				studentLines = line.split(",");
 				student[inc] = studentLines;
 				inc += 1;
 			}

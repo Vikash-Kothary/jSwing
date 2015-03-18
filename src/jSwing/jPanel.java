@@ -15,9 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import PRA.Results;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
@@ -30,6 +34,8 @@ public class jPanel extends JPanel {
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
+	private ArrayList<JTabbedPane> tabbedPanes;
+	private ArrayList<JTable> tables;
 
     // Constructor
     public jPanel() {
@@ -52,6 +58,8 @@ public class jPanel extends JPanel {
         lists = new ArrayList<>();
         textAreas = new ArrayList<>();
         textFields = new ArrayList<>();
+        tabbedPanes = new ArrayList<>();
+        tables = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -117,6 +125,15 @@ public class jPanel extends JPanel {
     	for(JTextField tField : textFields){
     		if(tField.getName().contains(text)){
     			return tField;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JTabbedPane getTabbedPane(String text){
+    	for(JTabbedPane tPane : tabbedPanes){
+    		if(tPane.getName().contains(text)){
+    			return tPane;
     		}
     	}
     	return null;
@@ -257,6 +274,25 @@ public class jPanel extends JPanel {
 		}
 		return null;
     }
+	
+	public JTabbedPane addPane(String text){
+		JTabbedPane pane = new JTabbedPane();
+		pane.setName(text);
+		tabbedPanes.add(pane);
+		add(pane);
+		return pane;
+		
+	}
+	
+	public JTable addTable (String text, Object[][] results, String[] columns){
+		JTable table = new JTable(results, columns);
+		table.setName(text);
+		//add(table);
+		tables.add(table);
+		return table;
+		
+	}
+	
 
     public void setPadding(int top, int left, int bottom, int right) {
         setBorder(new EmptyBorder(top, left, bottom, right));
