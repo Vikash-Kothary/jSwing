@@ -22,10 +22,7 @@ public class ExamResults implements ActionListener {
 		frame = _frame;
 	}
 
-	public static Results[] getResults(){
-		return null;
-	}
-	
+
 	
 	
 	@Override
