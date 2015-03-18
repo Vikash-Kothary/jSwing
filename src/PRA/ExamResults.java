@@ -15,11 +15,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ExamResults implements ActionListener {
 	private jFrame frame;
-
+	
+	
+	
 	public ExamResults(jFrame _frame) {
 		frame = _frame;
 	}
 
+	public static Results[] getResults(){
+		return null;
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try{
@@ -27,6 +35,8 @@ public class ExamResults implements ActionListener {
 			Results[] data = null;
 			if(filePath!=null){
 				data = getCSVData(filePath);
+		
+				
 			}
 			if(data!=null){
 				//TODO
@@ -35,6 +45,8 @@ public class ExamResults implements ActionListener {
 			ex.printStackTrace();
 		}
 	}
+	
+	
 
 	private String getFile() throws IOException {
 		JFileChooser fc = new JFileChooser();
@@ -59,19 +71,20 @@ public class ExamResults implements ActionListener {
 		while ((line = br.readLine()) != null) {
 			lengthOfFile += 1;
 		}
-		br.reset();
-		String[] studentLines;
+		BufferedReader br1 = new BufferedReader(new FileReader(csvFile));
+		
 		Results[] data = new Results[lengthOfFile];
 		for (int i = 1; i < lengthOfFile; i++) {
-			String[] lineData = br.readLine().split(",");
+			String[] lineData = br1.readLine().split(",");
 			data[i] = new Results();
 			data[i].setExamModule(lineData[2]);
 			data[i].setAssModule(lineData[5]);
 			data[i].setCandKey(lineData[6]);
 			data[i].setExamMark(lineData[9]);
 			data[i].setExamGrade(lineData[10]);
+			
 		}
-		br.close();
+		br1.close();
 		return data;
 	}
 }
