@@ -13,6 +13,13 @@ public class Result {
 		examGrade = _examGrade;
 	}
 
+	@Override
+	public String toString() {
+		return "Result [examModule=" + examModule + ", assModule=" + assModule
+				+ ", candKey=" + candKey + ", examMark=" + examMark
+				+ ", examGrade=" + examGrade + "]";
+	}
+
 	public Result() {
 	}
 
