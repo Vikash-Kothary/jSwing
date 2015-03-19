@@ -1,20 +1,22 @@
 package PRA;
 
+import java.util.ArrayList;
+
 public class Student {
 
 	private String studentName;
 	private String studentNumber;
 	private String emailAddress;
 	private String tutorEmail;
-	private String anonymousMarkingCode;
+	private ArrayList<String> anonymousMarkingCode;
 
 	public Student(String _studentName, String _studentNumber,
-			String _emailAddress, String _tutorEmail, String _anonymousMarkingCode) {
+			String _emailAddress, String _tutorEmail) {
 		studentName = _studentName;
 		studentNumber = _studentNumber;
 		emailAddress = _emailAddress;
 		tutorEmail = _tutorEmail;
-		anonymousMarkingCode = _anonymousMarkingCode;
+		anonymousMarkingCode = new ArrayList<>();
 	}
 
 	public Student() {
@@ -74,12 +76,16 @@ public class Student {
 		this.tutorEmail = tutorEmail;
 	}
 	
-	public String getAnonymousMarkingCode(){
+	public ArrayList<String> getAnonymousMarkingCodes(){
 		return anonymousMarkingCode;
 	}
 	
-	public void setAnonymousMarkingCode(String aMC){
-		this.anonymousMarkingCode = aMC;
+	public boolean addAnonymousMarkingCode(String aMC){
+		if(!anonymousMarkingCode.contains(aMC)){
+			anonymousMarkingCode.add(aMC);
+			return true;
+		}
+		return false;
 	}
 
 	/*

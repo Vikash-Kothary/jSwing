@@ -56,15 +56,17 @@ public class InterfaceWindow extends jFrame {
 		initMenu();
 		
 		//This is an example of how the addTable/addPane class works
+<<<<<<< HEAD
 		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 
 
 		
 		
 
+=======
+//		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
+>>>>>>> refs/remotes/origin/requirement5
 		
-		
-		new ExamResults(this);
 		
 		
 		this.setVisible(true);
@@ -149,7 +151,7 @@ public class InterfaceWindow extends jFrame {
 											.getStudentNumber();
 									if (Acode.equals(Snumber)) {
 										mainList.getStudent(i)
-												.setAnonymousMarkingCode(
+												.addAnonymousMarkingCode(
 														csvFile[j][1]);
 										imports += 1;
 									}
@@ -166,7 +168,7 @@ public class InterfaceWindow extends jFrame {
 					}
 				});
 
-		getMenuItem("File", fileMenu[1]).addActionListener(new ExamResults(this));
+		getMenuItem("File", fileMenu[1]).addActionListener(new CSVHandler(this, mainList));
 		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 

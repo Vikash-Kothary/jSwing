@@ -33,7 +33,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import PRA.Results;
+import PRA.Result;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
