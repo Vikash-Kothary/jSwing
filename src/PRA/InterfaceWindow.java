@@ -99,7 +99,12 @@ public class InterfaceWindow extends jFrame {
 		
 		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+				try {
+					new EmailSettings();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		

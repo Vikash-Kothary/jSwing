@@ -18,10 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
 import javax.swing.border.EmptyBorder;
 
 import org.jfree.chart.ChartFactory;
@@ -43,11 +45,12 @@ public class jPanel extends JPanel {
     private ArrayList<JButton> buttons;
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jScrollPane> textAreas;
+	private ArrayList<JTextArea> jTextAreas;
 	private ArrayList<JTextField> textFields;
 	private ArrayList<JTabbedPane> tabbedPanes;
 	private ArrayList<JTable> tables;
 	private ArrayList<JCheckBox> checkBoxes;
-	
+	private ArrayList<JSpinner> spinners;
 	
 	private Random rand = new Random();
 	private final XYSeries series = new XYSeries("StudentData");
@@ -72,10 +75,12 @@ public class jPanel extends JPanel {
         buttons = new ArrayList<>();
         lists = new ArrayList<>();
         textAreas = new ArrayList<>();
+        jTextAreas = new ArrayList<>();
         textFields = new ArrayList<>();
         tabbedPanes = new ArrayList<>();
         tables = new ArrayList<>();
         checkBoxes = new ArrayList<>();
+        spinners = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -137,6 +142,9 @@ public class jPanel extends JPanel {
 		return null;
     }
     
+    
+
+    
     public jPanel getScrollPanel(String name){
     	for(jPanel panel : panels){
     		if(panel.getName().equals(name)){
@@ -168,6 +176,15 @@ public class jPanel extends JPanel {
     	for (JCheckBox cBox : checkBoxes){
     		if(cBox.getText().contains(text)){
     			return cBox;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JTextArea getjTextArea(String text){
+    	for (JTextArea tArea : jTextAreas){
+    		if(tArea.getName().contains(text)){
+    			return tArea;
     		}
     	}
     	return null;
@@ -230,7 +247,9 @@ public class jPanel extends JPanel {
     
     public jScrollPane addTextArea(String text, String name) {
         JTextArea textArea = new JTextArea(text);
+        textArea.setName(name);
         jScrollPane scrollPane = new jScrollPane(textArea, name);
+        jTextAreas.add(textArea);
         textAreas.add(scrollPane);
         add(scrollPane);
         return scrollPane;
@@ -368,6 +387,14 @@ public class jPanel extends JPanel {
 		}
 		studentData.addSeries(series);
 		return studentData;
+	}
+	
+	public JSpinner addSpinner(SpinnerModel spinnerModel){
+		JSpinner spinner = new JSpinner(spinnerModel);
+		spinners.add(spinner);
+		add(spinner);
+		return spinner;
+		
 	}
 	
 	
