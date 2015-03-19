@@ -51,19 +51,17 @@ public class InterfaceWindow extends jFrame {
 		addStudentPanelElements();
 
 		jPanel data = container.addPanel("data", BorderLayout.CENTER);
-<<<<<<< HEAD
+
 		
 		initMenu();
 		
 		//This is an example of how the addTable/addPane class works
 		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
-=======
-		data.addPane("resultsPane");
-		initMenu(data);
+
+
 		
-		//This is an example of how the addTable/addPane class works
-		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
->>>>>>> refs/remotes/origin/requirement5
+		
+
 		
 		
 		new ExamResults(this);
@@ -72,11 +70,11 @@ public class InterfaceWindow extends jFrame {
 		this.setVisible(true);
 	}
 
-<<<<<<< HEAD
+
+	
+
 	private void initMenu(  ) {
-=======
-	private void initMenu(final jPanel panel) {
->>>>>>> refs/remotes/origin/requirement5
+
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
 		addMenu("File", fileMenu);
@@ -93,7 +91,7 @@ public class InterfaceWindow extends jFrame {
 			
 		});
 		
-<<<<<<< HEAD
+
 		getMenuItem("Data", dataMenu[0]).addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -121,8 +119,7 @@ public class InterfaceWindow extends jFrame {
 			}
 		});
 		
-=======
->>>>>>> refs/remotes/origin/requirement5
+
 		getMenuItem("File", fileMenu[0]).addActionListener(new ActionListener() {
 			
 					@Override
@@ -172,11 +169,7 @@ public class InterfaceWindow extends jFrame {
 		getMenuItem("File", fileMenu[1]).addActionListener(new ExamResults(this));
 		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-<<<<<<< HEAD
-//				getFrameContainer().getPanel("Data").getTabbedPane("resultsPane").addTab("Tab1", panel.addTable("Table", Results.getTableData(),Results.getColumns()));		
-=======
-//				panel.getTabbedPane("resultsPane").addTab("Tab1", panel.addTable("Table", Results.getTableData(),Results.getColumns()));		
->>>>>>> refs/remotes/origin/requirement5
+
 			}
 		});
 		
