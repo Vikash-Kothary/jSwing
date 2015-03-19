@@ -56,16 +56,8 @@ public class InterfaceWindow extends jFrame {
 		initMenu();
 		
 		//This is an example of how the addTable/addPane class works
-<<<<<<< HEAD
 		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 
-
-		
-		
-
-=======
-//		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
->>>>>>> refs/remotes/origin/requirement5
 		
 		
 		
