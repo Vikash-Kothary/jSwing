@@ -25,6 +25,12 @@ public class ExamResults implements ActionListener {
 
 	
 	
+	public static Results[] getResults(){
+		return null;
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try{
