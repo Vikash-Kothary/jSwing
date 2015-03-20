@@ -1,25 +1,49 @@
-
 package jSwing;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 public class jTabbedPane extends JTabbedPane {
 	ArrayList<jScrollPane> tabs;
-	
+
 	public jTabbedPane() {
 		tabs = new ArrayList<>();
 	}
-	
+
 	/* (non-Javadoc)
-	 * @see javax.swing.JTabbedPane#addTab(java.lang.String, java.awt.Component)
+	 * @see javax.swing.JTabbedPane#add(java.lang.String, java.awt.Component)
 	 */
-	@Override
-	public void addTab(String title, Component component) {
-		super.addTab(title, component);
+	public jScrollPane add(String title, jScrollPane component) {
+		Component success = super.add(title, component);
+		addCloseTabButton(title, (jScrollPane) component);
+		return (jScrollPane) success;
+	}
+
+	private void addCloseTabButton(String title, final jScrollPane panel) {
+		final JTabbedPane tabbedPane = this;
+		jPanel titlePanel = new jPanel();
+		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		titlePanel.setOpaque(false);
+		JLabel titleLbl = titlePanel.addLabel(title);
+		titleLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+		JButton closeButton = titlePanel.addButton("x");
+		closeButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tabbedPane.remove(panel);
+			}
+		});
+		titlePanel.add(closeButton);
+		setTabComponentAt(indexOfComponent(panel), titlePanel);
 	}
 
 	/**
@@ -30,18 +54,21 @@ public class jTabbedPane extends JTabbedPane {
 	}
 
 	/**
-	 * @param numOfTabs the numOftabs to set
+	 * @param numOfTabs
+	 *            the numOftabs to set
 	 */
 
-	public jScrollPane addTableTab(String tabName, Object[][] results, String[] columns) {
+	public jScrollPane addTableTab(String tabName, Object[][] results,
+			String[] columns) {
 		JTable table = new JTable(results, columns);
 		table.setName(tabName);
 		jScrollPane scrollTable = new jScrollPane(table, tabName);
 		tabs.add(scrollTable);
 		addTab(tabName, scrollTable);
+		addCloseTabButton(tabName, scrollTable);
 		return scrollTable;
 	}
-	
+
 	public jScrollPane addTableTab(String tabName, JTable table) {
 		table.setName(tabName);
 		jScrollPane scrollTable = new jScrollPane(table, tabName);
@@ -49,16 +76,16 @@ public class jTabbedPane extends JTabbedPane {
 		addTab(tabName, scrollTable);
 		return scrollTable;
 	}
-	
-	public jScrollPane removeTab(int index){
+
+	public jScrollPane removeTab(int index) {
 		return tabs.remove(index);
 	}
-	
-	public jScrollPane getTab(int index){
+
+	public jScrollPane getTab(int index) {
 		return tabs.get(index);
 	}
-	
-	public ArrayList<jScrollPane> getTabs(){
+
+	public ArrayList<jScrollPane> getTabs() {
 		return tabs;
 	}
 }
