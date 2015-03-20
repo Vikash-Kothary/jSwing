@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -30,9 +31,14 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 @SuppressWarnings("serial")
 public class InterfaceWindow extends jFrame {
 	private StudentList mainList;
+	private Random rand = new Random();
+	private final XYSeries series = new XYSeries("StudentData");
 
 	public InterfaceWindow(StudentList _mainList) {
 		super("PRA Coursework - Deep Vein Thrombosis");
@@ -94,9 +100,24 @@ public class InterfaceWindow extends jFrame {
 		getMenuItem("Data", dataMenu[0]).addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				jPanel panel = getFrameContainer().getPanel("data"); 
-				panel.addPane("graph");
-				panel.getTabbedPane("graph").addTab("Scatter", panel.createChartPanel());
+
+						XYSeriesCollection studentData = new XYSeriesCollection();
+						
+						int tableRows = 0;
+						for (int i = 0; i < tableRows; i++) {
+							series.add(rand.nextGaussian(), rand.nextGaussian());
+						}
+						
+						
+						
+						
+						
+						studentData.addSeries(series);
+						
+						jPanel panel = getFrameContainer().getPanel("data");
+						
+						panel.getTabbedPane("resultsPane").addTab("Scatter",
+								panel.createChartPanel(studentData));
 				
 			}
 		});

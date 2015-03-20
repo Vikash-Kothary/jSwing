@@ -58,8 +58,7 @@ public class jPanel extends JPanel {
 	private ArrayList<JPasswordField> passwordFields;
 	private ArrayList<JProgressBar> progressBars;
 	
-	private Random rand = new Random();
-	private final XYSeries series = new XYSeries("StudentData");
+
 
     // Constructor
     public jPanel() {
@@ -448,24 +447,17 @@ public class jPanel extends JPanel {
 	}
 	
 	
-	public ChartPanel createChartPanel(){
+	public ChartPanel createChartPanel(XYDataset studentData) {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
-				"Student Scatter", "Student Average", "Selected Result", createData());
+				"Student Scatter", "Student Average", "Selected Result",
+				studentData);
 		ChartPanel chartPanel2 = new ChartPanel(chartPanel1);
-		chartPanel2.setPreferredSize(new Dimension(500,500));
+		chartPanel2.setPreferredSize(new Dimension(500, 500));
 
 		return chartPanel2;
-		
+
 	}
-	
-	private XYDataset createData(){
-		XYSeriesCollection studentData = new XYSeriesCollection();
-		for (int i = 0; i< 25; i++){
-			series.add(rand.nextGaussian(), rand.nextGaussian());
-		}
-		studentData.addSeries(series);
-		return studentData;
-	}
+
 	
 	
 	
