@@ -23,17 +23,17 @@ public class jFrame extends JFrame {
 		initFrame();
 	}
 
-	public jFrame(String _title) {
-		title = _title;
-		setTitle(title); // set the frame title
-
-		initFrame();
-	}
-
 	public jFrame(int _width, int _height) {
 		width = _width;
 		height = _height;
 		setSize(width, height); // set the frame size
+
+		initFrame();
+	}
+
+	public jFrame(String _title) {
+		title = _title;
+		setTitle(title); // set the frame title
 
 		initFrame();
 	}
@@ -46,22 +46,6 @@ public class jFrame extends JFrame {
 		setSize(width, height); // set the frame size
 
 		initFrame();
-	}
-
-	private void initFrame() {
-		setJMenuBar(menuBar);
-	}
-
-	// changes jpanel container in frame
-	public void setContainer(JPanel panel) {
-		getContentPane().removeAll(); // empties frame background
-		getContentPane().add(panel); // add panel to background
-		// refresh panel (optional)
-		panel.revalidate();
-		panel.repaint();
-		// refresh frame
-		revalidate(); // if error: validate();
-		repaint();
 	}
 
 	public jPanel addContainer() {
@@ -77,8 +61,34 @@ public class jFrame extends JFrame {
 		return panel;
 	}
 
-	public jPanel getFrameContainer() {
-		return (jPanel) getContentPane().getComponent(0);
+	public JMenu addMenu(String menuTitle, String[] menuItems) {
+		if (menuItems != null) {
+			JMenu menu = new JMenu(menuTitle);
+			for (String itemTitle : menuItems) {
+				JMenuItem menuItem = new JMenuItem(itemTitle);
+				menu.add(menuItem);
+			}
+			menuBar.add(menu);
+			return menu;
+		}
+		return null;
+	}
+
+	// frame's location is set to the centre to the screen
+	public void centreFrame() {
+		// TODO multiple screens: should appear in the centre of the primary
+		// screen
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
+		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
+		setLocation(x, y);
+	}
+
+	public void exitFrame() {
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		// // Alternative method to close frame
+		// setVisible(false);
+		// dispose();
 	}
 
 	// // logs mouse location when clicked
@@ -107,39 +117,8 @@ public class jFrame extends JFrame {
 	// });
 	// }
 
-	// maximise frame
-	public void maximiseFrame() {
-		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
-	}
-
-	// frame's location is set to the centre to the screen
-	public void centreFrame() {
-		// TODO multiple screens: should appear in the centre of the primary
-		// screen
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
-		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
-		setLocation(x, y);
-	}
-
-	public void exitFrame() {
-		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		// // Alternative method to close frame
-		// setVisible(false);
-		// dispose();
-	}
-
-	public JMenu addMenu(String menuTitle, String[] menuItems) {
-		if (menuItems != null) {
-			JMenu menu = new JMenu(menuTitle);
-			for (String itemTitle : menuItems) {
-				JMenuItem menuItem = new JMenuItem(itemTitle);
-				menu.add(menuItem);
-			}
-			menuBar.add(menu);
-			return menu;
-		}
-		return null;
+	public jPanel getFrameContainer() {
+		return (jPanel) getContentPane().getComponent(0);
 	}
 
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {
@@ -159,5 +138,26 @@ public class jFrame extends JFrame {
 			}
 		}
 		return null;
+	}
+
+	private void initFrame() {
+		setJMenuBar(menuBar);
+	}
+
+	// maximise frame
+	public void maximiseFrame() {
+		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
+	}
+
+	// changes jpanel container in frame
+	public void setContainer(JPanel panel) {
+		getContentPane().removeAll(); // empties frame background
+		getContentPane().add(panel); // add panel to background
+		// refresh panel (optional)
+		panel.revalidate();
+		panel.repaint();
+		// refresh frame
+		revalidate(); // if error: validate();
+		repaint();
 	}
 }

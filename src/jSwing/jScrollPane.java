@@ -25,9 +25,11 @@ public class jScrollPane extends JScrollPane {
 		name = _name;
 	}
 
-	@Override
-	public void setName(String _name) {
-		name = _name;
+	public JList getList() {
+		if(object instanceof JList){
+			return (JList) object;
+		}
+		return null;
 	}
 
 	@Override
@@ -39,16 +41,16 @@ public class jScrollPane extends JScrollPane {
 		return object;
 	}
 
-	public JList getList() {
-		if(object instanceof JList){
-			return (JList) object;
+	public jPanel getPanel() {
+		if(object instanceof jPanel){
+			return (jPanel) object;
 		}
 		return null;
 	}
 
-	public jPanel getPanel() {
-		if(object instanceof jPanel){
-			return (jPanel) object;
+	public JTable getTable() {
+		if(object instanceof JTable){
+			return (JTable) object;
 		}
 		return null;
 	}
@@ -60,11 +62,9 @@ public class jScrollPane extends JScrollPane {
 		return null;
 	}
 	
-	public JTable getTable() {
-		if(object instanceof JTable){
-			return (JTable) object;
-		}
-		return null;
+	@Override
+	public void setName(String _name) {
+		name = _name;
 	}
 
 	public void updateList(String[] text) {

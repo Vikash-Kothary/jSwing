@@ -4,6 +4,10 @@ public class Result {
 	private String examModule, assModule, candKey, examMark, examGrade;
 	private Student student;
 
+	public Result() {
+		student = null;
+	}
+	
 	public Result(String _examModule, String _assModule, String _candKey,
 			String _examMark, String _examGrade) {
 		examModule = _examModule;
@@ -14,40 +18,29 @@ public class Result {
 		examGrade = _examGrade;
 		student = null;
 	}
-	
-	public Result() {
-		student = null;
-	}
-
-	@Override
-	public String toString() {
-		return "Result [examModule=" + examModule + ", assModule=" + assModule
-				+ ", candKey=" + candKey + ", examMark=" + examMark
-				+ ", examGrade=" + examGrade + "]";
-	}
-
-
-	public String getExamModule() {
-		return examModule;
-	}
-
-	public void setExamModule(String examModule) {
-		this.examModule = examModule;
-	}
 
 	public String getAssModule() {
 		return assModule;
 	}
 
-	public void setAssModule(String assModule) {
-		this.assModule = assModule;
-	}
 
 	public String getCandKey() {
 		if(student!=null){
 			return student.getStudentNumber();
 		}
 		return candKey;
+	}
+
+	public String getExamGrade() {
+		return examGrade;
+	}
+
+	public String getExamMark() {
+		return examMark;
+	}
+
+	public String getExamModule() {
+		return examModule;
 	}
 
 	/**
@@ -57,6 +50,26 @@ public class Result {
 		return student;
 	}
 
+	public void setAssModule(String assModule) {
+		this.assModule = assModule;
+	}
+
+	public void setCandKey(String candKey) {
+		this.candKey = candKey;
+	}
+
+	public void setExamGrade(String examGrade) {
+		this.examGrade = examGrade;
+	}
+
+	public void setExamMark(String examMark) {
+		this.examMark = examMark;
+	}
+
+	public void setExamModule(String examModule) {
+		this.examModule = examModule;
+	}
+
 	/**
 	 * @param student the student to set
 	 */
@@ -64,24 +77,11 @@ public class Result {
 		this.student = student;
 	}
 
-	public void setCandKey(String candKey) {
-		this.candKey = candKey;
-	}
-
-	public String getExamMark() {
-		return examMark;
-	}
-
-	public void setExamMark(String examMark) {
-		this.examMark = examMark;
-	}
-
-	public String getExamGrade() {
-		return examGrade;
-	}
-
-	public void setExamGrade(String examGrade) {
-		this.examGrade = examGrade;
+	@Override
+	public String toString() {
+		return "Result [examModule=" + examModule + ", assModule=" + assModule
+				+ ", candKey=" + candKey + ", examMark=" + examMark
+				+ ", examGrade=" + examGrade + "]";
 	}
 
 }

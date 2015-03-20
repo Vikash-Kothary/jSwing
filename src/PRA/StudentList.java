@@ -4,10 +4,6 @@ import java.util.ArrayList;
 
 public class StudentList extends ArrayList<Student> {
 
-	public Student getStudent(int i) {
-		return get(i);
-	}
-
 	public StudentList() {
 
 	}
@@ -16,16 +12,18 @@ public class StudentList extends ArrayList<Student> {
 		return size();
 	}
 
+	public Student getStudent(int i) {
+		return get(i);
+	}
+
 	// consider splitting into two functions: toStringArray and filterList
 	public String[] updateStudentList(String textField) {
 		ArrayList<String> studentNamesArrayList = new ArrayList<String>();
-		int length = 0;
 		for (int i = 0; i < getSize(); i++) {
 			if (textField != "") {
 				if (get(i).toString().toUpperCase()
 						.contains(textField.toUpperCase())) {
 					studentNamesArrayList.add(get(i).toString());
-					length += 1;
 				}
 
 			} else {

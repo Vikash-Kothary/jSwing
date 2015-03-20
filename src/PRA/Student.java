@@ -4,11 +4,19 @@ import java.util.ArrayList;
 
 public class Student {
 
+	private ArrayList<String> anonymousMarkingCode;
+	private String emailAddress;
 	private String studentName;
 	private String studentNumber;
-	private String emailAddress;
 	private String tutorEmail;
-	private ArrayList<String> anonymousMarkingCode;
+
+	public Student() {
+		studentName = "";
+		studentNumber = "";
+		emailAddress = "";
+		tutorEmail = "";
+		anonymousMarkingCode = new ArrayList<>();
+	}
 
 	public Student(String _studentName, String _studentNumber,
 			String _emailAddress, String _tutorEmail) {
@@ -19,20 +27,27 @@ public class Student {
 		anonymousMarkingCode = new ArrayList<>();
 	}
 
-	public Student() {
-		studentName = "";
-		studentNumber = "";
-		emailAddress = "";
-		tutorEmail = "";
-		anonymousMarkingCode = new ArrayList<>();
+	public boolean addAnonymousMarkingCode(String aMC) {
+		if (!anonymousMarkingCode.contains(aMC)) {
+			anonymousMarkingCode.add(aMC);
+			return true;
+		}
+		return false;
+	}
+
+	public ArrayList<String> getAnonymousMarkingCodes() {
+		return anonymousMarkingCode;
+	}
+
+	/**
+	 * @return the emailAddress
+	 */
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
 	public String getStudentName() {
 		return studentName;
-	}
-
-	public void setStudentName(String studentName) {
-		this.studentName = studentName;
 	}
 
 	/**
@@ -40,6 +55,25 @@ public class Student {
 	 */
 	public String getStudentNumber() {
 		return studentNumber;
+	}
+
+	/**
+	 * @return the tutorEmail
+	 */
+	public String getTutorEmail() {
+		return tutorEmail;
+	}
+
+	/**
+	 * @param emailAddress
+	 *            the emailAddress to set
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
 	/**
@@ -51,45 +85,11 @@ public class Student {
 	}
 
 	/**
-	 * @return the emailAddress
-	 */
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	/**
-	 * @param emailAddress
-	 *            the emailAddress to set
-	 */
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
-	/**
-	 * @return the tutorEmail
-	 */
-	public String getTutorEmail() {
-		return tutorEmail;
-	}
-
-	/**
 	 * @param tutorEmail
 	 *            the tutorEmail to set
 	 */
 	public void setTutorEmail(String tutorEmail) {
 		this.tutorEmail = tutorEmail;
-	}
-
-	public ArrayList<String> getAnonymousMarkingCodes() {
-		return anonymousMarkingCode;
-	}
-
-	public boolean addAnonymousMarkingCode(String aMC) {
-		if (!anonymousMarkingCode.contains(aMC)) {
-			anonymousMarkingCode.add(aMC);
-			return true;
-		}
-		return false;
 	}
 
 	/*

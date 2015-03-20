@@ -10,6 +10,25 @@ public class Assessment extends ArrayList<Result> {
 		assModule = _assModule;
 	}
 
+	public boolean addResult(Result result) {
+		if (result.getAssModule().equals(assModule)
+				&& result.getExamModule().equals(examModule)) {
+			add(result);
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj) || this.toString().equals(obj.toString());
+	}
+
 	public String getAssModule() {
 		return assModule;
 	}
@@ -21,6 +40,10 @@ public class Assessment extends ArrayList<Result> {
 		return examModule;
 	}
 
+	public void setAssModule(String assModule) {
+		this.assModule = assModule;
+	}
+
 	/**
 	 * @param examModule
 	 *            the examModule to set
@@ -29,32 +52,9 @@ public class Assessment extends ArrayList<Result> {
 		this.examModule = examModule;
 	}
 
-	public void setAssModule(String assModule) {
-		this.assModule = assModule;
-	}
-
-	public boolean addResult(Result result) {
-		if (result.getAssModule().equals(assModule)
-				&& result.getExamModule().equals(examModule)) {
-			add(result);
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public String toString() {
 		return examModule + " " + assModule;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj) || this.toString().equals(obj.toString());
 	}
 
 	// public boolean sameAssessment(Assessment ass){

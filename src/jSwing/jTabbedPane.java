@@ -24,7 +24,7 @@ public class jTabbedPane extends JTabbedPane {
 	 */
 	public jScrollPane add(String title, jScrollPane component) {
 		Component success = super.add(title, component);
-		addCloseTabButton(title, (jScrollPane) component);
+		addCloseTabButton(title, component);
 		return (jScrollPane) success;
 	}
 
@@ -46,11 +46,12 @@ public class jTabbedPane extends JTabbedPane {
 		setTabComponentAt(indexOfComponent(panel), titlePanel);
 	}
 
-	/**
-	 * @return the numOfTabs
-	 */
-	public int getNumberOfTabs() {
-		return tabs.size();
+	public jScrollPane addTableTab(String tabName, JTable table) {
+		table.setName(tabName);
+		jScrollPane scrollTable = new jScrollPane(table, tabName);
+		tabs.add(scrollTable);
+		addTab(tabName, scrollTable);
+		return scrollTable;
 	}
 
 	/**
@@ -69,16 +70,11 @@ public class jTabbedPane extends JTabbedPane {
 		return scrollTable;
 	}
 
-	public jScrollPane addTableTab(String tabName, JTable table) {
-		table.setName(tabName);
-		jScrollPane scrollTable = new jScrollPane(table, tabName);
-		tabs.add(scrollTable);
-		addTab(tabName, scrollTable);
-		return scrollTable;
-	}
-
-	public jScrollPane removeTab(int index) {
-		return tabs.remove(index);
+	/**
+	 * @return the numOfTabs
+	 */
+	public int getNumberOfTabs() {
+		return tabs.size();
 	}
 
 	public jScrollPane getTab(int index) {
@@ -87,5 +83,9 @@ public class jTabbedPane extends JTabbedPane {
 
 	public ArrayList<jScrollPane> getTabs() {
 		return tabs;
+	}
+
+	public jScrollPane removeTab(int index) {
+		return tabs.remove(index);
 	}
 }
