@@ -2,6 +2,7 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -115,6 +116,7 @@ public class CSVHandler implements ActionListener {
 		return null;
 	}
 
+	@SuppressWarnings("resource")
 	public ArrayList<Result> getCSVData(String filePath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 

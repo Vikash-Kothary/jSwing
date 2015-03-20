@@ -156,7 +156,7 @@ public class jPanel extends JPanel {
 
 	public jScrollPane addList(String[] text, String name) {
 		if (text != null) {
-			JList list = new JList(text);
+			JList<?> list = new JList<>(text);
 			list.setName(name);
 			jScrollPane scrollPane = new jScrollPane(list, name);
 			lists.add(scrollPane);
@@ -348,12 +348,13 @@ public class jPanel extends JPanel {
 	// return button;
 	// }
 
-	public jScrollPane createTable(String name, Object[][] results,
-			String[] columns) {
-		JTable table = new JTable(results, columns);
+	public jScrollPane addTable(String name, Object[][] data,
+			String[] headers) {
+		JTable table = new JTable(data, headers);
 		table.setName(name);
 		jScrollPane scrollTable = new jScrollPane(table, name);
 		tables.add(scrollTable);
+		add(scrollTable);
 		return scrollTable;
 
 	}
@@ -400,10 +401,10 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
-	public JComboBox getComboBox(String text) {
-		for (JComboBox comboBox : comboBoxes) {
-			if (comboBox.getName().contains(text)) {
-				return comboBox;
+	public JComboBox<?> getComboBox(String text) {
+		for (int i = 0; i < comboBoxes.size(); i++) {
+			if (comboBoxes.get(i).getName().contains(text)) {
+				return comboBoxes.get(i);
 			}
 		}
 		return null;

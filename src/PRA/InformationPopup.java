@@ -30,12 +30,26 @@ public class InformationPopup extends jFrame {
 		container.addLabel("Tutor: " + student.getTutorEmail())
 				.setHorizontalAlignment(SwingConstants.LEFT);
 
-		ArrayList<Result> results = student.getResults();
-		
+		String[] headers = { "Module", "Ass", "Cand Key", "Mark",
+				"Grade" };
+		String[][] dataArray = toStringArray(student.getResults());
+		container.addTable("Student Results", dataArray, headers);
 		
 		centreFrame();
 		pack();
 		setVisible(true);
+	}
+	
+	private String[][] toStringArray(ArrayList<Result> resultsData) {
+		String[][] dataArray = new String[resultsData.size()][5];
+		for (int i = 0; i < dataArray.length; i++) {
+			dataArray[i][0] = resultsData.get(i).getExamModule();
+			dataArray[i][1] = resultsData.get(i).getAssModule();
+			dataArray[i][2] = resultsData.get(i).getCandKey();
+			dataArray[i][3] = resultsData.get(i).getExamMark();
+			dataArray[i][4] = resultsData.get(i).getExamGrade();
+		}
+		return dataArray;
 	}
 
 }

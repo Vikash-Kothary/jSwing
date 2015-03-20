@@ -68,6 +68,7 @@ public class jScrollPane extends JScrollPane {
 		name = _name;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void updateList(String[] text) {
 		if (object instanceof JList) {
 			((JList<String>) object).setListData(text);
