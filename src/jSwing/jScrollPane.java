@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 public class jScrollPane extends JScrollPane {
@@ -35,23 +36,35 @@ public class jScrollPane extends JScrollPane {
 	}
 
 	public Component getObject() {
-		if (object instanceof JTextArea) {
-			return object;
-		} else if (object instanceof JList) {
-			return object;
-		} else if (object instanceof jPanel) {
-			return object;
-		}
-
 		return object;
 	}
 
 	public JList getList() {
-		return (JList) object;
+		if(object instanceof JList){
+			return (JList) object;
+		}
+		return null;
 	}
 
 	public jPanel getPanel() {
-		return (jPanel) object;
+		if(object instanceof jPanel){
+			return (jPanel) object;
+		}
+		return null;
+	}
+	
+	public JTextArea getTextArea() {
+		if(object instanceof JTextArea){
+			return (JTextArea) object;
+		}
+		return null;
+	}
+	
+	public JTable getTable() {
+		if(object instanceof JTable){
+			return (JTable) object;
+		}
+		return null;
 	}
 
 	public void updateList(String[] text) {

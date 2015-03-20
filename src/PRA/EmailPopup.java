@@ -105,7 +105,7 @@ public class EmailPopup extends jFrame {
 						.getText();
 
 				body = getFrameContainer().getPanel("makeEmailContainer")
-						.getPanel("emailComponents").getjTextArea("Footer")
+						.getPanel("emailComponents").getTextArea("Footer").getTextArea()
 						.getText();
 				wholeThing.remove(makeEmailContainer);
 				wholeThing.add(previewEmailContainer);

@@ -38,12 +38,7 @@ public class CSVHandler implements ActionListener {
 
 					jPanel panel = frame.getFrameContainer().getPanel("data");
 					for (Assessment ass : assData) {
-						jScrollPane scrollPane = new jScrollPane(
-								panel.createTable(ass.toString(),
-										toStringArray(ass), headers),
-								toStringArray(ass) + " Table");
-						panel.getTabbedPane("resultsPane").addTab(
-								ass.getExamModule(), scrollPane);
+						panel.getTabbedPane("resultsPane").addTableTab(ass.toString(), toStringArray(ass), headers);
 					}
 				}
 			}

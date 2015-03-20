@@ -2,6 +2,8 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
+import jSwing.jScrollPane;
+import jSwing.jTabbedPane;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -15,7 +17,6 @@ import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -43,7 +44,7 @@ public class InterfaceWindow extends jFrame {
 		jPanel data = container.addPanel("data", BorderLayout.CENTER);
 		data.setLayout(new BorderLayout());
 
-		JTabbedPane resultsPane = data.addPane("resultsPane",
+		jTabbedPane resultsPane = data.addPane("resultsPane",
 				BorderLayout.CENTER);
 
 		// This is an example of how the addTable/addPane class works
@@ -149,7 +150,11 @@ public class InterfaceWindow extends jFrame {
 											+ " codes were for known students; "
 											+ ((csvFile.length) - imports)
 											+ " codes were for unknown students");
-
+//							jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
+//							for(int i=0; i<tabbedPane.getNumberOfTabs(); i++){
+//								jScrollPane test = tabbedPane.removeTab(i);
+//								tabbedPane.addTableTab(test.getName(), test.getTable());
+//							}
 						}
 					}
 				});

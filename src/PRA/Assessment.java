@@ -44,8 +44,7 @@ public class Assessment extends ArrayList<Result> {
 
 	@Override
 	public String toString() {
-		return "Assessment [examModule=" + examModule + ", assModule="
-				+ assModule + "]";
+		return examModule + " " + assModule;
 	}
 
 	/*

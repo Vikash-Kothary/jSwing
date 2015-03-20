@@ -1,6 +1,7 @@
 // Vikash Kothary
 package jSwing;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -43,10 +43,9 @@ public class jPanel extends JPanel {
 	private ArrayList<JButton> buttons;
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jScrollPane> textAreas;
-	private ArrayList<JTextArea> jTextAreas;
+	private ArrayList<jScrollPane> tables;
 	private ArrayList<JTextField> textFields;
-	private ArrayList<JTabbedPane> tabbedPanes;
-	private ArrayList<JTable> tables;
+	private ArrayList<jTabbedPane> tabbedPanes;
 	private ArrayList<JCheckBox> checkBoxes;
 	private ArrayList<JSpinner> spinners;
 
@@ -74,7 +73,6 @@ public class jPanel extends JPanel {
 		buttons = new ArrayList<>();
 		lists = new ArrayList<>();
 		textAreas = new ArrayList<>();
-		jTextAreas = new ArrayList<>();
 		textFields = new ArrayList<>();
 		tabbedPanes = new ArrayList<>();
 		tables = new ArrayList<>();
@@ -159,8 +157,8 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
-	public JTabbedPane getTabbedPane(String text) {
-		for (JTabbedPane tPane : tabbedPanes) {
+	public jTabbedPane getTabbedPane(String text) {
+		for (jTabbedPane tPane : tabbedPanes) {
 			if (tPane.getName().contains(text)) {
 				return tPane;
 			}
@@ -176,16 +174,6 @@ public class jPanel extends JPanel {
 		}
 		return null;
 	}
-
-	public JTextArea getjTextArea(String text) {
-		for (JTextArea tArea : jTextAreas) {
-			if (tArea.getName().contains(text)) {
-				return tArea;
-			}
-		}
-		return null;
-	}
-
 	public jPanel addPanel(String name) {
 		jPanel panel = new jPanel();
 		panel.setName(name);
@@ -247,7 +235,6 @@ public class jPanel extends JPanel {
 		JTextArea textArea = new JTextArea(text);
 		textArea.setName(name);
 		jScrollPane scrollPane = new jScrollPane(textArea, name);
-		jTextAreas.add(textArea);
 		textAreas.add(scrollPane);
 		add(scrollPane);
 		return scrollPane;
@@ -354,8 +341,8 @@ public class jPanel extends JPanel {
 		return checkBox;
 	}
 
-	public JTabbedPane addPane(String text) {
-		JTabbedPane pane = new JTabbedPane();
+	public jTabbedPane addPane(String text) {
+		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
 		tabbedPanes.add(pane);
 		add(pane);
@@ -363,24 +350,32 @@ public class jPanel extends JPanel {
 
 	}
 
-	public JTabbedPane addPane(String text, String format) {
-		JTabbedPane pane = new JTabbedPane();
+	public jTabbedPane addPane(String text, String format) {
+		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
 		tabbedPanes.add(pane);
 		add(pane, format);
 		return pane;
 
 	}
-
-	public JTable createTable(String text, Object[][] results, String[] columns) {
-		JTable table = new JTable(results, columns);
-		table.setName(text);
-		// add(table);
-		tables.add(table);
-		return table;
+	
+	public JSpinner addSpinner(SpinnerModel spinnerModel) {
+		JSpinner spinner = new JSpinner(spinnerModel);
+		spinners.add(spinner);
+		add(spinner);
+		return spinner;
 
 	}
+	
+	public jScrollPane createTable(String name, Object[][] results, String[] columns) {
+		JTable table = new JTable(results, columns);
+		table.setName(name);
+		jScrollPane scrollTable = new jScrollPane(table, name);
+		tables.add(scrollTable);
+		return scrollTable;
 
+	}
+	
 	public ChartPanel createChartPanel() {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
 				"Student Scatter", "Student Average", "Selected Result",
@@ -399,14 +394,6 @@ public class jPanel extends JPanel {
 		}
 		studentData.addSeries(series);
 		return studentData;
-	}
-
-	public JSpinner addSpinner(SpinnerModel spinnerModel) {
-		JSpinner spinner = new JSpinner(spinnerModel);
-		spinners.add(spinner);
-		add(spinner);
-		return spinner;
-
 	}
 
 	public void setPadding(int top, int left, int bottom, int right) {
