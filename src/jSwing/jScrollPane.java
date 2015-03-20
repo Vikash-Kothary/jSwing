@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class jScrollPane extends JScrollPane {
 	private String name;
 	private Component object;
@@ -25,9 +26,9 @@ public class jScrollPane extends JScrollPane {
 		name = _name;
 	}
 
-	public JList getList() {
+	public JList<?> getList() {
 		if (object instanceof JList) {
-			return (JList) object;
+			return (JList<?>) object;
 		}
 		return null;
 	}
@@ -69,7 +70,7 @@ public class jScrollPane extends JScrollPane {
 
 	public void updateList(String[] text) {
 		if (object instanceof JList) {
-			((JList) object).setListData(text);
+			((JList<String>) object).setListData(text);
 			setViewportView(object);
 			revalidate();
 			repaint();

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class jTabbedPane extends JTabbedPane {
 	ArrayList<jScrollPane> tabs;
 

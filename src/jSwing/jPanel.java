@@ -40,7 +40,7 @@ public class jPanel extends JPanel {
 	private Image bgImage = null;
 	private ArrayList<JButton> buttons;
 	private ArrayList<JCheckBox> checkBoxes;
-	private ArrayList<JComboBox> comboBoxes;
+	private ArrayList<JComboBox<?>> comboBoxes;
 	private ArrayList<JLabel> labels;
 	private ArrayList<jScrollPane> lists;
 	private ArrayList<jPanel> panels;
@@ -56,7 +56,6 @@ public class jPanel extends JPanel {
 
 	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
-	private int width, height;
 
 	// Constructor
 	public jPanel() {
@@ -111,8 +110,8 @@ public class jPanel extends JPanel {
 		return checkBox;
 	}
 
-	public JComboBox addComboBox(String[] fields, String name) {
-		JComboBox comboBox = new JComboBox(fields);
+	public JComboBox<?> addComboBox(String[] fields, String name) {
+		JComboBox<?> comboBox = new JComboBox<>(fields);
 		comboBox.setName(name);
 		comboBoxes.add(comboBox);
 		add(comboBox);
