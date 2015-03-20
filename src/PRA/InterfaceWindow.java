@@ -17,6 +17,7 @@ import java.util.Random;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -120,9 +121,9 @@ public class InterfaceWindow extends jFrame {
 									.getPanel("data").getTabbedPane(
 											"resultsPane");
 							for (int i = 0; i < tabbedPane.getNumberOfTabs(); i++) {
-								// jScrollPane test = tabbedPane.removeTab(i);
-								// tabbedPane.addTableTab(test.getName(),
-								// test.getTable());
+//								 jScrollPane test = tabbedPane.removeTab(i);
+//								 tabbedPane.addTableTab(test.getName(),
+//								 test.getTable());
 							}
 						}
 					}
@@ -146,21 +147,66 @@ public class InterfaceWindow extends jFrame {
 				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-
-						XYSeriesCollection studentData = new XYSeriesCollection();
-
-						int tableRows = 0;
-						for (int i = 0; i < tableRows; i++) {
-							series.add(rand.nextGaussian(), rand.nextGaussian());
+						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
+						if(tabbedPane.getSelectedIndex() != -1){
+							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+							int studentIndex = 0;
+							for(int i = 0; i < selectedTable.getColumnCount(); i++){
+								if (selectedTable.getColumnName(i).equals("Cand Key")){
+									studentIndex = i;
+									break;
+								}
+							}
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+//							int average = 0;
+//							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+//							
+//							for (int i = 0; i < selectedTable.getRowCount(); i++){
+//								for(int j = 0; j<tabbedPane.getTabCount(); j++){
+//									if (j != tabbedPane.getSelectedIndex()){
+//										int markIndex = 0;
+//										
+//										JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
+//								
+//										for(int k = 0; k < nonSelectedTable.getColumnCount(); k++){
+//											if (nonSelectedTable.getColumnName(k).equals("Mark")){
+//												markIndex = k;
+//												break;
+//											}
+//										}
+//										average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, markIndex));
+//									}	
+//								}
+//									average = average / (tabbedPane.getTabCount() - 1);
+//									int markIndex = 0;
+//									for (int k = 0; k <selectedTable.getColumnCount(); k++){
+//										if (selectedTable.getColumnName(k).equals("Mark")){
+//											markIndex = k;
+//											break;
+//										}	
+//									}
+//									series.add(Integer.valueOf((String) selectedTable.getValueAt(i, markIndex)), Integer.valueOf(average));
+//									System.out.println(selectedTable.getRowCount());
+//								}
+//							
+//								
+//								
+//							
+//					
+							XYSeriesCollection studentData = new XYSeriesCollection();
+							studentData.addSeries(series);
+							new ScatterPlot(studentData);	
 						}
-
-						studentData.addSeries(series);
-
-						jPanel panel = getFrameContainer().getPanel("data");
-
-						panel.getTabbedPane("resultsPane").addTab("Scatter",
-								panel.createChartPanel(studentData));
-
 					}
 				});
 

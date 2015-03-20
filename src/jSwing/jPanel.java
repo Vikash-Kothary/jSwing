@@ -311,35 +311,17 @@ public class jPanel extends JPanel {
 		return textField;
 	}
 
-	public ChartPanel createChartPanel() {
-		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
-				"Student Scatter", "Student Average", "Selected Result",
-				createData());
-		ChartPanel chartPanel2 = new ChartPanel(chartPanel1);
-		chartPanel2.setPreferredSize(new Dimension(500, 500));
 
-		return chartPanel2;
-
-	}
 
 	public ChartPanel createChartPanel(XYDataset studentData) {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
 				"Student Scatter", "Student Average", "Selected Result",
 				studentData);
 		ChartPanel chartPanel2 = new ChartPanel(chartPanel1);
-		chartPanel2.setPreferredSize(new Dimension(500, 500));
-
+		chartPanel2.setPreferredSize(new Dimension(1100, 500));
+		add(chartPanel2);
 		return chartPanel2;
 
-	}
-
-	private XYDataset createData() {
-		XYSeriesCollection studentData = new XYSeriesCollection();
-		for (int i = 0; i < 25; i++) {
-			series.add(rand.nextGaussian(), rand.nextGaussian());
-		}
-		studentData.addSeries(series);
-		return studentData;
 	}
 
 	// public JButton addButton(String name, Rectangle location) {
