@@ -322,12 +322,12 @@ public class jPanel extends JPanel {
 
 
 
-	public ChartPanel createChartPanel(XYDataset studentData) {
+	public ChartPanel createChartPanel(XYDataset studentData, String name, String[] axis, int[] dimensions) {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
-				"Student Scatter", "Student Average", "Selected Result",
+				name, axis[0], axis[1],
 				studentData);
 		ChartPanel chartPanel2 = new ChartPanel(chartPanel1);
-		chartPanel2.setPreferredSize(new Dimension(1100, 500));
+		chartPanel2.setPreferredSize(new Dimension(dimensions[0],dimensions[1]));
 		add(chartPanel2);
 		return chartPanel2;
 

@@ -17,13 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 @SuppressWarnings("serial")
 public class InterfaceWindow extends jFrame {
 	private StudentList mainList;
-	private Random rand = new Random();
+	
 	private final XYSeries series = new XYSeries("StudentData");
 
 	public InterfaceWindow(StudentList _mainList) {
@@ -85,57 +86,44 @@ public class InterfaceWindow extends jFrame {
 		
 		getMenuItem("Data", dataMenu[0]).addActionListener(
 				new ActionListener() {
+					@SuppressWarnings("unused")
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
+						XYSeriesCollection studentData = new XYSeriesCollection();
+						String candKey = null;
 						if(tabbedPane.getSelectedIndex() != -1){
 							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
-							int studentIndex = 2;
-							// you probably won't need this since no matter the order of the file
-							// the cand key will always we the 3 column hence studentIndex = 2;
-							for(int i = 0; i < selectedTable.getColumnCount(); i++){
-								if (selectedTable.getColumnName(i).equals("Cand Key")){
-									studentIndex = i;
-									break;
-								}
-							}
 							
-//							int average = 0;
-//							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
-//							
-//							for (int i = 0; i < selectedTable.getRowCount(); i++){
-//								for(int j = 0; j<tabbedPane.getTabCount(); j++){
-//									if (j != tabbedPane.getSelectedIndex()){
-//										int markIndex = 0;
-//										
-//										JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
-//								
-//										for(int k = 0; k < nonSelectedTable.getColumnCount(); k++){
-//											if (nonSelectedTable.getColumnName(k).equals("Mark")){
-//												markIndex = k;
-//												break;
-//											}
-//										}
-//										average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, markIndex));
-//									}	
-//								}
-//									average = average / (tabbedPane.getTabCount() - 1);
-//									int markIndex = 0;
-//									for (int k = 0; k <selectedTable.getColumnCount(); k++){
-//										if (selectedTable.getColumnName(k).equals("Mark")){
-//											markIndex = k;
-//											break;
-//										}	
-//									}
-//									series.add(Integer.valueOf((String) selectedTable.getValueAt(i, markIndex)), Integer.valueOf(average));
-//									System.out.println(selectedTable.getRowCount());
-//								}
-//							
-//								
-//								
-//							
-//					
-							XYSeriesCollection studentData = new XYSeriesCollection();
+							
+							for (int i = 0; i < selectedTable.getRowCount(); i++){
+								double average = 0;
+								candKey = (String) selectedTable.getValueAt(i, 2);
+								int numberOfAverageTabs = tabbedPane.getTabCount() -1;
+								for(int j = 0; j<tabbedPane.getTabCount(); j++){
+									tabbed_if : if (j != tabbedPane.getSelectedIndex()){
+													JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
+													if ((String) nonSelectedTable.getValueAt(i, 2) != candKey){
+															numberOfAverageTabs-=1;
+															break tabbed_if;
+													}
+										
+									
+												average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, 3));
+												}	
+								}
+									average = average / (numberOfAverageTabs);
+									
+									double x = (Double.valueOf((String) selectedTable.getValueAt(i, 3)));
+									series.add(x, average);
+									
+								}
+							
+								
+								
+							
+					
+							
 							studentData.addSeries(series);
 							new ScatterPlotWindow(studentData);	
 						}

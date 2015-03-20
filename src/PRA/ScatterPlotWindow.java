@@ -23,8 +23,10 @@ public class ScatterPlotWindow extends jFrame{
 		jPanel container = addContainer();
 		container.setLayout(new BorderLayout());
 		container.setPadding(5, 5, 5, 5);
-		
-		container.createChartPanel(studentData);
+		String name = "Student ScatterPlot";
+		String[] axis = {"Student Average Result", "Current Assessment Result"};
+		int[] dimensions = {1100, 500};
+		container.createChartPanel(studentData, name, axis, dimensions);
 
 //		pack();
 		centreFrame();
