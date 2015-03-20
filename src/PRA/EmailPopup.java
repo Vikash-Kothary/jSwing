@@ -177,6 +177,7 @@ public class EmailPopup extends jFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						jPanel passPanel = new jPanel();
+						passPanel.setLayout(new GridLayout(1,1));
 						passPanel.addLabel("Password: ");
 						passPanel.addPasswordField("passwordField");
 						final int option = JOptionPane.showOptionDialog(null,
@@ -199,8 +200,7 @@ public class EmailPopup extends jFrame {
 										@Override
 										protected PasswordAuthentication getPasswordAuthentication() {
 											return new PasswordAuthentication(
-													EmailSettings.getUserName(),
-													new String("passworddvt"));
+													EmailSettings.getUserName(),new String(password));
 										}
 									});
 							
