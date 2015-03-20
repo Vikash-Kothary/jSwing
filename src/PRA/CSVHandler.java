@@ -70,8 +70,8 @@ public class CSVHandler implements ActionListener {
 			// and all the anonymous marking codes for each student
 			for (String aMC : student.getAnonymousMarkingCodes()) {
 				// if they are the same as the results
-				if (result.getCandKey().replaceAll("#", "").equals(aMC)
-						|| result.getCandKey().equals(
+				if (result.getCandKey().equals(aMC)
+						|| result.getCandKey().split("/")[0].equals(
 								student.getStudentNumber())) {
 					// and if they are, attaches student to result
 					result.setStudent(student);
