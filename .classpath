@@ -9,5 +9,8 @@
 	<classpathentry kind="lib" path="D:/Documents/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="D:/Documents/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="D:/Documents/StudentData.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/jsoup-1.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/selenium-java-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Vikash Kothary/Downloads/selenium-htmlunit-driver-2.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,10 +1,13 @@
 package PRA;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
@@ -15,7 +18,7 @@ public class EmailSettingsDialogue extends jFrame {
 
 	public EmailSettingsDialogue() throws FileNotFoundException, IOException {
 		super("Settings");
-		setSize(500, 300);
+		this.setMinimumSize(new Dimension(300,150));
 
 		final EmailSettings emailSettings = new EmailSettings();
 
@@ -23,8 +26,9 @@ public class EmailSettingsDialogue extends jFrame {
 				EmailSettings.getPort(), 0, 999, 1);
 
 		jPanel container = addContainer();
-		final jPanel settings = container.addPanel("Settings");
-		settings.setLayout(new GridLayout(7, 2));
+		container.setLayout(new BorderLayout());
+		final jPanel settings = container.addPanel("Settings", BorderLayout.CENTER);
+		settings.setLayout(new GridLayout(6, 2));
 		settings.addLabel("SMTP Server: ");
 		settings.addTextField(EmailSettings.getHost(), "Server", null);
 		settings.addLabel("Port: ");
@@ -64,13 +68,13 @@ public class EmailSettingsDialogue extends jFrame {
 							.getText());
 					exitFrame();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
 
-		
+		pack();
+		centreFrame();
 		setVisible(true);
 
 	}

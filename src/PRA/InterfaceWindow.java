@@ -5,6 +5,8 @@ import jSwing.jPanel;
 import jSwing.jTabbedPane;
 
 import java.awt.BorderLayout;
+import java.awt.HeadlessException;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -14,9 +16,11 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -63,7 +67,7 @@ public class InterfaceWindow extends jFrame {
 				"Load exam results", "Exit" };
 		addMenu("File", fileMenu);
 		String[] dataMenu = new String[] { "Compare To Average",
-				"Email to Students", "Email Settings" };
+				"Email to Students", "Email Settings", "Fetch Participation" };
 		addMenu("Data", dataMenu);
 
 		getMenuItem("File", fileMenu[0]).addActionListener(
@@ -82,62 +86,77 @@ public class InterfaceWindow extends jFrame {
 
 				});
 
-		
 		getMenuItem("Data", dataMenu[0]).addActionListener(
 				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
-						if(tabbedPane.getSelectedIndex() != -1){
-							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+						jTabbedPane tabbedPane = getFrameContainer().getPanel(
+								"data").getTabbedPane("resultsPane");
+						if (tabbedPane.getSelectedIndex() != -1) {
+							JTable selectedTable = tabbedPane.getTab(
+									tabbedPane.getSelectedIndex()).getTable();
 							int studentIndex = 2;
-							// you probably won't need this since no matter the order of the file
-							// the cand key will always we the 3 column hence studentIndex = 2;
-							for(int i = 0; i < selectedTable.getColumnCount(); i++){
-								if (selectedTable.getColumnName(i).equals("Cand Key")){
+							// you probably won't need this since no matter the
+							// order of the file
+							// the cand key will always we the 3 column hence
+							// studentIndex = 2;
+							for (int i = 0; i < selectedTable.getColumnCount(); i++) {
+								if (selectedTable.getColumnName(i).equals(
+										"Cand Key")) {
 									studentIndex = i;
 									break;
 								}
 							}
-							
-//							int average = 0;
-//							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
-//							
-//							for (int i = 0; i < selectedTable.getRowCount(); i++){
-//								for(int j = 0; j<tabbedPane.getTabCount(); j++){
-//									if (j != tabbedPane.getSelectedIndex()){
-//										int markIndex = 0;
-//										
-//										JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
-//								
-//										for(int k = 0; k < nonSelectedTable.getColumnCount(); k++){
-//											if (nonSelectedTable.getColumnName(k).equals("Mark")){
-//												markIndex = k;
-//												break;
-//											}
-//										}
-//										average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, markIndex));
-//									}	
-//								}
-//									average = average / (tabbedPane.getTabCount() - 1);
-//									int markIndex = 0;
-//									for (int k = 0; k <selectedTable.getColumnCount(); k++){
-//										if (selectedTable.getColumnName(k).equals("Mark")){
-//											markIndex = k;
-//											break;
-//										}	
-//									}
-//									series.add(Integer.valueOf((String) selectedTable.getValueAt(i, markIndex)), Integer.valueOf(average));
-//									System.out.println(selectedTable.getRowCount());
-//								}
-//							
-//								
-//								
-//							
-//					
+
+							// int average = 0;
+							// JTable selectedTable =
+							// tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+							//
+							// for (int i = 0; i < selectedTable.getRowCount();
+							// i++){
+							// for(int j = 0; j<tabbedPane.getTabCount(); j++){
+							// if (j != tabbedPane.getSelectedIndex()){
+							// int markIndex = 0;
+							//
+							// JTable nonSelectedTable =
+							// tabbedPane.getTab(j).getTable();
+							//
+							// for(int k = 0; k <
+							// nonSelectedTable.getColumnCount(); k++){
+							// if
+							// (nonSelectedTable.getColumnName(k).equals("Mark")){
+							// markIndex = k;
+							// break;
+							// }
+							// }
+							// average += Integer.valueOf((String)
+							// nonSelectedTable.getValueAt(i, markIndex));
+							// }
+							// }
+							// average = average / (tabbedPane.getTabCount() -
+							// 1);
+							// int markIndex = 0;
+							// for (int k = 0; k
+							// <selectedTable.getColumnCount(); k++){
+							// if
+							// (selectedTable.getColumnName(k).equals("Mark")){
+							// markIndex = k;
+							// break;
+							// }
+							// }
+							// series.add(Integer.valueOf((String)
+							// selectedTable.getValueAt(i, markIndex)),
+							// Integer.valueOf(average));
+							// System.out.println(selectedTable.getRowCount());
+							// }
+							//
+							//
+							//
+							//
+							//
 							XYSeriesCollection studentData = new XYSeriesCollection();
 							studentData.addSeries(series);
-							new ScatterPlotWindow(studentData);	
+							new ScatterPlotWindow(studentData);
 						}
 					}
 				});
@@ -157,10 +176,9 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
-		
 
-
-		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener() {
+		getMenuItem("Data", dataMenu[2]).addActionListener(
+				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						try {
@@ -170,6 +188,20 @@ public class InterfaceWindow extends jFrame {
 							e1.printStackTrace();
 						}
 					}
+				});
+
+		getMenuItem("Data", dataMenu[3]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new WebScraper();
+						} catch (HeadlessException | UnsupportedFlavorException
+								| IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+
 				});
 	}
 

@@ -4,6 +4,9 @@ package jSwing;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -313,7 +316,6 @@ public class jPanel extends JPanel {
 
 	public JTextField addTextField(String text, String name, String format) {
 		JTextField textField = new JTextField();
-		textField.setText(text);
 		textField.setName(name);
 		textFields.add(textField);
 		add(textField, format);

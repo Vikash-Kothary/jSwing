@@ -10,12 +10,9 @@ public class Student {
 	private String studentName;
 	private String studentNumber;
 	private String tutorEmail;
+	private String lastAccessed;
 
 	public Student() {
-		studentName = "";
-		studentNumber = "";
-		emailAddress = "";
-		tutorEmail = "";
 		anonymousMarkingCode = new ArrayList<>();
 		results = new ArrayList<>();
 	}
@@ -28,6 +25,20 @@ public class Student {
 		tutorEmail = _tutorEmail.replaceAll("[\"]", "");
 		anonymousMarkingCode = new ArrayList<>();
 		results = new ArrayList<>();
+	}
+
+	/**
+	 * @return the lastAccessed
+	 */
+	public String getLastAccessed() {
+		return lastAccessed;
+	}
+
+	/**
+	 * @param lastAccessed the lastAccessed to set
+	 */
+	public void setLastAccessed(String lastAccessed) {
+		this.lastAccessed = lastAccessed;
 	}
 
 	public boolean addAnonymousMarkingCode(String aMC) {
