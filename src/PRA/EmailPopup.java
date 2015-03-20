@@ -1,5 +1,8 @@
 package PRA;
 
+import jSwing.jFrame;
+import jSwing.jPanel;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -7,17 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.mail.*;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import jSwing.jFrame;
-import jSwing.jPanel;
+import javax.swing.JScrollPane;
 
 
 
@@ -26,16 +30,18 @@ import jSwing.jPanel;
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame{
 		
-	private String toEmail = "tobyrbirkett@gmail.com";
-	private String fromEmail = "dvtPRACoursework@gmail.com";
+
 	
 	private String subject;
 	private String body;
+	
+	ArrayList<String> studentEmails = new ArrayList<String>();
 	 
 	
 	public EmailPopup(final StudentList mainList) throws FileNotFoundException, IOException{
 		super("Email");
 		setSize(1000,600);
+		
 		final jPanel wholeThing = addContainer();
 		wholeThing.setLayout(new GridLayout(1,1));
 		final jPanel makeEmailContainer = wholeThing.addPanel("makeEmailContainer");
@@ -64,12 +70,12 @@ public class EmailPopup extends jFrame{
 		jPanel bottom = emailComponents.addPanel("bottom", BorderLayout.SOUTH);
 		bottom.setLayout(new BorderLayout());
 		bottom.addButton("Next", BorderLayout.EAST);
-		
+		final jPanel scrollPanel = getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel");
 		buttons.getButton("Select All").addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
 				for (int i = 0; i < mainList.size(); i++){
-					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(true);
+					scrollPanel.getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(true);
 				}
 			}
 		});
@@ -77,16 +83,24 @@ public class EmailPopup extends jFrame{
 			@Override
 			public void actionPerformed(ActionEvent e){
 				for (int i = 0; i < mainList.size(); i++){
-					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(false);
+					scrollPanel.getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(false);
 					
 				}
 			} 
 		});
 		
 		bottom.getButton("Next").addActionListener(new ActionListener(){
+			@SuppressWarnings("null")
 			@Override
 			public void actionPerformed(ActionEvent e){
 				subject = getFrameContainer().getPanel("makeEmailContainer").getPanel("emailComponents").getTextField("Header").getText();
+				
+				for(int i = 0; i < mainList.size(); i++){
+					if (scrollPanel.getCheckBox(mainList.getStudent(i).getStudentName()).isSelected()){
+						
+						studentEmails.add(mainList.getStudent(i).getEmailAddress());
+					}
+				}
 				
 				body = getFrameContainer().getPanel("makeEmailContainer").getPanel("emailComponents").getjTextArea("Footer").getText();
 				wholeThing.remove(makeEmailContainer);
@@ -142,7 +156,10 @@ public class EmailPopup extends jFrame{
 					MimeMessage message = new MimeMessage(session);
 					try {
 						message.setFrom(new InternetAddress(emailSettings.getUserName()));
-						message.addRecipient(Message.RecipientType.TO, new InternetAddress("tobyrbirkett@gmail.com"));
+						for (int i = 0; i<studentEmails.size(); i++){
+							message.addRecipient(Message.RecipientType.TO, new InternetAddress(studentEmails.get(i)));	
+						}
+						
 						message.setSubject(subject);
 						message.setText(body);
 						Transport.send(message);

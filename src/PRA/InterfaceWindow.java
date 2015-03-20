@@ -51,7 +51,12 @@ public class InterfaceWindow extends jFrame {
 		addStudentPanelElements();
 
 		jPanel data = container.addPanel("data", BorderLayout.CENTER);
-
+		String[] temp = {"a;lskdfja", "asdfadsf"};
+		String[] temp1 = {"a;lskdfja", "asdfadsf"};
+		String[][] temp2 = new String[2][2];
+		temp2[0] = temp;
+		temp2[1] = temp1;
+		data.addTable("Table", temp2, temp);
 		
 		initMenu();
 		
