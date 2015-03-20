@@ -98,16 +98,6 @@ public class InterfaceWindow extends jFrame {
 								}
 							}
 							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
 //							int average = 0;
 //							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
 //							

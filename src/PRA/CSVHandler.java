@@ -2,6 +2,7 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CSVHandler implements ActionListener {
@@ -27,21 +29,23 @@ public class CSVHandler implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		try {
 			File[] files = getFiles();
-			for (File file : files) {
-				ArrayList<Result> csvData = getCSVData(file.toString());
-				if (csvData != null) {
-					String[] headers = { "Module", "Ass", "Cand Key", "Mark",
-							"Grade" };
-					ArrayList<Assessment> assData = addToAssessments(csvData);
-					for (Assessment ass : assData) {
-						for (Result result : ass) {
-							deAnonymise(result);
+			if(files!=null){
+				for (File file : files) {
+					ArrayList<Result> csvData = getCSVData(file.toString());
+					if (csvData != null) {
+						String[] headers = { "Module", "Ass", "Cand Key", "Mark",
+								"Grade" };
+						ArrayList<Assessment> assData = addToAssessments(csvData);
+						for (Assessment ass : assData) {
+							for (Result result : ass) {
+								deAnonymise(result);
+							}
 						}
-					}
-					jPanel panel = frame.getFrameContainer().getPanel("data");
-					for (Assessment ass : assData) {
-						panel.getTabbedPane("resultsPane").addTableTab(
-								ass.toString(), toStringArray(ass), headers);
+						jPanel panel = frame.getFrameContainer().getPanel("data");
+						for (Assessment ass : assData) {
+							panel.getTabbedPane("resultsPane").addTableTab(
+									ass.toString(), toStringArray(ass), headers);
+						}
 					}
 				}
 			}
@@ -180,10 +184,11 @@ public class CSVHandler implements ActionListener {
 				}
 			}
 		}
-		System.out.println("Anonymous marking codes impored. " + imports
+		String message = "Anonymous marking codes impored. " + imports
 				+ " codes were for known students; "
 				+ ((csvFile.length) - imports)
-				+ " codes were for unknown students");
+				+ " codes were for unknown students";
+		JOptionPane.showMessageDialog(frame, message);
 		return null;
 
 	}
