@@ -69,114 +69,10 @@ public class InterfaceWindow extends jFrame {
 				"Email to Students", "Email Settings" };
 		addMenu("Data", dataMenu);
 
-		getMenuItem("File", fileMenu[2]).addActionListener(
-				new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						exitFrame();
-					}
-
-				});
-
-		getMenuItem("Data", dataMenu[0]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						jPanel panel = getFrameContainer().getPanel("data");
-						panel.addPane("graph");
-						panel.getTabbedPane("graph").addTab("Scatter",
-								panel.createChartPanel());
-
-					}
-				});
-
-		getMenuItem("Data", dataMenu[1]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailPopup(mainList);
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-
-		getMenuItem("Data", dataMenu[2]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailSettings();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-
-		getMenuItem("File", fileMenu[2]).addActionListener(
-				new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						exitFrame();
-					}
-
-				});
-
-		getMenuItem("Data", dataMenu[0]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						XYSeriesCollection studentData = new XYSeriesCollection();
-
-						int tableRows = 0;
-						for (int i = 0; i < tableRows; i++) {
-							series.add(rand.nextGaussian(), rand.nextGaussian());
-						}
-
-						studentData.addSeries(series);
-
-						jPanel panel = getFrameContainer().getPanel("data");
-
-						panel.getTabbedPane("resultsPane").addTab("Scatter",
-								panel.createChartPanel(studentData));
-
-					}
-				});
-
-		getMenuItem("Data", dataMenu[1]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailPopup(mainList);
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-
-		getMenuItem("Data", dataMenu[2]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailSettingsDialogue();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
+		
+	
+		
 
 		getMenuItem("File", fileMenu[0]).addActionListener(
 				new ActionListener() {
@@ -231,8 +127,75 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
-		getMenuItem("File", fileMenu[1]).addActionListener(
-				new CSVHandler(this, mainList));
+		
+		getMenuItem("File", fileMenu[1]).addActionListener(	new CSVHandler(this, mainList));
+		
+
+		getMenuItem("File", fileMenu[2]).addActionListener(
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exitFrame();
+					}
+
+				});
+
+		
+		getMenuItem("Data", dataMenu[0]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						XYSeriesCollection studentData = new XYSeriesCollection();
+
+						int tableRows = 0;
+						for (int i = 0; i < tableRows; i++) {
+							series.add(rand.nextGaussian(), rand.nextGaussian());
+						}
+
+						studentData.addSeries(series);
+
+						jPanel panel = getFrameContainer().getPanel("data");
+
+						panel.getTabbedPane("resultsPane").addTab("Scatter",
+								panel.createChartPanel(studentData));
+
+					}
+				});
+
+		getMenuItem("Data", dataMenu[1]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailPopup(mainList);
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+		
+
+
+		getMenuItem("Data", dataMenu[2]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailSettingsDialogue();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+		
+		
 	}
 
 	private void addStudentPanelElements() {
