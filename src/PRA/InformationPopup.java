@@ -32,7 +32,9 @@ public class InformationPopup extends jFrame {
 
 		ArrayList<Result> results = student.getResults();
 		
+		
 		centreFrame();
+		pack();
 		setVisible(true);
 	}
 

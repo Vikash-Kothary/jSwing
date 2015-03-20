@@ -58,7 +58,8 @@ public class InterfaceWindow extends jFrame {
 		// getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"),
 		// getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 
-		this.setVisible(true);
+		maximiseFrame();
+		setVisible(true);
 	}
 
 	private void initMenu() {

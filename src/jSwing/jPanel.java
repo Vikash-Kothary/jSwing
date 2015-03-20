@@ -36,7 +36,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
-
+	//TODO remove dependency on jScrollPane as deprecated
 	private Image bgImage = null;
 	private ArrayList<JButton> buttons;
 	private ArrayList<JCheckBox> checkBoxes;
