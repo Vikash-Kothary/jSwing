@@ -24,10 +24,7 @@ public class ScatterPlotWindow extends jFrame{
 		container.setLayout(new BorderLayout());
 		container.setPadding(5, 5, 5, 5);
 		
-			
-
 		container.createChartPanel(studentData);
-
 
 //		pack();
 		centreFrame();

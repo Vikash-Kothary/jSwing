@@ -90,7 +90,9 @@ public class InterfaceWindow extends jFrame {
 						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
 						if(tabbedPane.getSelectedIndex() != -1){
 							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
-							int studentIndex = 0;
+							int studentIndex = 2;
+							// you probably won't need this since no matter the order of the file
+							// the cand key will always we the 3 column hence studentIndex = 2;
 							for(int i = 0; i < selectedTable.getColumnCount(); i++){
 								if (selectedTable.getColumnName(i).equals("Cand Key")){
 									studentIndex = i;
@@ -158,8 +160,7 @@ public class InterfaceWindow extends jFrame {
 		
 
 
-		getMenuItem("Data", dataMenu[2]).addActionListener(
-				new ActionListener() {
+		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						try {
