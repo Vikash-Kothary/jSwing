@@ -50,6 +50,37 @@ public class CSVHandler implements ActionListener {
 		}
 	}
 
+	private String[][] toStringArray(Assessment assData) {
+		String[][] dataArray = new String[assData.size()][5];
+		for (int i = 0; i < dataArray.length; i++) {
+			dataArray[i][0] = assData.get(i).getExamModule();
+			dataArray[i][1] = assData.get(i).getAssModule();
+			dataArray[i][2] = assData.get(i).getCandKey();
+			dataArray[i][3] = assData.get(i).getExamMark();
+			dataArray[i][4] = assData.get(i).getExamGrade();
+		}
+		return dataArray;
+	}
+
+	private boolean deAnonymise(Result result) {
+		// check every student
+		for (Student student : mainList) {
+			// and all the anonymous marking codes for each student
+			for (String aMC : student.getAnonymousMarkingCodes()) {
+				// if they are the same as the results
+				if (result.getCandKey().equals(aMC)
+						|| result.getCandKey().split("/")[0].equals(
+								student.getStudentNumber())) {
+					// and if they are, attaches student to result
+					result.setStudent(student);
+					student.addResults(result);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	private ArrayList<Assessment> addToAssessments(ArrayList<Result> data) {
 		ArrayList<Assessment> assData = new ArrayList<>();
 		int assIndex = -1;
@@ -69,25 +100,6 @@ public class CSVHandler implements ActionListener {
 			}
 		}
 		return assData;
-	}
-
-	private boolean deAnonymise(Result result) {
-		// check every student
-		for (Student student : mainList) {
-			// and all the anonymous marking codes for each student
-			for (String aMC : student.getAnonymousMarkingCodes()) {
-				// if they are the same as the results
-				if (result.getCandKey().equals(aMC)
-						|| result.getCandKey().split("/")[0].equals(student
-								.getStudentNumber())) {
-					// and if they are, attaches student to result
-					result.setStudent(student);
-					student.addResults(result);
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	@SuppressWarnings("resource")
@@ -207,18 +219,6 @@ public class CSVHandler implements ActionListener {
 		}
 		br.close();
 		return data;
-	}
-
-	private String[][] toStringArray(Assessment assData) {
-		String[][] dataArray = new String[assData.size()][5];
-		for (int i = 0; i < dataArray.length; i++) {
-			dataArray[i][0] = assData.get(i).getExamModule();
-			dataArray[i][1] = assData.get(i).getAssModule();
-			dataArray[i][2] = assData.get(i).getCandKey();
-			dataArray[i][3] = assData.get(i).getExamMark();
-			dataArray[i][4] = assData.get(i).getExamGrade();
-		}
-		return dataArray;
 	}
 
 }
