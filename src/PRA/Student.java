@@ -42,7 +42,7 @@ public class Student {
 	public Student(String _studentName, String _studentNumber,
 			String _emailAddress, String _tutorEmail) {
 		studentName = _studentName.replaceAll("[\"]", "");
-		studentNumber = _studentNumber.replaceAll("[\"]", "");
+		studentNumber = _studentNumber.replaceAll("[\"]", "").replaceAll("#", "");
 		emailAddress = _emailAddress.replaceAll("[\"]", "");
 		tutorEmail = _tutorEmail.replaceAll("[\"]", "");
 		anonymousMarkingCode = new ArrayList<>();
@@ -96,7 +96,7 @@ public class Student {
 	}
 
 	public void setStudentName(String studentName) {
-		this.studentName = studentName.replaceAll("[\"]", "");
+		this.studentName = studentName.replaceAll("[\"]", "").replaceAll("#", "");
 	}
 
 	/**
