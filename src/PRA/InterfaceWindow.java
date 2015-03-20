@@ -98,14 +98,22 @@ public class InterfaceWindow extends jFrame {
 		
 		getMenuItem("Data", dataMenu[1]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				new EmailPopup(mainList);
+				try {
+					new EmailPopup(mainList);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
-					new EmailSettings();
+					new EmailSettingsDialogue();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -161,11 +169,7 @@ public class InterfaceWindow extends jFrame {
 				});
 
 		getMenuItem("File", fileMenu[1]).addActionListener(new CSVHandler(this, mainList));
-		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-
-			}
-		});
+		
 		
 	}
 

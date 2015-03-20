@@ -5,16 +5,15 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.*;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import jSwing.jFrame;
@@ -29,19 +28,19 @@ public class EmailPopup extends jFrame{
 		
 	private String toEmail = "tobyrbirkett@gmail.com";
 	private String fromEmail = "dvtPRACoursework@gmail.com";
-	private String host = EmailSettings.getHost();
+	
 	private String subject;
 	private String body;
 	 
 	
-	public EmailPopup(final StudentList mainList){
+	public EmailPopup(final StudentList mainList) throws FileNotFoundException, IOException{
 		super("Email");
 		setSize(1000,600);
 		final jPanel wholeThing = addContainer();
 		wholeThing.setLayout(new GridLayout(1,1));
 		final jPanel makeEmailContainer = wholeThing.addPanel("makeEmailContainer");
 		final jPanel previewEmailContainer = new jPanel();
-		
+		final EmailSettings emailSettings = new EmailSettings();
 		makeEmailContainer.setLayout(new BorderLayout());
 		jPanel students = makeEmailContainer.addPanel("students", BorderLayout.WEST);
 		students.setLayout(new BorderLayout());
@@ -119,32 +118,43 @@ public class EmailPopup extends jFrame{
 		previewButtons.getButton("Send").addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
-				Properties props = new Properties();
+				jPanel passPanel = new jPanel();
+				passPanel.addLabel("Password: ");
+				passPanel.addPasswordField("passwordField");
+				final int option = JOptionPane.showOptionDialog(null, passPanel, "Enter Password",  
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, "OK");
+				if (option == 0){
+					final char[] password = passPanel.getPasswordField("passwordField").getPassword();
+					Properties props = new Properties();
+					
+					props.put("mail.smtp.auth", emailSettings.getAuth());
+					props.put("mail.smtp.starttls.enable", emailSettings.getSSL());
+					props.put("mail.smtp.host", emailSettings.getHost());
+					props.put("mail.smtp.port", emailSettings.getPort());
+					
+					Session session = Session.getInstance(props, 
+							new javax.mail.Authenticator(){ 
+								protected PasswordAuthentication getPasswordAuthentication(){ 
+									return new PasswordAuthentication(emailSettings.getUserName(), new String(password));
+								}	
+					});
+					
+					MimeMessage message = new MimeMessage(session);
+					try {
+						message.setFrom(new InternetAddress(emailSettings.getUserName()));
+						message.addRecipient(Message.RecipientType.TO, new InternetAddress("tobyrbirkett@gmail.com"));
+						message.setSubject(subject);
+						message.setText(body);
+						Transport.send(message);
+						System.out.println("Done");
+					} catch (MessagingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}	
+				}
 				
-				props.put("mail.smtp.auth", EmailSettings.getAuth());
-				props.put("mail.smtp.starttls.enable", EmailSettings.getSSL());
-				props.put("mail.smtp.host", EmailSettings.getHost());
-				props.put("mail.smtp.port", EmailSettings.getPort());
 				
-				Session session = Session.getInstance(props, 
-						new javax.mail.Authenticator(){ 
-							protected PasswordAuthentication getPasswordAuthentication(){ 
-								return new PasswordAuthentication(EmailSettings.getUserName(), "passworddvt");
-							}	
-			});
-				
-				MimeMessage message = new MimeMessage(session);
-				try {
-					message.setFrom(new InternetAddress(EmailSettings.getUserName()));
-					message.addRecipient(Message.RecipientType.TO, new InternetAddress("tobyrbirkett@gmail.com"));
-					message.setSubject(subject);
-					message.setText(body);
-					Transport.send(message);
-					System.out.println("Done");
-				} catch (MessagingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
+				 
 				
 				
 			}

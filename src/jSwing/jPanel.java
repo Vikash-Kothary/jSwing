@@ -14,9 +14,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
@@ -51,6 +53,8 @@ public class jPanel extends JPanel {
 	private ArrayList<JTable> tables;
 	private ArrayList<JCheckBox> checkBoxes;
 	private ArrayList<JSpinner> spinners;
+	private ArrayList<JComboBox> comboBoxes;
+	private ArrayList<JPasswordField> passwordFields;
 	
 	private Random rand = new Random();
 	private final XYSeries series = new XYSeries("StudentData");
@@ -81,6 +85,8 @@ public class jPanel extends JPanel {
         tables = new ArrayList<>();
         checkBoxes = new ArrayList<>();
         spinners = new ArrayList<>();
+        comboBoxes = new ArrayList<>();
+        passwordFields = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -185,6 +191,33 @@ public class jPanel extends JPanel {
     	for (JTextArea tArea : jTextAreas){
     		if(tArea.getName().contains(text)){
     			return tArea;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JSpinner getSpinner(String text){
+    	for(JSpinner spinner : spinners){
+    		if(spinner.getName().contains(text)){
+    			return spinner;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JComboBox getComboBox(String text){
+    	for(JComboBox comboBox : comboBoxes){
+    		if(comboBox.getName().contains(text)){
+    			return comboBox;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JPasswordField getPasswordField(String text){
+    	for(JPasswordField passwordField : passwordFields){
+    		if(passwordField.getName().contains(text)){
+    			return passwordField;
     		}
     	}
     	return null;
@@ -369,6 +402,31 @@ public class jPanel extends JPanel {
 		
 	}
 	
+	public JSpinner addSpinner(SpinnerModel spinnerModel, String name){
+		JSpinner spinner = new JSpinner(spinnerModel);
+		spinner.setName(name);
+		spinners.add(spinner);
+		add(spinner);
+		return spinner;
+		
+	}
+	
+	public JComboBox addComboBox(String[] fields, String name){
+		JComboBox comboBox = new JComboBox(fields);
+		comboBox.setName(name);
+		comboBoxes.add(comboBox);
+		add(comboBox);
+		return comboBox;
+	}
+	
+	public JPasswordField addPasswordField(String name){
+		JPasswordField passwordField = new JPasswordField();
+		passwordField.setName(name);
+		passwordFields.add(passwordField);
+		add(passwordField);
+		return passwordField;
+	}
+	
 	
 	public ChartPanel createChartPanel(){
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
@@ -389,13 +447,7 @@ public class jPanel extends JPanel {
 		return studentData;
 	}
 	
-	public JSpinner addSpinner(SpinnerModel spinnerModel){
-		JSpinner spinner = new JSpinner(spinnerModel);
-		spinners.add(spinner);
-		add(spinner);
-		return spinner;
-		
-	}
+	
 	
 	
 
