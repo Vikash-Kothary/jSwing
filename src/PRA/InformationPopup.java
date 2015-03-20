@@ -5,32 +5,32 @@ import jSwing.jPanel;
 
 import java.awt.GridLayout;
 
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class InformationPopup extends jFrame {
 
-	public InformationPopup(Student student){
+	public InformationPopup(Student student) {
 		super("Information");
-		setSize(300,300);
+		setSize(300, 300);
 		jPanel container = addContainer();
-		container.setLayout(new GridLayout(4,1));
-		
-		container.addLabel(student.getStudentName())
-			.setHorizontalAlignment(SwingConstants.CENTER);
+		container.setLayout(new GridLayout(4, 1));
 
-		container.addLabel("<html><i>"+student.getEmailAddress()+"</i></html>")
-			.setHorizontalAlignment(SwingConstants.CENTER);
+		container.addLabel(student.getStudentName()).setHorizontalAlignment(
+				SwingConstants.CENTER);
 
-		container.addLabel("Student No.: "+student.getStudentNumber())
-			.setHorizontalAlignment(SwingConstants.LEFT);
+		container.addLabel(
+				"<html><i>" + student.getEmailAddress() + "</i></html>")
+				.setHorizontalAlignment(SwingConstants.CENTER);
+
+		container.addLabel("Student No.: " + student.getStudentNumber())
+				.setHorizontalAlignment(SwingConstants.LEFT);
 
 		container.addLabel("Tutor: " + student.getTutorEmail())
-			.setHorizontalAlignment(SwingConstants.LEFT);
-		
+				.setHorizontalAlignment(SwingConstants.LEFT);
+
 		centreFrame();
-		
+
 		setVisible(true);
 	}
 

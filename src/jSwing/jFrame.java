@@ -1,9 +1,9 @@
 // Vikash Kothary
 package jSwing;
 
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -51,7 +51,6 @@ public class jFrame extends JFrame {
 	private void initFrame() {
 		setJMenuBar(menuBar);
 	}
-	
 
 	// changes jpanel container in frame
 	public void setContainer(JPanel panel) {
@@ -64,7 +63,7 @@ public class jFrame extends JFrame {
 		revalidate(); // if error: validate();
 		repaint();
 	}
-	
+
 	public jPanel addContainer() {
 		jPanel panel = new jPanel();
 		getContentPane().removeAll(); // empties frame background
@@ -78,44 +77,45 @@ public class jFrame extends JFrame {
 		return panel;
 	}
 
-	 public jPanel getFrameContainer(){
-		 return (jPanel) getContentPane().getComponent(0);
-	 }
+	public jPanel getFrameContainer() {
+		return (jPanel) getContentPane().getComponent(0);
+	}
 
-//	 // logs mouse location when clicked
-//	 public void mouseLogger() {
-//		 this.addMouseListener(new MouseListener() {
-//			 @Override
-//			 public void mouseClicked(MouseEvent e) {
-//				 System.out.println("x: " + e.getX() + " y: " + e.getY());
-//			 }
-//			
-//			 @Override
-//			 public void mousePressed(MouseEvent e) {
-//			 }
-//			
-//			 @Override
-//			 public void mouseReleased(MouseEvent e) {
-//			 }
-//			
-//			 @Override
-//			 public void mouseEntered(MouseEvent e) {
-//			 }
-//			
-//			 @Override
-//			 public void mouseExited(MouseEvent e) {
-//			 }
-//		 });
-//	 }
-	
+	// // logs mouse location when clicked
+	// public void mouseLogger() {
+	// this.addMouseListener(new MouseListener() {
+	// @Override
+	// public void mouseClicked(MouseEvent e) {
+	// System.out.println("x: " + e.getX() + " y: " + e.getY());
+	// }
+	//
+	// @Override
+	// public void mousePressed(MouseEvent e) {
+	// }
+	//
+	// @Override
+	// public void mouseReleased(MouseEvent e) {
+	// }
+	//
+	// @Override
+	// public void mouseEntered(MouseEvent e) {
+	// }
+	//
+	// @Override
+	// public void mouseExited(MouseEvent e) {
+	// }
+	// });
+	// }
+
 	// maximise frame
 	public void maximiseFrame() {
-		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH); // maximise
+		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
 	}
 
 	// frame's location is set to the centre to the screen
 	public void centreFrame() {
-		// TODO multiple screens: should appear in the centre of the primary screen
+		// TODO multiple screens: should appear in the centre of the primary
+		// screen
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
 		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
@@ -124,23 +124,23 @@ public class jFrame extends JFrame {
 
 	public void exitFrame() {
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-//		// Alternative method to close frame
-//		setVisible(false);
-//		dispose();
+		// // Alternative method to close frame
+		// setVisible(false);
+		// dispose();
 	}
 
 	public JMenu addMenu(String menuTitle, String[] menuItems) {
-		if(menuItems!=null){
-	        JMenu menu = new JMenu(menuTitle);
-	        for (String itemTitle : menuItems) {
-	            JMenuItem menuItem = new JMenuItem(itemTitle);
-	            menu.add(menuItem);
-	        }
-	        menuBar.add(menu);
-	        return menu;
+		if (menuItems != null) {
+			JMenu menu = new JMenu(menuTitle);
+			for (String itemTitle : menuItems) {
+				JMenuItem menuItem = new JMenuItem(itemTitle);
+				menu.add(menuItem);
+			}
+			menuBar.add(menu);
+			return menu;
 		}
 		return null;
-    }
+	}
 
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {
 		return menuBar.getMenu(0).getItem(0);

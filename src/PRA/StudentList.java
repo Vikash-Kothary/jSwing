@@ -25,7 +25,7 @@ public class StudentList extends ArrayList<Student> {
 				if (get(i).toString().toUpperCase()
 						.contains(textField.toUpperCase())) {
 					studentNamesArrayList.add(get(i).toString());
-					length+=1;
+					length += 1;
 				}
 
 			} else {
@@ -33,12 +33,12 @@ public class StudentList extends ArrayList<Student> {
 			}
 
 		}
-		
+
 		String[] studentNamesArray = new String[studentNamesArrayList.size()];
-		for (String s : studentNamesArrayList){
-			studentNamesArray = studentNamesArrayList.toArray(studentNamesArray);
+		for (String s : studentNamesArrayList) {
+			studentNamesArray = studentNamesArrayList
+					.toArray(studentNamesArray);
 		}
-		
 
 		return studentNamesArray;
 

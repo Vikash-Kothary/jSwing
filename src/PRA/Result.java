@@ -63,5 +63,4 @@ public class Result {
 		this.examGrade = examGrade;
 	}
 
-	
 }

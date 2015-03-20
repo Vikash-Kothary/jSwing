@@ -17,7 +17,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -32,8 +31,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
-import PRA.Result;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
@@ -365,7 +362,7 @@ public class jPanel extends JPanel {
 		return pane;
 
 	}
-	
+
 	public JTabbedPane addPane(String text, String format) {
 		JTabbedPane pane = new JTabbedPane();
 		pane.setName(text);
@@ -375,7 +372,7 @@ public class jPanel extends JPanel {
 
 	}
 
-	public JTable addTable(String text, Object[][] results, String[] columns) {
+	public JTable createTable(String text, Object[][] results, String[] columns) {
 		JTable table = new JTable(results, columns);
 		table.setName(text);
 		// add(table);

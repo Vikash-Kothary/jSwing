@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Assessment extends ArrayList<Result> {
 	private String examModule, assModule;
-	
-	public Assessment(String _examModule, String _assModule){
+
+	public Assessment(String _examModule, String _assModule) {
 		examModule = _examModule;
 		assModule = _assModule;
 	}
-	
+
 	public String getAssModule() {
 		return assModule;
 	}
@@ -22,7 +22,8 @@ public class Assessment extends ArrayList<Result> {
 	}
 
 	/**
-	 * @param examModule the examModule to set
+	 * @param examModule
+	 *            the examModule to set
 	 */
 	public void setExamModule(String examModule) {
 		this.examModule = examModule;
@@ -32,9 +33,9 @@ public class Assessment extends ArrayList<Result> {
 		this.assModule = assModule;
 	}
 
-
-	public boolean addResult(Result result){
-		if(result.getAssModule().equals(assModule) && result.getExamModule().equals(examModule)){
+	public boolean addResult(Result result) {
+		if (result.getAssModule().equals(assModule)
+				&& result.getExamModule().equals(examModule)) {
 			add(result);
 			return true;
 		}
@@ -47,17 +48,17 @@ public class Assessment extends ArrayList<Result> {
 				+ assModule + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj) || this.toString().equals(obj.toString());
 	}
-	
-	
-	
-//	public boolean sameAssessment(Assessment ass){
-//		return ass.getAssModule().equals(assModule);
-//	}
+
+	// public boolean sameAssessment(Assessment ass){
+	// return ass.getAssModule().equals(assModule);
+	// }
 }
