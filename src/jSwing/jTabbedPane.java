@@ -38,7 +38,7 @@ public class jTabbedPane extends JTabbedPane {
 		titlePanel.setOpaque(false);
 		JLabel titleLbl = titlePanel.addLabel(title);
 		titleLbl.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
-		JButton closeButton = titlePanel.addButton("x");
+		JLabel closeButton = titlePanel.addLabel("x");
 		closeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
