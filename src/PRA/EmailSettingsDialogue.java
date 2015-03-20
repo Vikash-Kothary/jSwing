@@ -70,7 +70,7 @@ public class EmailSettingsDialogue extends jFrame {
 			}
 		});
 
-		pack();
+		
 		setVisible(true);
 
 	}

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.jfree.data.xy.XYSeries;
@@ -55,6 +56,130 @@ public class InterfaceWindow extends jFrame {
 
 		maximiseFrame();
 		setVisible(true);
+	}
+
+	private void initMenu() {
+		String[] fileMenu = new String[] { "Load anonymous marking codes",
+				"Load exam results", "Exit" };
+		addMenu("File", fileMenu);
+		String[] dataMenu = new String[] { "Compare To Average",
+				"Email to Students", "Email Settings" };
+		addMenu("Data", dataMenu);
+
+		getMenuItem("File", fileMenu[0]).addActionListener(
+				new CSVHandler(this, mainList));
+
+		getMenuItem("File", fileMenu[1]).addActionListener(
+				new CSVHandler(this, mainList));
+
+		getMenuItem("File", fileMenu[2]).addActionListener(
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exitFrame();
+					}
+
+				});
+
+		
+		getMenuItem("Data", dataMenu[0]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
+						if(tabbedPane.getSelectedIndex() != -1){
+							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+							int studentIndex = 0;
+							for(int i = 0; i < selectedTable.getColumnCount(); i++){
+								if (selectedTable.getColumnName(i).equals("Cand Key")){
+									studentIndex = i;
+									break;
+								}
+							}
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+//							int average = 0;
+//							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
+//							
+//							for (int i = 0; i < selectedTable.getRowCount(); i++){
+//								for(int j = 0; j<tabbedPane.getTabCount(); j++){
+//									if (j != tabbedPane.getSelectedIndex()){
+//										int markIndex = 0;
+//										
+//										JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
+//								
+//										for(int k = 0; k < nonSelectedTable.getColumnCount(); k++){
+//											if (nonSelectedTable.getColumnName(k).equals("Mark")){
+//												markIndex = k;
+//												break;
+//											}
+//										}
+//										average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, markIndex));
+//									}	
+//								}
+//									average = average / (tabbedPane.getTabCount() - 1);
+//									int markIndex = 0;
+//									for (int k = 0; k <selectedTable.getColumnCount(); k++){
+//										if (selectedTable.getColumnName(k).equals("Mark")){
+//											markIndex = k;
+//											break;
+//										}	
+//									}
+//									series.add(Integer.valueOf((String) selectedTable.getValueAt(i, markIndex)), Integer.valueOf(average));
+//									System.out.println(selectedTable.getRowCount());
+//								}
+//							
+//								
+//								
+//							
+//					
+							XYSeriesCollection studentData = new XYSeriesCollection();
+							studentData.addSeries(series);
+							new ScatterPlotWindow(studentData);	
+						}
+					}
+				});
+
+		getMenuItem("Data", dataMenu[1]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailPopup(mainList);
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+		
+
+
+		getMenuItem("Data", dataMenu[2]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailSettingsDialogue();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
 	}
 
 	private void addStudentPanelElements() {
@@ -99,83 +224,6 @@ public class InterfaceWindow extends jFrame {
 
 					}
 				});
-	}
-
-	private void initMenu() {
-		String[] fileMenu = new String[] { "Load anonymous marking codes",
-				"Load exam results", "Exit" };
-		addMenu("File", fileMenu);
-		String[] dataMenu = new String[] { "Compare To Average",
-				"Email to Students", "Email Settings" };
-		addMenu("Data", dataMenu);
-
-		getMenuItem("File", fileMenu[0]).addActionListener(
-				new CSVHandler(this, mainList));
-
-		getMenuItem("File", fileMenu[1]).addActionListener(
-				new CSVHandler(this, mainList));
-
-		getMenuItem("File", fileMenu[2]).addActionListener(
-				new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						exitFrame();
-					}
-
-				});
-
-		getMenuItem("Data", dataMenu[0]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						XYSeriesCollection studentData = new XYSeriesCollection();
-
-						int tableRows = 0;
-						for (int i = 0; i < tableRows; i++) {
-							series.add(rand.nextGaussian(), rand.nextGaussian());
-						}
-
-						studentData.addSeries(series);
-
-						jPanel panel = getFrameContainer().getPanel("data");
-
-						panel.getTabbedPane("resultsPane").addTab("Scatter",
-								panel.createChartPanel(studentData));
-
-					}
-				});
-
-		getMenuItem("Data", dataMenu[1]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailPopup(mainList);
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-
-		getMenuItem("Data", dataMenu[2]).addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						try {
-							new EmailSettingsDialogue();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				});
-
 	}
 
 }
