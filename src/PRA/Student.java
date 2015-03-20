@@ -9,6 +9,7 @@ public class Student {
 	private String studentName;
 	private String studentNumber;
 	private String tutorEmail;
+	private ArrayList<Result> results;
 
 	public Student() {
 		studentName = "";
@@ -16,6 +17,25 @@ public class Student {
 		emailAddress = "";
 		tutorEmail = "";
 		anonymousMarkingCode = new ArrayList<>();
+		results = new ArrayList<>();
+	}
+
+	/**
+	 * @return the results
+	 */
+	public ArrayList<Result> getResults() {
+		return results;
+	}
+
+	/**
+	 * @param results the results to set
+	 */
+	public boolean addResults(Result result) {
+		if(!results.contains(result)){
+			results.add(result);
+			return true;
+		}
+		return false;
 	}
 
 	public Student(String _studentName, String _studentNumber,

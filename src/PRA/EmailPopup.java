@@ -100,7 +100,6 @@ public class EmailPopup extends jFrame {
 		jPanel previewButtons = previewEmailContainer.addPanel(
 				"PreviewButtons", BorderLayout.SOUTH);
 		bottom.getButton("Next").addActionListener(new ActionListener() {
-			@SuppressWarnings("null")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				subject = getFrameContainer().getPanel("makeEmailContainer")
@@ -128,9 +127,6 @@ public class EmailPopup extends jFrame {
 				wholeThing.repaint();
 			}
 		});
-
-		setVisible(true);
-
 		previewButtons.addButton("Previous");
 		previewButtons.addButton("Send");
 
@@ -207,6 +203,8 @@ public class EmailPopup extends jFrame {
 
 					}
 				});
+		
+		setVisible(true);
 
 	}
 

@@ -4,6 +4,7 @@ import jSwing.jFrame;
 import jSwing.jPanel;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 
@@ -29,8 +30,9 @@ public class InformationPopup extends jFrame {
 		container.addLabel("Tutor: " + student.getTutorEmail())
 				.setHorizontalAlignment(SwingConstants.LEFT);
 
+		ArrayList<Result> results = student.getResults();
+		
 		centreFrame();
-
 		setVisible(true);
 	}
 

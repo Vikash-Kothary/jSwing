@@ -71,6 +71,7 @@ public class CSVHandler implements ActionListener {
 				if (result.getCandKey().contains(aMC)) {
 					// and if they are, attaches student to result
 					result.setStudent(student);
+					student.addResults(result);
 					return true;
 				}
 			}
