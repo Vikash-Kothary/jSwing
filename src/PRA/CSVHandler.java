@@ -2,8 +2,6 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
-import jSwing.jScrollPane;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -63,7 +61,7 @@ public class CSVHandler implements ActionListener {
 		}
 		return dataArray;
 	}
-	
+
 	private boolean deAnonymise(Result result) {
 		// check every student
 		for (Student student : mainList) {

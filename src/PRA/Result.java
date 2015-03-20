@@ -7,7 +7,7 @@ public class Result {
 	public Result() {
 		student = null;
 	}
-	
+
 	public Result(String _examModule, String _assModule, String _candKey,
 			String _examMark, String _examGrade) {
 		examModule = _examModule;
@@ -23,9 +23,8 @@ public class Result {
 		return assModule;
 	}
 
-
 	public String getCandKey() {
-		if(student!=null){
+		if (student != null) {
 			return student.getStudentNumber();
 		}
 		return candKey;
@@ -71,7 +70,8 @@ public class Result {
 	}
 
 	/**
-	 * @param student the student to set
+	 * @param student
+	 *            the student to set
 	 */
 	public void setStudent(Student student) {
 		this.student = student;

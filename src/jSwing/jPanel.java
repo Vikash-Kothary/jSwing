@@ -1,7 +1,6 @@
 // Vikash Kothary
 package jSwing;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -52,15 +51,12 @@ public class jPanel extends JPanel {
 	private final XYSeries series = new XYSeries("StudentData");
 	private ArrayList<JSpinner> spinners;
 
-
 	private ArrayList<jTabbedPane> tabbedPanes;
 	private ArrayList<jScrollPane> tables;
 
 	private ArrayList<jScrollPane> textAreas;
 	private ArrayList<JTextField> textFields;
 	private int width, height;
-	
-
 
 	// Constructor
 	public jPanel() {
@@ -68,30 +64,30 @@ public class jPanel extends JPanel {
 		_init();
 	}
 
+	// // use only for layout-less panel
+	// public jPanel(int _width, int _height) {
+	// width = _width;
+	// height = _height;
+	// _init();
+	//
+	// }
 
-//    // use only for layout-less panel
-//    public jPanel(int _width, int _height) {
-//        width = _width;
-//        height = _height;
-//        _init();
-//    
-//    }
-    
-    private void _init() {
-    	panels = new ArrayList<>();
-        labels = new ArrayList<>();
-        buttons = new ArrayList<>();
-        lists = new ArrayList<>();
-        textAreas = new ArrayList<>();
-        textFields = new ArrayList<>();
-        tabbedPanes = new ArrayList<>();
-        tables = new ArrayList<>();
-        checkBoxes = new ArrayList<>();
-        spinners = new ArrayList<>();
-        comboBoxes = new ArrayList<>();
-        passwordFields = new ArrayList<>();
-        progressBars = new ArrayList<>();
-    }
+	private void _init() {
+		panels = new ArrayList<>();
+		scrollPanels = new ArrayList<>();
+		labels = new ArrayList<>();
+		buttons = new ArrayList<>();
+		lists = new ArrayList<>();
+		textAreas = new ArrayList<>();
+		textFields = new ArrayList<>();
+		tabbedPanes = new ArrayList<>();
+		tables = new ArrayList<>();
+		checkBoxes = new ArrayList<>();
+		spinners = new ArrayList<>();
+		comboBoxes = new ArrayList<>();
+		passwordFields = new ArrayList<>();
+		progressBars = new ArrayList<>();
+	}
 
 	public JButton addButton(String text) {
 		JButton button = new JButton(text);
@@ -101,64 +97,65 @@ public class jPanel extends JPanel {
 	}
 
 	public JButton addButton(String text, String format) {
-        JButton button = new JButton(text);
-        add(button, format);
-        buttons.add(button);
-        return button;
-    }
-    
-    public JCheckBox addCheckBox(String text) {
+		JButton button = new JButton(text);
+		add(button, format);
+		buttons.add(button);
+		return button;
+	}
+
+	public JCheckBox addCheckBox(String text) {
 		JCheckBox checkBox = new JCheckBox(text);
 
 		add(checkBox);
 		checkBoxes.add(checkBox);
 		return checkBox;
 	}
-    
-    public JComboBox addComboBox(String[] fields, String name){
+
+	public JComboBox addComboBox(String[] fields, String name) {
 		JComboBox comboBox = new JComboBox(fields);
 		comboBox.setName(name);
 		comboBoxes.add(comboBox);
 		add(comboBox);
 		return comboBox;
 	}
-    
-    public void addImage(File file) {
-        try {
-            Image image = ImageIO.read(file);
-            JLabel picLabel = new JLabel(new ImageIcon(image));
-//            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-            add(picLabel);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-    
-    public void addImage(URL url) {
-        try {
-            Image image = ImageIO.read(url);
-            JLabel picLabel = new JLabel(new ImageIcon(image));
-//            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-            add(picLabel);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-    
-    public JLabel addLabel(String text) {
+
+	public void addImage(File file) {
+		try {
+			Image image = ImageIO.read(file);
+			JLabel picLabel = new JLabel(new ImageIcon(image));
+			// picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+			add(picLabel);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public void addImage(URL url) {
+		try {
+			Image image = ImageIO.read(url);
+			JLabel picLabel = new JLabel(new ImageIcon(image));
+			// picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+			add(picLabel);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public JLabel addLabel(String text) {
 		JLabel label = new JLabel(text);
 		add(label);
 		labels.add(label);
 		return label;
 	}
-    public JLabel addLabel(String text, String format) {
+
+	public JLabel addLabel(String text, String format) {
 		JLabel label = new JLabel(text);
 		add(label, format);
 		labels.add(label);
 		return label;
 	}
-    
-    public jScrollPane addList(String[] text, String name) {
+
+	public jScrollPane addList(String[] text, String name) {
 		if (text != null) {
 			JList list = new JList(text);
 			list.setName(name);
@@ -169,24 +166,24 @@ public class jPanel extends JPanel {
 		}
 		return null;
 	}
-    
-    public jTabbedPane addPane(String text) {
+
+	public jTabbedPane addPane(String text) {
 		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
 		tabbedPanes.add(pane);
 		add(pane);
 		return pane;
 	}
-    
-    public jTabbedPane addPane(String text, String format) {
+
+	public jTabbedPane addPane(String text, String format) {
 		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
 		tabbedPanes.add(pane);
 		add(pane);
 		return pane;
 	}
-    
-    public jPanel addPanel(String name) {
+
+	public jPanel addPanel(String name) {
 		jPanel panel = new jPanel();
 		panel.setName(name);
 		add(panel);
@@ -194,43 +191,46 @@ public class jPanel extends JPanel {
 		return panel;
 	}
 
-//    public JScrollPane addTextArea(String text, Rectangle location, boolean edit) {
-//        JTextArea textArea = new JTextArea(text);
-//        textArea.setEditable(edit);
-//        JScrollPane scrollPane = new JScrollPane(textArea);
-//        scrollPane.setBounds(location);
-//        add(scrollPane);
-//        return scrollPane;
-//    }
-    
-    public jPanel addPanel(String name, String format){
-    	jPanel panel = new jPanel();
-    	panel.setName(name);
-    	add(panel, format);
-    	panels.add(panel);
-    	return panel;
-    }
-//    public JButton addButton(String name, Rectangle location) {
-//        JButton button = new JButton(name);
-//        button.setBounds(location);
-//        add(button);
-//        return button;
-//    }
+	// public JScrollPane addTextArea(String text, Rectangle location, boolean
+	// edit) {
+	// JTextArea textArea = new JTextArea(text);
+	// textArea.setEditable(edit);
+	// JScrollPane scrollPane = new JScrollPane(textArea);
+	// scrollPane.setBounds(location);
+	// add(scrollPane);
+	// return scrollPane;
+	// }
 
-//    public void addImage(String path, Rectangle location) {
-//        try {
-//            Image image = ImageIO.read(new File(path));
-//            image.getScaledInstance(location.width, location.height, Image.SCALE_SMOOTH);
-//            JLabel picLabel = new JLabel(new ImageIcon(image));
-//            picLabel.setBounds(location);
-//            picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
-//            add(picLabel);
-//        } catch (IOException e) {
-//            System.out.println(e);
-//        }
-//    }
+	public jPanel addPanel(String name, String format) {
+		jPanel panel = new jPanel();
+		panel.setName(name);
+		add(panel, format);
+		panels.add(panel);
+		return panel;
+	}
 
-    public JPasswordField addPasswordField(String name){
+	// public JButton addButton(String name, Rectangle location) {
+	// JButton button = new JButton(name);
+	// button.setBounds(location);
+	// add(button);
+	// return button;
+	// }
+
+	// public void addImage(String path, Rectangle location) {
+	// try {
+	// Image image = ImageIO.read(new File(path));
+	// image.getScaledInstance(location.width, location.height,
+	// Image.SCALE_SMOOTH);
+	// JLabel picLabel = new JLabel(new ImageIcon(image));
+	// picLabel.setBounds(location);
+	// picLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+	// add(picLabel);
+	// } catch (IOException e) {
+	// System.out.println(e);
+	// }
+	// }
+
+	public JPasswordField addPasswordField(String name) {
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setName(name);
 		passwordFields.add(passwordField);
@@ -238,7 +238,7 @@ public class jPanel extends JPanel {
 		return passwordField;
 	}
 
-    public JProgressBar addProgressBar(int min, int max, String name){
+	public JProgressBar addProgressBar(int min, int max, String name) {
 		JProgressBar progressBar = new JProgressBar(min, max);
 		progressBar.setName(name);
 		progressBars.add(progressBar);
@@ -246,7 +246,7 @@ public class jPanel extends JPanel {
 		return progressBar;
 	}
 
-    public void addScaledImage(String path, int imgWidth, int imgHeight) {
+	public void addScaledImage(String path, int imgWidth, int imgHeight) {
 		try {
 			Image image = ImageIO.read(new File(path));
 			image = image.getScaledInstance(imgWidth, imgHeight,
@@ -285,7 +285,7 @@ public class jPanel extends JPanel {
 
 	}
 
-	public JSpinner addSpinner(SpinnerModel spinnerModel, String name){
+	public JSpinner addSpinner(SpinnerModel spinnerModel, String name) {
 		JSpinner spinner = new JSpinner(spinnerModel);
 		spinner.setName(name);
 		spinners.add(spinner);
@@ -302,14 +302,14 @@ public class jPanel extends JPanel {
 		return scrollPane;
 	}
 
-	public JTextField addTextField(String text, String name, String format){
-    	JTextField textField = new JTextField();
-    	textField.setText(text);
-    	textField.setName(name);
-    	textFields.add(textField);
-    	add(textField, format);
-    	return textField;
-    }
+	public JTextField addTextField(String text, String name, String format) {
+		JTextField textField = new JTextField();
+		textField.setText(text);
+		textField.setName(name);
+		textFields.add(textField);
+		add(textField, format);
+		return textField;
+	}
 
 	public ChartPanel createChartPanel() {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
@@ -321,6 +321,7 @@ public class jPanel extends JPanel {
 		return chartPanel2;
 
 	}
+
 	public ChartPanel createChartPanel(XYDataset studentData) {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
 				"Student Scatter", "Student Average", "Selected Result",
@@ -348,7 +349,8 @@ public class jPanel extends JPanel {
 	// return button;
 	// }
 
-	public jScrollPane createTable(String name, Object[][] results, String[] columns) {
+	public jScrollPane createTable(String name, Object[][] results,
+			String[] columns) {
 		JTable table = new JTable(results, columns);
 		table.setName(name);
 		jScrollPane scrollTable = new jScrollPane(table, name);
@@ -399,14 +401,14 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
-	public JComboBox getComboBox(String text){
-    	for(JComboBox comboBox : comboBoxes){
-    		if(comboBox.getName().contains(text)){
-    			return comboBox;
-    		}
-    	}
-    	return null;
-    }
+	public JComboBox getComboBox(String text) {
+		for (JComboBox comboBox : comboBoxes) {
+			if (comboBox.getName().contains(text)) {
+				return comboBox;
+			}
+		}
+		return null;
+	}
 
 	public JLabel getLabel(String text) {
 		for (JLabel label : labels) {
@@ -435,23 +437,23 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
-	public JPasswordField getPasswordField(String text){
-    	for(JPasswordField passwordField : passwordFields){
-    		if(passwordField.getName().contains(text)){
-    			return passwordField;
-    		}
-    	}
-    	return null;
-    }
+	public JPasswordField getPasswordField(String text) {
+		for (JPasswordField passwordField : passwordFields) {
+			if (passwordField.getName().contains(text)) {
+				return passwordField;
+			}
+		}
+		return null;
+	}
 
-	public JProgressBar getProgressBar(String text){
-    	for(JProgressBar progressBar : progressBars){
-    		if(progressBar.getName().contains(text)){
-    			return progressBar;
-    		}
-    	}
-    	return null;
-    }
+	public JProgressBar getProgressBar(String text) {
+		for (JProgressBar progressBar : progressBars) {
+			if (progressBar.getName().contains(text)) {
+				return progressBar;
+			}
+		}
+		return null;
+	}
 
 	public jScrollPane getScrollPanel(String name) {
 		for (jScrollPane panel : scrollPanels) {
@@ -461,25 +463,25 @@ public class jPanel extends JPanel {
 		}
 		return null;
 	}
-	
-	public JSpinner getSpinner(String text){
-    	for(JSpinner spinner : spinners){
-    		if(spinner.getName().contains(text)){
-    			return spinner;
-    		}
-    	}
-    	return null;
-    }
-	
-	public jTabbedPane getTabbedPane(String text){
-    	for(jTabbedPane tPane : tabbedPanes){
-    		if(tPane.getName().contains(text)){
-    			return tPane;
-    		}
-    	}
-    	return null;
-    }
-	
+
+	public JSpinner getSpinner(String text) {
+		for (JSpinner spinner : spinners) {
+			if (spinner.getName().contains(text)) {
+				return spinner;
+			}
+		}
+		return null;
+	}
+
+	public jTabbedPane getTabbedPane(String text) {
+		for (jTabbedPane tPane : tabbedPanes) {
+			if (tPane.getName().contains(text)) {
+				return tPane;
+			}
+		}
+		return null;
+	}
+
 	public jScrollPane getTextArea(String name) {
 		for (jScrollPane tArea : textAreas) {
 			if (tArea.getName().equals(name)) {
@@ -488,7 +490,7 @@ public class jPanel extends JPanel {
 		}
 		return null;
 	}
-	
+
 	public JTextField getTextField(String text) {
 		for (JTextField tField : textFields) {
 			if (tField.getName().contains(text)) {
@@ -497,7 +499,7 @@ public class jPanel extends JPanel {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

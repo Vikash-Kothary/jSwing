@@ -2,7 +2,6 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
-import jSwing.jScrollPane;
 import jSwing.jTabbedPane;
 
 import java.awt.BorderLayout;
@@ -14,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.swing.JFileChooser;
@@ -53,9 +51,12 @@ public class InterfaceWindow extends jFrame {
 
 		jTabbedPane resultsPane = data.addPane("resultsPane",
 				BorderLayout.CENTER);
-		
-		//This is an example of how the addTable/addPane class works
-		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
+
+		// This is an example of how the addTable/addPane class works
+		// data.getTabbedPane("resultsPane").addTab("Tab1",
+		// data.addTable("Table",
+		// getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"),
+		// getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 
 		this.setVisible(true);
 	}
@@ -67,7 +68,7 @@ public class InterfaceWindow extends jFrame {
 		String[] dataMenu = new String[] { "Compare To Average",
 				"Email to Students", "Email Settings" };
 		addMenu("Data", dataMenu);
-		
+
 		getMenuItem("File", fileMenu[2]).addActionListener(
 				new ActionListener() {
 
@@ -116,65 +117,69 @@ public class InterfaceWindow extends jFrame {
 					}
 				});
 
-		getMenuItem("File", fileMenu[2]).addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				exitFrame();
-			}
-			
-		});
-		
+		getMenuItem("File", fileMenu[2]).addActionListener(
+				new ActionListener() {
 
-		getMenuItem("Data", dataMenu[0]).addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exitFrame();
+					}
+
+				});
+
+		getMenuItem("Data", dataMenu[0]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
 
 						XYSeriesCollection studentData = new XYSeriesCollection();
-						
+
 						int tableRows = 0;
 						for (int i = 0; i < tableRows; i++) {
 							series.add(rand.nextGaussian(), rand.nextGaussian());
 						}
-						
-						
+
 						studentData.addSeries(series);
-						
+
 						jPanel panel = getFrameContainer().getPanel("data");
-						
+
 						panel.getTabbedPane("resultsPane").addTab("Scatter",
 								panel.createChartPanel(studentData));
-				
-			}
-		});
-		
-		getMenuItem("Data", dataMenu[1]).addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				try {
-					new EmailPopup(mainList);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		
-		getMenuItem("Data", dataMenu[2]).addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				try {
-					new EmailSettingsDialogue();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		
 
-		getMenuItem("File", fileMenu[0]).addActionListener(new ActionListener() {
+					}
+				});
+
+		getMenuItem("Data", dataMenu[1]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailPopup(mainList);
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+
+		getMenuItem("Data", dataMenu[2]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new EmailSettingsDialogue();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+
+		getMenuItem("File", fileMenu[0]).addActionListener(
+				new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -215,15 +220,19 @@ public class InterfaceWindow extends jFrame {
 											+ " codes were for known students; "
 											+ ((csvFile.length) - imports)
 											+ " codes were for unknown students");
-							jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
-							for(int i=0; i<tabbedPane.getNumberOfTabs(); i++){
-//								jScrollPane test = tabbedPane.removeTab(i);
-//								tabbedPane.addTableTab(test.getName(), test.getTable());
+							jTabbedPane tabbedPane = getFrameContainer()
+									.getPanel("data").getTabbedPane(
+											"resultsPane");
+							for (int i = 0; i < tabbedPane.getNumberOfTabs(); i++) {
+								// jScrollPane test = tabbedPane.removeTab(i);
+								// tabbedPane.addTableTab(test.getName(),
+								// test.getTable());
 							}
 						}
 					}
 				});
-		getMenuItem("File", fileMenu[1]).addActionListener(new CSVHandler(this, mainList));
+		getMenuItem("File", fileMenu[1]).addActionListener(
+				new CSVHandler(this, mainList));
 	}
 
 	private void addStudentPanelElements() {

@@ -19,7 +19,9 @@ public class jTabbedPane extends JTabbedPane {
 		tabs = new ArrayList<>();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.swing.JTabbedPane#add(java.lang.String, java.awt.Component)
 	 */
 	public jScrollPane add(String title, jScrollPane component) {
