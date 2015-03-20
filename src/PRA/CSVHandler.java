@@ -30,10 +30,10 @@ public class CSVHandler implements ActionListener {
 		try {
 			File[] files = getFiles();
 			for (File file : files) {
-				String[] headers = { "Module", "Ass", "Cand Key", "Mark",
-						"Grade" };
 				ArrayList<Result> csvData = getCSVData(file.toString());
 				if (csvData != null) {
+					String[] headers = { "Module", "Ass", "Cand Key", "Mark",
+							"Grade" };
 					ArrayList<Assessment> assData = addToAssessments(csvData);
 					for (Assessment ass : assData) {
 						for (Result result : ass) {
@@ -70,8 +70,8 @@ public class CSVHandler implements ActionListener {
 			// and all the anonymous marking codes for each student
 			for (String aMC : student.getAnonymousMarkingCodes()) {
 				// if they are the same as the results
-				if (result.getCandKey().contains(aMC)
-						|| result.getCandKey().contains(
+				if (result.getCandKey().replaceAll("#", "").equals(aMC)
+						|| result.getCandKey().equals(
 								student.getStudentNumber())) {
 					// and if they are, attaches student to result
 					result.setStudent(student);

@@ -41,14 +41,16 @@ public class Student {
 
 	public Student(String _studentName, String _studentNumber,
 			String _emailAddress, String _tutorEmail) {
-		studentName = _studentName;
-		studentNumber = _studentNumber;
-		emailAddress = _emailAddress;
-		tutorEmail = _tutorEmail;
+		studentName = _studentName.replaceAll("[\"]", "");
+		studentNumber = _studentNumber.replaceAll("[\"]", "");
+		emailAddress = _emailAddress.replaceAll("[\"]", "");
+		tutorEmail = _tutorEmail.replaceAll("[\"]", "");
 		anonymousMarkingCode = new ArrayList<>();
+		results = new ArrayList<>();
 	}
 
 	public boolean addAnonymousMarkingCode(String aMC) {
+		aMC = aMC.replaceAll("[\"]", "");
 		if (!anonymousMarkingCode.contains(aMC)) {
 			anonymousMarkingCode.add(aMC);
 			return true;
@@ -90,11 +92,11 @@ public class Student {
 	 *            the emailAddress to set
 	 */
 	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+		this.emailAddress = emailAddress.replaceAll("[\"]", "");
 	}
 
 	public void setStudentName(String studentName) {
-		this.studentName = studentName;
+		this.studentName = studentName.replaceAll("[\"]", "");
 	}
 
 	/**
@@ -102,7 +104,7 @@ public class Student {
 	 *            the studentNumber to set
 	 */
 	public void setStudentNumber(String studentNumber) {
-		this.studentNumber = studentNumber;
+		this.studentNumber = studentNumber.replaceAll("[\"]", "");
 	}
 
 	/**
@@ -110,7 +112,7 @@ public class Student {
 	 *            the tutorEmail to set
 	 */
 	public void setTutorEmail(String tutorEmail) {
-		this.tutorEmail = tutorEmail;
+		this.tutorEmail = tutorEmail.replaceAll("[\"]", "");
 	}
 
 	/*

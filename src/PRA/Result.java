@@ -10,12 +10,12 @@ public class Result {
 
 	public Result(String _examModule, String _assModule, String _candKey,
 			String _examMark, String _examGrade) {
-		examModule = _examModule;
-		assModule = _assModule;
-		candKey = _candKey;
-		examMark = _examMark;
+		examModule = _examModule.replaceAll("[\"]", "");
+		assModule = _assModule.replaceAll("[\"]", "");
+		candKey = _candKey.replaceAll("[\"]", "");
+		examMark = _examMark.replaceAll("[\"]", "");
 		// possible extension: TODO convert examGrade to enum datatype
-		examGrade = _examGrade;
+		examGrade = _examGrade.replaceAll("[\"]", "");
 		student = null;
 	}
 
@@ -50,23 +50,23 @@ public class Result {
 	}
 
 	public void setAssModule(String assModule) {
-		this.assModule = assModule;
+		this.assModule = assModule.replaceAll("[\"]", "");
 	}
 
 	public void setCandKey(String candKey) {
-		this.candKey = candKey;
+		this.candKey = candKey.replaceAll("[\"]", "");
 	}
 
 	public void setExamGrade(String examGrade) {
-		this.examGrade = examGrade;
+		this.examGrade = examGrade.replaceAll("[\"]", "");
 	}
 
 	public void setExamMark(String examMark) {
-		this.examMark = examMark;
+		this.examMark = examMark.replaceAll("[\"]", "");
 	}
 
 	public void setExamModule(String examModule) {
-		this.examModule = examModule;
+		this.examModule = examModule.replaceAll("[\"]", "");
 	}
 
 	/**
