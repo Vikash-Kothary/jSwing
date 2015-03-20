@@ -46,11 +46,11 @@ public class EmailPopup extends jFrame{
 		buttons.addButton("Select All");
 		buttons.addButton("Select None");
 		
-		students.addScrollPanel("scrollPanel","scrollPane");
+		students.addScrollPanel("scrollPanel");
 		students.getScrollPanel("scrollPanel").setLayout(new GridLayout(mainList.size(),1));
 		students.getScrollPanel("scrollPanel").setSize(200,200);
 		for (int i = 0; i < mainList.size(); i++){
-			students.getScrollPanel("scrollPanel").addCheckBox(mainList.getStudent(i).getStudentName());
+			students.getScrollPanel("scrollPanel").getPanel().addCheckBox(mainList.getStudent(i).getStudentName());
 		}
 		
 		
@@ -66,7 +66,7 @@ public class EmailPopup extends jFrame{
 			@Override
 			public void actionPerformed(ActionEvent e){
 				for (int i = 0; i < mainList.size(); i++){
-					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(true);
+					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getPanel().getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(true);
 				}
 			}
 		});
@@ -74,7 +74,7 @@ public class EmailPopup extends jFrame{
 			@Override
 			public void actionPerformed(ActionEvent e){
 				for (int i = 0; i < mainList.size(); i++){
-					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(false);
+					getFrameContainer().getPanel("makeEmailContainer").getPanel("students").getScrollPanel("scrollPanel").getPanel().getCheckBox(mainList.getStudent(i).getStudentName()).setSelected(false);
 					
 				}
 			} 

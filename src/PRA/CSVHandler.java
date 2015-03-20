@@ -34,12 +34,12 @@ public class CSVHandler implements ActionListener {
 				ArrayList<Assessment> assData = addToAssessments(csvData);
 				deAnonymiseData(assData);
 
-				jPanel panel = frame.getFrameContainer().getPanel("data");
+				jPanel panel = frame.getFrameContainer().getScrollPanel("data").getPanel();
 				for(Assessment ass : assData){
-					panel.getTabbedPane("resultsPane").addTab(ass.getExamModule(), panel.addTable(ass.getAssModule(), 
-							toStringArray(ass),headers));
+					panel.getTabbedPane("resultsPane").addTab(ass.getExamModule(), panel.addTable(ass.toString(), 
+							toStringArray(ass), headers));
 				}
-				
+				frame.getFrameContainer().getScrollPanel("data").setVisible(true);
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();

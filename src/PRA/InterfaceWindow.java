@@ -1,6 +1,7 @@
 package PRA;
 
 import jSwing.jFrame;
+import jSwing.jScrollPane;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -50,10 +51,12 @@ public class InterfaceWindow extends jFrame {
 		students.setLayout(new BorderLayout());
 		addStudentPanelElements();
 
-		jPanel data = container.addPanel("data", BorderLayout.CENTER);
-		data.setLayout(new FlowLayout());
-		JTabbedPane resultsPane = data.addPane("resultsPane");
-		resultsPane.setLayout(new FlowLayout());
+		jScrollPane data = container.addScrollPanel("data", BorderLayout.CENTER);
+		data.getPanel().setLayout(new BorderLayout());
+		
+//		data.setVisible(false);
+		JTabbedPane resultsPane = data.getPanel().addPane("resultsPane", BorderLayout.CENTER);
+//		resultsPane.sh
 		
 		
 		//This is an example of how the addTable/addPane class works

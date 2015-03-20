@@ -23,6 +23,7 @@ public class jScrollPane extends JScrollPane{
 		super(_object);
 		object = _object;
 		name = _name;
+		super.setName(name);
 	}
 
 	public void setName(String _name){
@@ -49,7 +50,7 @@ public class jScrollPane extends JScrollPane{
 		return (JList) object;
 	}
 	
-	public jPanel getScrollPanel(){
+	public jPanel getPanel(){
 		return (jPanel) object;
 	}
 	
@@ -60,10 +61,5 @@ public class jScrollPane extends JScrollPane{
 			revalidate();
 			repaint();
 		}
-	}
-
-	public void setViewportview() {
-		// TODO Auto-generated method stub
-		
 	}
 }
