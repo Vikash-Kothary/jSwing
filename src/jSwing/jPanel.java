@@ -36,7 +36,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
-	//TODO remove dependency on jScrollPane as deprecated
+	// TODO remove dependency on jScrollPane as deprecated
 	private Image bgImage = null;
 	private ArrayList<JButton> buttons;
 	private ArrayList<JCheckBox> checkBoxes;
@@ -348,8 +348,7 @@ public class jPanel extends JPanel {
 	// return button;
 	// }
 
-	public jScrollPane addTable(String name, Object[][] data,
-			String[] headers) {
+	public jScrollPane addTable(String name, Object[][] data, String[] headers) {
 		JTable table = new JTable(data, headers);
 		table.setName(name);
 		jScrollPane scrollTable = new jScrollPane(table, name);

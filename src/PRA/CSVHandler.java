@@ -2,11 +2,13 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
+import jSwing.jTabbedPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,11 +28,11 @@ public class CSVHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try {
-			String filePath = getFile();
-			if (filePath != null) {
+			File[] files = getFiles();
+			for (File file : files) {
 				String[] headers = { "Module", "Ass", "Cand Key", "Mark",
 						"Grade" };
-				ArrayList<Result> csvData = getCSVData(filePath);
+				ArrayList<Result> csvData = getCSVData(file.toString());
 				if (csvData != null) {
 					ArrayList<Assessment> assData = addToAssessments(csvData);
 					for (Assessment ass : assData) {
@@ -38,7 +40,6 @@ public class CSVHandler implements ActionListener {
 							deAnonymise(result);
 						}
 					}
-
 					jPanel panel = frame.getFrameContainer().getPanel("data");
 					for (Assessment ass : assData) {
 						panel.getTabbedPane("resultsPane").addTableTab(
@@ -69,7 +70,9 @@ public class CSVHandler implements ActionListener {
 			// and all the anonymous marking codes for each student
 			for (String aMC : student.getAnonymousMarkingCodes()) {
 				// if they are the same as the results
-				if (result.getCandKey().contains(aMC)) {
+				if (result.getCandKey().contains(aMC)
+						|| result.getCandKey().contains(
+								student.getStudentNumber())) {
 					// and if they are, attaches student to result
 					result.setStudent(student);
 					student.addResults(result);
@@ -101,23 +104,35 @@ public class CSVHandler implements ActionListener {
 		return assData;
 	}
 
-	private String getFile() throws IOException {
+	private File[] getFiles() throws IOException {
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
 				"CSV files (*.csv)", "csv");
 		fc.setFileFilter(xmlfilter);
-		fc.setDialogTitle("Open anonymous marking codes");
+		fc.setDialogTitle("Open exam results");
+		fc.setMultiSelectionEnabled(true);
 
 		int returnVal = fc.showOpenDialog(frame);
 		if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-			File file = fc.getSelectedFile();
-			return file.toString();
+			File[] files = fc.getSelectedFiles();
+			return files;
 		}
 		return null;
 	}
 
 	@SuppressWarnings("resource")
-	public ArrayList<Result> getCSVData(String filePath) throws IOException {
+	private ArrayList<Result> getCSVData(String filePath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+		boolean codesFile = (br.readLine().split(",").length == 2);
+		br.close();
+		if (codesFile) {
+			return readCodes(filePath);
+		} else {
+			return readResults(filePath);
+		}
+	}
+
+	private ArrayList<Result> readResults(String filePath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 
 		String[] headers = { "Module", "Ass", "Cand Key", "Mark", "Grade" };
@@ -149,4 +164,63 @@ public class CSVHandler implements ActionListener {
 		br.close();
 		return data;
 	}
+
+	private ArrayList<Result> readCodes(String filePath) {
+		BufferedReader br = null;
+		String line = " ";
+
+		String[][] csvFile = null;
+		int lengthOfFile = 0;
+		try {
+			br = new BufferedReader(new FileReader(filePath));
+			while ((line = br.readLine()) != null) {
+				lengthOfFile += 1;
+			}
+			int inc = 0;
+			String[] studentLines;
+			csvFile = new String[lengthOfFile][];
+			br = new BufferedReader(new FileReader(filePath));
+			while ((line = br.readLine()) != null) {
+				studentLines = line.split(",");
+				csvFile[inc] = studentLines;
+				inc += 1;
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		String Snumber;
+		String Acode;
+		int imports = 0;
+
+		for (int i = 0; i < mainList.size(); i++) {
+			for (int j = 0; j < csvFile.length; j++) {
+				Acode = csvFile[j][0];
+				Snumber = mainList.getStudent(i).getStudentNumber();
+				if (Acode.equals(Snumber)) {
+					mainList.getStudent(i).addAnonymousMarkingCode(
+							csvFile[j][1]);
+					imports += 1;
+				}
+			}
+		}
+		System.out.println("Anonymous marking codes impored. " + imports
+				+ " codes were for known students; "
+				+ ((csvFile.length) - imports)
+				+ " codes were for unknown students");
+		return null;
+
+	}
+
 }

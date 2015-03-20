@@ -28,10 +28,11 @@ public class Student {
 	}
 
 	/**
-	 * @param results the results to set
+	 * @param results
+	 *            the results to set
 	 */
 	public boolean addResults(Result result) {
-		if(!results.contains(result)){
+		if (!results.contains(result)) {
 			results.add(result);
 			return true;
 		}

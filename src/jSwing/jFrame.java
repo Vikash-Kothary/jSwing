@@ -79,10 +79,28 @@ public class jFrame extends JFrame {
 		// TODO multiple screens: should appear in the centre of the primary
 		// screen
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int x = ((int) tk.getScreenSize().getWidth() - super.getWidth()) / 2;
-		int y = ((int) tk.getScreenSize().getHeight() - super.getHeight()) / 2;
+		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
+		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
 		setLocation(x, y);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.Window#pack()
+	 */
+	@Override
+	public void pack() {
+		super.pack();
+		width = super.getBounds().width;
+		height = super.getBounds().height;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.Window#setSize(int, int)
+	 */
 
 	public void exitFrame() {
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

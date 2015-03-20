@@ -3,9 +3,11 @@ package PRA;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
@@ -15,10 +17,11 @@ public class InformationPopup extends jFrame {
 		super("Information");
 		setSize(300, 300);
 		jPanel container = addContainer();
-		container.setLayout(new GridLayout(4, 1));
+		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		container.setPadding(5, 5, 5, 5);
 
-		container.addLabel(student.getStudentName()).setHorizontalAlignment(
-				SwingConstants.CENTER);
+		container.addLabel("<html>" + student.getStudentName() + "</html>")
+				.setHorizontalAlignment(SwingConstants.CENTER);
 
 		container.addLabel(
 				"<html><i>" + student.getEmailAddress() + "</i></html>")
@@ -30,24 +33,24 @@ public class InformationPopup extends jFrame {
 		container.addLabel("Tutor: " + student.getTutorEmail())
 				.setHorizontalAlignment(SwingConstants.LEFT);
 
-		String[] headers = { "Module", "Ass", "Cand Key", "Mark",
-				"Grade" };
+		jPanel results = container.addPanel("resultsPopup");
+		results.setPadding(5, 0, 0, 0);
+		String[] headers = { "Module", "Ass", "Mark", "Grade" };
 		String[][] dataArray = toStringArray(student.getResults());
-		container.addTable("Student Results", dataArray, headers);
-		
-		centreFrame();
+		results.addTable("Student Results", dataArray, headers);
+
 		pack();
+		centreFrame();
 		setVisible(true);
 	}
-	
+
 	private String[][] toStringArray(ArrayList<Result> resultsData) {
-		String[][] dataArray = new String[resultsData.size()][5];
+		String[][] dataArray = new String[resultsData.size()][4];
 		for (int i = 0; i < dataArray.length; i++) {
 			dataArray[i][0] = resultsData.get(i).getExamModule();
 			dataArray[i][1] = resultsData.get(i).getAssModule();
-			dataArray[i][2] = resultsData.get(i).getCandKey();
-			dataArray[i][3] = resultsData.get(i).getExamMark();
-			dataArray[i][4] = resultsData.get(i).getExamGrade();
+			dataArray[i][2] = resultsData.get(i).getExamMark();
+			dataArray[i][3] = resultsData.get(i).getExamGrade();
 		}
 		return dataArray;
 	}

@@ -70,67 +70,11 @@ public class InterfaceWindow extends jFrame {
 				"Email to Students", "Email Settings" };
 		addMenu("Data", dataMenu);
 
+		getMenuItem("File", fileMenu[0])
+				.addActionListener(new CSVHandler(this, mainList));
 
-		
-	
-		
-
-		getMenuItem("File", fileMenu[0]).addActionListener(
-				new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-
-						final JFileChooser fc = new JFileChooser();
-						FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
-								"CSV files (*.csv)", "csv");
-						fc.setFileFilter(xmlfilter);
-						fc.setDialogTitle("Open anonymous marking codes");
-
-						int returnVal = fc.showOpenDialog(InterfaceWindow.this);
-						String[][] csvFile = null;
-						if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-							java.io.File file = fc.getSelectedFile();
-							String filePath = file.toString();
-							csvFile = getCSV(filePath);
-
-							String Snumber;
-							String Acode;
-							int imports = 0;
-
-							for (int i = 0; i < mainList.size(); i++) {
-								for (int j = 0; j < csvFile.length; j++) {
-									Acode = csvFile[j][0];
-									Snumber = mainList.getStudent(i)
-											.getStudentNumber();
-									if (Acode.equals(Snumber)) {
-										mainList.getStudent(i)
-												.addAnonymousMarkingCode(
-														csvFile[j][1]);
-										imports += 1;
-									}
-								}
-							}
-							System.out
-									.println("Anonymous marking codes impored. "
-											+ imports
-											+ " codes were for known students; "
-											+ ((csvFile.length) - imports)
-											+ " codes were for unknown students");
-							jTabbedPane tabbedPane = getFrameContainer()
-									.getPanel("data").getTabbedPane(
-											"resultsPane");
-							for (int i = 0; i < tabbedPane.getNumberOfTabs(); i++) {
-								// jScrollPane test = tabbedPane.removeTab(i);
-								// tabbedPane.addTableTab(test.getName(),
-								// test.getTable());
-							}
-						}
-					}
-				});
-		
-		getMenuItem("File", fileMenu[1]).addActionListener(	new CSVHandler(this, mainList));
-		
+		getMenuItem("File", fileMenu[1])
+				.addActionListener(new CSVHandler(this, mainList));
 
 		getMenuItem("File", fileMenu[2]).addActionListener(
 				new ActionListener() {
@@ -142,7 +86,6 @@ public class InterfaceWindow extends jFrame {
 
 				});
 
-		
 		getMenuItem("Data", dataMenu[0]).addActionListener(
 				new ActionListener() {
 					@Override
@@ -180,8 +123,6 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
-		
-
 
 		getMenuItem("Data", dataMenu[2]).addActionListener(
 				new ActionListener() {
@@ -195,8 +136,7 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
-		
-		
+
 	}
 
 	private void addStudentPanelElements() {
@@ -243,43 +183,5 @@ public class InterfaceWindow extends jFrame {
 				});
 	}
 
-	public String[][] getCSV(String filePath) {
-		String csvFile = filePath;
-		BufferedReader br = null;
-		String line = " ";
-
-		String[][] student = null;
-		int lengthOfFile = 0;
-		try {
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-				lengthOfFile += 1;
-			}
-			int inc = 0;
-			String[] studentLines;
-			student = new String[lengthOfFile][];
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-				studentLines = line.split(",");
-				student[inc] = studentLines;
-				inc += 1;
-			}
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return student;
-	}
-
+	
 }

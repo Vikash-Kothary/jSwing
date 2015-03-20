@@ -203,7 +203,7 @@ public class EmailPopup extends jFrame {
 
 					}
 				});
-		
+
 		setVisible(true);
 
 	}
