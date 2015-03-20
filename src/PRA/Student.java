@@ -20,7 +20,11 @@ public class Student {
 	}
 
 	public Student() {
-
+		studentName = "";
+		studentNumber = "";
+		emailAddress = "";
+		tutorEmail = "";
+		anonymousMarkingCode = new ArrayList<>();
 	}
 
 	public String getStudentName() {
@@ -75,13 +79,13 @@ public class Student {
 	public void setTutorEmail(String tutorEmail) {
 		this.tutorEmail = tutorEmail;
 	}
-	
-	public ArrayList<String> getAnonymousMarkingCodes(){
+
+	public ArrayList<String> getAnonymousMarkingCodes() {
 		return anonymousMarkingCode;
 	}
-	
-	public boolean addAnonymousMarkingCode(String aMC){
-		if(!anonymousMarkingCode.contains(aMC)){
+
+	public boolean addAnonymousMarkingCode(String aMC) {
+		if (!anonymousMarkingCode.contains(aMC)) {
 			anonymousMarkingCode.add(aMC);
 			return true;
 		}

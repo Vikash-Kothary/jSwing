@@ -3,7 +3,7 @@ package PRA;
 import java.util.ArrayList;
 
 public class Assessment extends ArrayList<Result> {
-	String examModule, assModule;
+	private String examModule, assModule;
 	
 	public Assessment(String _examModule, String _assModule){
 		examModule = _examModule;
@@ -12,6 +12,20 @@ public class Assessment extends ArrayList<Result> {
 	
 	public String getAssModule() {
 		return assModule;
+	}
+
+	/**
+	 * @return the examModule
+	 */
+	public String getExamModule() {
+		return examModule;
+	}
+
+	/**
+	 * @param examModule the examModule to set
+	 */
+	public void setExamModule(String examModule) {
+		this.examModule = examModule;
 	}
 
 	public void setAssModule(String assModule) {

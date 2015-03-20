@@ -10,6 +10,7 @@ import jSwing.jPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -38,26 +39,25 @@ public class InterfaceWindow extends jFrame {
 		super("PRA Coursework - Deep Vein Thrombosis");
 		mainList = _mainList;
 
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // stops program when frame is closed
 		setSize(1000, 600);
+		initMenu();
 
 		jPanel container = addContainer();
 		container.setLayout(new BorderLayout());
 		
-
 		jPanel students = container.addPanel("students", BorderLayout.WEST);
 		students.setLayout(new BorderLayout());
 		addStudentPanelElements();
 
 		jPanel data = container.addPanel("data", BorderLayout.CENTER);
-
+		data.setLayout(new FlowLayout());
+		JTabbedPane resultsPane = data.addPane("resultsPane");
+		resultsPane.setLayout(new FlowLayout());
 		
-		initMenu();
 		
 		//This is an example of how the addTable/addPane class works
-		//data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
-
+//		data.getTabbedPane("resultsPane").addTab("Tab1", data.addTable("Table", getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv"), getCSV("C:\\Users\\Toby\\Downloads\\codes_and_marksheets\\codes_and_marksheets\\anoncodes1.csv")[0]));
 		
 		
 		
@@ -67,7 +67,7 @@ public class InterfaceWindow extends jFrame {
 
 	
 
-	private void initMenu(  ) {
+	private void initMenu( ) {
 
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
@@ -161,11 +161,7 @@ public class InterfaceWindow extends jFrame {
 				});
 
 		getMenuItem("File", fileMenu[1]).addActionListener(new CSVHandler(this, mainList));
-		getMenuItem("File", fileMenu[1]).addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-
-			}
-		});
+		
 		
 	}
 

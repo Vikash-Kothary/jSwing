@@ -20,10 +20,6 @@ import javax.swing.JTextField;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
-
-
-
-
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame{
 		
