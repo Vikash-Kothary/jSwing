@@ -150,11 +150,11 @@ public class InterfaceWindow extends jFrame {
 											+ " codes were for known students; "
 											+ ((csvFile.length) - imports)
 											+ " codes were for unknown students");
-//							jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
-//							for(int i=0; i<tabbedPane.getNumberOfTabs(); i++){
+							jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
+							for(int i=0; i<tabbedPane.getNumberOfTabs(); i++){
 //								jScrollPane test = tabbedPane.removeTab(i);
 //								tabbedPane.addTableTab(test.getName(), test.getTable());
-//							}
+							}
 						}
 					}
 				});

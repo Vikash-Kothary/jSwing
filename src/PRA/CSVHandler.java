@@ -34,11 +34,16 @@ public class CSVHandler implements ActionListener {
 				ArrayList<Result> csvData = getCSVData(filePath);
 				if (csvData != null) {
 					ArrayList<Assessment> assData = addToAssessments(csvData);
-					deAnonymiseData(assData);
+					for (Assessment ass : assData) {
+						for (Result result : ass) {
+							deAnonymise(result);
+						}
+					}
 
 					jPanel panel = frame.getFrameContainer().getPanel("data");
 					for (Assessment ass : assData) {
-						panel.getTabbedPane("resultsPane").addTableTab(ass.toString(), toStringArray(ass), headers);
+						panel.getTabbedPane("resultsPane").addTableTab(
+								ass.toString(), toStringArray(ass), headers);
 					}
 				}
 			}
@@ -58,26 +63,16 @@ public class CSVHandler implements ActionListener {
 		}
 		return dataArray;
 	}
-
-	private void deAnonymiseData(ArrayList<Assessment> assData){
-		for(Assessment ass : assData){
-			for(Result result : ass){
-				// if not a student number
-				deAnonymise(result);
-			}
-		}
-	}
 	
-	private boolean deAnonymise(Result result){
+	private boolean deAnonymise(Result result) {
 		// check every student
-		for(Student student : mainList){
+		for (Student student : mainList) {
 			// and all the anonymous marking codes for each student
-			for(String aMC : student.getAnonymousMarkingCodes()){
-
+			for (String aMC : student.getAnonymousMarkingCodes()) {
 				// if they are the same as the results
-				if(result.getCandKey().contains(aMC)){
-					// and if they are, replace the cand key with that student's student number
-					result.setStudent(student);;
+				if (result.getCandKey().contains(aMC)) {
+					// and if they are, attaches student to result
+					result.setStudent(student);
 					return true;
 				}
 			}
