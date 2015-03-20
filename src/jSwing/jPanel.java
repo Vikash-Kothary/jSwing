@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
@@ -55,6 +56,7 @@ public class jPanel extends JPanel {
 	private ArrayList<JSpinner> spinners;
 	private ArrayList<JComboBox> comboBoxes;
 	private ArrayList<JPasswordField> passwordFields;
+	private ArrayList<JProgressBar> progressBars;
 	
 	private Random rand = new Random();
 	private final XYSeries series = new XYSeries("StudentData");
@@ -87,6 +89,7 @@ public class jPanel extends JPanel {
         spinners = new ArrayList<>();
         comboBoxes = new ArrayList<>();
         passwordFields = new ArrayList<>();
+        progressBars = new ArrayList<>();
     }
 
     public void setBackground(String path) {
@@ -218,6 +221,15 @@ public class jPanel extends JPanel {
     	for(JPasswordField passwordField : passwordFields){
     		if(passwordField.getName().contains(text)){
     			return passwordField;
+    		}
+    	}
+    	return null;
+    }
+    
+    public JProgressBar getProgressBar(String text){
+    	for(JProgressBar progressBar : progressBars){
+    		if(progressBar.getName().contains(text)){
+    			return progressBar;
     		}
     	}
     	return null;
@@ -425,6 +437,14 @@ public class jPanel extends JPanel {
 		passwordFields.add(passwordField);
 		add(passwordField);
 		return passwordField;
+	}
+	
+	public JProgressBar addProgressBar(int min, int max, String name){
+		JProgressBar progressBar = new JProgressBar(min, max);
+		progressBar.setName(name);
+		progressBars.add(progressBar);
+		add(progressBar);
+		return progressBar;
 	}
 	
 	

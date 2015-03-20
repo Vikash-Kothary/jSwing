@@ -1,6 +1,7 @@
 package PRA;
 
 import jSwing.jFrame;
+import jSwing.jPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,15 +27,38 @@ public class CSVHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try {
-			String filePath = getFile();
-			if (filePath != null) {
-				ArrayList<Result> csvData = getCSVData(filePath);
-				ArrayList<Assessment> assData = addToAssessments(csvData);
-				deAnonymiseData(assData);
-			}
-		} catch (IOException ex) {
-			ex.printStackTrace();
+ 			String filePath = getFile();
+ 			if (filePath != null) {
+ 				String[] headers = {"Module", "Ass", "Cand Key", "Mark", "Grade"};
+ 				ArrayList<Result> csvData = getCSVData(filePath);
+ 				ArrayList<Assessment> assData = addToAssessments(csvData);
+ 				deAnonymiseData(assData);
+ 
+
+				jPanel panel = frame.getFrameContainer().getScrollPanel("data").getPanel(filePath);
+ 				for(Assessment ass : assData){
+
+					panel.getTabbedPane("resultsPane").addTab(ass.getAssModule(), panel.addTable(ass.toString(), 
+							toStringArray(ass), headers));
+ 				}
+				
+				frame.getFrameContainer().getScrollPanel("data").setVisible(true);
+ 			}
+ 		} catch (IOException ex) {
+ 			ex.printStackTrace();
+ 		}
+	}
+	
+	private String[][] toStringArray(Assessment assData){
+		String[][] dataArray = new String[assData.size()][5];
+		for(int i=0; i<dataArray.length; i++){
+				dataArray[i][0] = assData.get(i).getExamModule();
+				dataArray[i][1] = assData.get(i).getAssModule();
+				dataArray[i][2] = assData.get(i).getCandKey();
+				dataArray[i][3] = assData.get(i).getExamMark();
+				dataArray[i][4] = assData.get(i).getExamGrade();
 		}
+		return dataArray;
 	}
 	
 	private void deAnonymiseData(ArrayList<Assessment> assData){
@@ -100,23 +124,19 @@ public class CSVHandler implements ActionListener {
 	}
 
 	public ArrayList<Result> getCSVData(String filePath) throws IOException {
-		String csvFile = filePath;
-		BufferedReader br = new BufferedReader(new FileReader(csvFile));
-
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+		
+		String[] headers = {"Module", "Ass", "Cand Key", "Mark", "Grade"};
+		
 		String[] lineData = br.readLine().split(",");
 		int[] column = new int[5];
 		for (int i = 0; i < lineData.length; i++) {
-			if (lineData[i].contains("Module")) {
-				column[0] = i;
-			} else if (lineData[i].contains("Ass")) {
-				column[1] = i;
-			} else if (lineData[i].contains("Cand Key")) {
-				column[2] = i;
-			} else if (lineData[i].contains("Mark")) {
-				column[3] = i;
-			} else if (lineData[i].contains("Grade")) {
-				column[4] = i;
+			for(int j=0; j< headers.length; j++){
+				if(lineData[i].contains(headers[j])){
+					column[j] = i;
+				}
 			}
+
 		}
 
 		String line = "";

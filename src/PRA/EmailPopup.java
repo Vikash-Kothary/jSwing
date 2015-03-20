@@ -21,6 +21,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 
 
@@ -30,13 +31,15 @@ import javax.swing.JScrollPane;
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame{
 		
-
+	boolean status = false;
 	
 	private String subject;
 	private String body;
 	
 	ArrayList<String> studentEmails = new ArrayList<String>();
 	 
+
+	
 	
 	public EmailPopup(final StudentList mainList) throws FileNotFoundException, IOException{
 		super("Email");
@@ -88,7 +91,9 @@ public class EmailPopup extends jFrame{
 				}
 			} 
 		});
-		
+		previewEmailContainer.setLayout(new BorderLayout());
+		jPanel emailPreview = previewEmailContainer.addPanel("EmailPreview", BorderLayout.CENTER);
+		jPanel previewButtons = previewEmailContainer.addPanel("PreviewButtons", BorderLayout.SOUTH);
 		bottom.getButton("Next").addActionListener(new ActionListener(){
 			@SuppressWarnings("null")
 			@Override
@@ -103,6 +108,7 @@ public class EmailPopup extends jFrame{
 				}
 				
 				body = getFrameContainer().getPanel("makeEmailContainer").getPanel("emailComponents").getjTextArea("Footer").getText();
+				previewEmailContainer.getPanel("PreviewButtons").addProgressBar(1, studentEmails.size(), "progressBar");
 				wholeThing.remove(makeEmailContainer);
 				wholeThing.add(previewEmailContainer);
 				wholeThing.revalidate();
@@ -113,11 +119,11 @@ public class EmailPopup extends jFrame{
 		setVisible(true);
 		
 		
-		previewEmailContainer.setLayout(new BorderLayout());
-		jPanel emailPreview = previewEmailContainer.addPanel("EmailPreview", BorderLayout.CENTER);
-		jPanel previewButtons = previewEmailContainer.addPanel("PreviewButtons", BorderLayout.SOUTH);
+		
 		previewButtons.addButton("Previous");
 		previewButtons.addButton("Send");	
+		
+		
 		
 		previewButtons.getButton("Previous").addActionListener(new ActionListener(){
 			@Override
@@ -128,7 +134,8 @@ public class EmailPopup extends jFrame{
 				wholeThing.repaint();
 			}
 		});
-		
+//		jPanel panel = previewEmailContainer.getPanel("PreviewButtons");
+//		final JProgressBar pb = panel.getProgressBar("progressBar");
 		previewButtons.getButton("Send").addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -149,25 +156,29 @@ public class EmailPopup extends jFrame{
 					Session session = Session.getInstance(props, 
 							new javax.mail.Authenticator(){ 
 								protected PasswordAuthentication getPasswordAuthentication(){ 
-									return new PasswordAuthentication(emailSettings.getUserName(), new String(password));
+									return new PasswordAuthentication(emailSettings.getUserName(), new String("passworddvt"));
 								}	
 					});
-					
+					for (int i = 0; i<studentEmails.size(); i++){
 					MimeMessage message = new MimeMessage(session);
 					try {
-						message.setFrom(new InternetAddress(emailSettings.getUserName()));
-						for (int i = 0; i<studentEmails.size(); i++){
-							message.addRecipient(Message.RecipientType.TO, new InternetAddress(studentEmails.get(i)));	
+							
+							message.setFrom(new InternetAddress(emailSettings.getUserName()));
+							message.setSubject(subject);
+							message.setText(body);	
+							message.addRecipient(Message.RecipientType.TO, new InternetAddress(studentEmails.get(i)));
+							Transport.send(message);
+							previewEmailContainer.getPanel("PreviewButtons").getProgressBar("progressBar").setValue(i);
 						}
-						
-						message.setSubject(subject);
-						message.setText(body);
-						Transport.send(message);
-						System.out.println("Done");
-					} catch (MessagingException e1) {
+						catch (MessagingException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}	
+						}						
+					}
+						
+						System.out.println("Done");
+						exitFrame();
+						
 				}
 				
 				
@@ -178,5 +189,7 @@ public class EmailPopup extends jFrame{
 		});
 		
 	}
+
+
 	
 }
