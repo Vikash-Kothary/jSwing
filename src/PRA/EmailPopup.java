@@ -25,12 +25,12 @@ import javax.swing.JOptionPane;
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame {
 
-	boolean status = false;
-
-	private String subject;
 	private String body;
 
+	boolean status = false;
 	ArrayList<String> studentEmails = new ArrayList<String>();
+
+	private String subject;
 
 	public EmailPopup(final StudentList mainList) throws FileNotFoundException,
 			IOException {

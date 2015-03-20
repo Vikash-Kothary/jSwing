@@ -292,6 +292,16 @@ public class jPanel extends JPanel {
 		return spinner;
 	}
 
+	public jScrollPane addTable(String name, Object[][] data, String[] headers) {
+		JTable table = new JTable(data, headers);
+		table.setName(name);
+		jScrollPane scrollTable = new jScrollPane(table, name);
+		tables.add(scrollTable);
+		add(scrollTable);
+		return scrollTable;
+
+	}
+
 	public jScrollPane addTextArea(String text, String name) {
 		JTextArea textArea = new JTextArea(text);
 		textArea.setName(name);
@@ -332,15 +342,6 @@ public class jPanel extends JPanel {
 
 	}
 
-	private XYDataset createData() {
-		XYSeriesCollection studentData = new XYSeriesCollection();
-		for (int i = 0; i < 25; i++) {
-			series.add(rand.nextGaussian(), rand.nextGaussian());
-		}
-		studentData.addSeries(series);
-		return studentData;
-	}
-
 	// public JButton addButton(String name, Rectangle location) {
 	// JButton button = new JButton(name);
 	// button.setBounds(location);
@@ -348,14 +349,13 @@ public class jPanel extends JPanel {
 	// return button;
 	// }
 
-	public jScrollPane addTable(String name, Object[][] data, String[] headers) {
-		JTable table = new JTable(data, headers);
-		table.setName(name);
-		jScrollPane scrollTable = new jScrollPane(table, name);
-		tables.add(scrollTable);
-		add(scrollTable);
-		return scrollTable;
-
+	private XYDataset createData() {
+		XYSeriesCollection studentData = new XYSeriesCollection();
+		for (int i = 0; i < 25; i++) {
+			series.add(rand.nextGaussian(), rand.nextGaussian());
+		}
+		studentData.addSeries(series);
+		return studentData;
 	}
 
 	public JButton getButton(String text) {

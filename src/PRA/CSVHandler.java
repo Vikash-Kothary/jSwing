@@ -2,8 +2,6 @@ package PRA;
 
 import jSwing.jFrame;
 import jSwing.jPanel;
-import jSwing.jTabbedPane;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -52,37 +50,6 @@ public class CSVHandler implements ActionListener {
 		}
 	}
 
-	private String[][] toStringArray(Assessment assData) {
-		String[][] dataArray = new String[assData.size()][5];
-		for (int i = 0; i < dataArray.length; i++) {
-			dataArray[i][0] = assData.get(i).getExamModule();
-			dataArray[i][1] = assData.get(i).getAssModule();
-			dataArray[i][2] = assData.get(i).getCandKey();
-			dataArray[i][3] = assData.get(i).getExamMark();
-			dataArray[i][4] = assData.get(i).getExamGrade();
-		}
-		return dataArray;
-	}
-
-	private boolean deAnonymise(Result result) {
-		// check every student
-		for (Student student : mainList) {
-			// and all the anonymous marking codes for each student
-			for (String aMC : student.getAnonymousMarkingCodes()) {
-				// if they are the same as the results
-				if (result.getCandKey().equals(aMC)
-						|| result.getCandKey().split("/")[0].equals(
-								student.getStudentNumber())) {
-					// and if they are, attaches student to result
-					result.setStudent(student);
-					student.addResults(result);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	private ArrayList<Assessment> addToAssessments(ArrayList<Result> data) {
 		ArrayList<Assessment> assData = new ArrayList<>();
 		int assIndex = -1;
@@ -104,20 +71,23 @@ public class CSVHandler implements ActionListener {
 		return assData;
 	}
 
-	private File[] getFiles() throws IOException {
-		JFileChooser fc = new JFileChooser();
-		FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
-				"CSV files (*.csv)", "csv");
-		fc.setFileFilter(xmlfilter);
-		fc.setDialogTitle("Open exam results");
-		fc.setMultiSelectionEnabled(true);
-
-		int returnVal = fc.showOpenDialog(frame);
-		if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
-			File[] files = fc.getSelectedFiles();
-			return files;
+	private boolean deAnonymise(Result result) {
+		// check every student
+		for (Student student : mainList) {
+			// and all the anonymous marking codes for each student
+			for (String aMC : student.getAnonymousMarkingCodes()) {
+				// if they are the same as the results
+				if (result.getCandKey().equals(aMC)
+						|| result.getCandKey().split("/")[0].equals(student
+								.getStudentNumber())) {
+					// and if they are, attaches student to result
+					result.setStudent(student);
+					student.addResults(result);
+					return true;
+				}
+			}
 		}
-		return null;
+		return false;
 	}
 
 	@SuppressWarnings("resource")
@@ -132,37 +102,20 @@ public class CSVHandler implements ActionListener {
 		}
 	}
 
-	private ArrayList<Result> readResults(String filePath) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(filePath));
+	private File[] getFiles() throws IOException {
+		JFileChooser fc = new JFileChooser();
+		FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
+				"CSV files (*.csv)", "csv");
+		fc.setFileFilter(xmlfilter);
+		fc.setDialogTitle("Open exam results");
+		fc.setMultiSelectionEnabled(true);
 
-		String[] headers = { "Module", "Ass", "Cand Key", "Mark", "Grade" };
-
-		String[] lineData = br.readLine().split(",");
-		int[] column = new int[5];
-		for (int i = 0; i < lineData.length; i++) {
-			for (int j = 0; j < headers.length; j++) {
-				if (lineData[i].contains(headers[j])) {
-					column[j] = i;
-				}
-			}
-
+		int returnVal = fc.showOpenDialog(frame);
+		if (returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+			File[] files = fc.getSelectedFiles();
+			return files;
 		}
-
-		if (column[0] == column[1]) {
-			return null;
-		}
-
-		String line = "";
-		ArrayList<Result> data = new ArrayList<>();
-		while ((line = br.readLine()) != null) {
-			lineData = line.split(",");
-			Result test = new Result(lineData[column[0]], lineData[column[1]],
-					lineData[column[2]], lineData[column[3]],
-					lineData[column[4]]);
-			data.add(test);
-		}
-		br.close();
-		return data;
+		return null;
 	}
 
 	private ArrayList<Result> readCodes(String filePath) {
@@ -221,6 +174,51 @@ public class CSVHandler implements ActionListener {
 				+ " codes were for unknown students");
 		return null;
 
+	}
+
+	private ArrayList<Result> readResults(String filePath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+
+		String[] headers = { "Module", "Ass", "Cand Key", "Mark", "Grade" };
+
+		String[] lineData = br.readLine().split(",");
+		int[] column = new int[5];
+		for (int i = 0; i < lineData.length; i++) {
+			for (int j = 0; j < headers.length; j++) {
+				if (lineData[i].contains(headers[j])) {
+					column[j] = i;
+				}
+			}
+
+		}
+
+		if (column[0] == column[1]) {
+			return null;
+		}
+
+		String line = "";
+		ArrayList<Result> data = new ArrayList<>();
+		while ((line = br.readLine()) != null) {
+			lineData = line.split(",");
+			Result test = new Result(lineData[column[0]], lineData[column[1]],
+					lineData[column[2]], lineData[column[3]],
+					lineData[column[4]]);
+			data.add(test);
+		}
+		br.close();
+		return data;
+	}
+
+	private String[][] toStringArray(Assessment assData) {
+		String[][] dataArray = new String[assData.size()][5];
+		for (int i = 0; i < dataArray.length; i++) {
+			dataArray[i][0] = assData.get(i).getExamModule();
+			dataArray[i][1] = assData.get(i).getAssModule();
+			dataArray[i][2] = assData.get(i).getCandKey();
+			dataArray[i][3] = assData.get(i).getExamMark();
+			dataArray[i][4] = assData.get(i).getExamGrade();
+		}
+		return dataArray;
 	}
 
 }

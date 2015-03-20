@@ -9,13 +9,41 @@ import java.util.Properties;
 
 public class EmailSettings {
 
-	private static String host;
-	private static int port;
-	private static String userName;
-	private static boolean SSL;
-	private static Properties props;
 	private static boolean auth;
 	private static String filePath;
+	private static String host;
+	private static int port;
+	private static Properties props;
+	private static boolean SSL;
+	private static String userName;
+
+	public static Boolean getAuth() {
+		return auth;
+	}
+
+	public static String getHost() {
+		return host;
+	}
+
+	public static int getPort() {
+		return port;
+	}
+
+	public static Properties getProperties() {
+		return props;
+	}
+
+	public static Properties getProps() {
+		return props;
+	}
+
+	public static Boolean getSSL() {
+		return SSL;
+	}
+
+	public static String getUserName() {
+		return userName;
+	}
 
 	public EmailSettings() throws FileNotFoundException, IOException {
 		Properties props = new Properties();
@@ -30,26 +58,6 @@ public class EmailSettings {
 		props.setProperty("PORT", "55");
 	}
 
-	public static String getHost() {
-		return host;
-	}
-
-	public void setPort(int port) throws FileNotFoundException, IOException {
-		getProps().setProperty("PORT", String.valueOf(port));
-		getProps().store(new FileOutputStream(filePath), null);
-	}
-
-	public void setUserName(String userName) throws FileNotFoundException,
-			IOException {
-		getProps().setProperty("USERNAME", userName);
-		getProps().store(new FileOutputStream(filePath), null);
-	}
-
-	public void setSSL(String SSL) throws FileNotFoundException, IOException {
-		getProps().setProperty("SSL", SSL);
-		getProps().store(new FileOutputStream(filePath), null);
-	}
-
 	public void setAuth(String auth) throws FileNotFoundException, IOException {
 		getProps().setProperty("AUTH", auth);
 		getProps().store(new FileOutputStream(filePath), null);
@@ -60,28 +68,20 @@ public class EmailSettings {
 		getProps().store(new FileOutputStream(filePath), null);
 	}
 
-	public static int getPort() {
-		return port;
+	public void setPort(int port) throws FileNotFoundException, IOException {
+		getProps().setProperty("PORT", String.valueOf(port));
+		getProps().store(new FileOutputStream(filePath), null);
 	}
 
-	public static String getUserName() {
-		return userName;
+	public void setSSL(String SSL) throws FileNotFoundException, IOException {
+		getProps().setProperty("SSL", SSL);
+		getProps().store(new FileOutputStream(filePath), null);
 	}
 
-	public static Boolean getSSL() {
-		return SSL;
-	}
-
-	public static Properties getProperties() {
-		return props;
-	}
-
-	public static Boolean getAuth() {
-		return auth;
-	}
-
-	public static Properties getProps() {
-		return props;
+	public void setUserName(String userName) throws FileNotFoundException,
+			IOException {
+		getProps().setProperty("USERNAME", userName);
+		getProps().store(new FileOutputStream(filePath), null);
 	}
 
 }

@@ -6,10 +6,10 @@ public class Student {
 
 	private ArrayList<String> anonymousMarkingCode;
 	private String emailAddress;
+	private ArrayList<Result> results;
 	private String studentName;
 	private String studentNumber;
 	private String tutorEmail;
-	private ArrayList<Result> results;
 
 	public Student() {
 		studentName = "";
@@ -20,29 +20,11 @@ public class Student {
 		results = new ArrayList<>();
 	}
 
-	/**
-	 * @return the results
-	 */
-	public ArrayList<Result> getResults() {
-		return results;
-	}
-
-	/**
-	 * @param results
-	 *            the results to set
-	 */
-	public boolean addResults(Result result) {
-		if (!results.contains(result)) {
-			results.add(result);
-			return true;
-		}
-		return false;
-	}
-
 	public Student(String _studentName, String _studentNumber,
 			String _emailAddress, String _tutorEmail) {
 		studentName = _studentName.replaceAll("[\"]", "");
-		studentNumber = _studentNumber.replaceAll("[\"]", "").replaceAll("#", "");
+		studentNumber = _studentNumber.replaceAll("[\"]", "").replaceAll("#",
+				"");
 		emailAddress = _emailAddress.replaceAll("[\"]", "");
 		tutorEmail = _tutorEmail.replaceAll("[\"]", "");
 		anonymousMarkingCode = new ArrayList<>();
@@ -58,6 +40,18 @@ public class Student {
 		return false;
 	}
 
+	/**
+	 * @param results
+	 *            the results to set
+	 */
+	public boolean addResults(Result result) {
+		if (!results.contains(result)) {
+			results.add(result);
+			return true;
+		}
+		return false;
+	}
+
 	public ArrayList<String> getAnonymousMarkingCodes() {
 		return anonymousMarkingCode;
 	}
@@ -67,6 +61,13 @@ public class Student {
 	 */
 	public String getEmailAddress() {
 		return emailAddress;
+	}
+
+	/**
+	 * @return the results
+	 */
+	public ArrayList<Result> getResults() {
+		return results;
 	}
 
 	public String getStudentName() {
@@ -96,7 +97,8 @@ public class Student {
 	}
 
 	public void setStudentName(String studentName) {
-		this.studentName = studentName.replaceAll("[\"]", "").replaceAll("#", "");
+		this.studentName = studentName.replaceAll("[\"]", "").replaceAll("#",
+				"");
 	}
 
 	/**

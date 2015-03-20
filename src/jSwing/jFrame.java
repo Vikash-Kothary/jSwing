@@ -84,16 +84,11 @@ public class jFrame extends JFrame {
 		setLocation(x, y);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Window#pack()
-	 */
-	@Override
-	public void pack() {
-		super.pack();
-		width = super.getBounds().width;
-		height = super.getBounds().height;
+	public void exitFrame() {
+		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		// // Alternative method to close frame
+		// setVisible(false);
+		// dispose();
 	}
 
 	/*
@@ -102,11 +97,8 @@ public class jFrame extends JFrame {
 	 * @see java.awt.Window#setSize(int, int)
 	 */
 
-	public void exitFrame() {
-		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		// // Alternative method to close frame
-		// setVisible(false);
-		// dispose();
+	public jPanel getFrameContainer() {
+		return (jPanel) getContentPane().getComponent(0);
 	}
 
 	// // logs mouse location when clicked
@@ -135,10 +127,6 @@ public class jFrame extends JFrame {
 	// });
 	// }
 
-	public jPanel getFrameContainer() {
-		return (jPanel) getContentPane().getComponent(0);
-	}
-
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {
 		return menuBar.getMenu(0).getItem(0);
 	}
@@ -165,6 +153,18 @@ public class jFrame extends JFrame {
 	// maximise frame
 	public void maximiseFrame() {
 		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.Window#pack()
+	 */
+	@Override
+	public void pack() {
+		super.pack();
+		width = super.getBounds().width;
+		height = super.getBounds().height;
 	}
 
 	// changes jpanel container in frame

@@ -9,18 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -62,6 +57,50 @@ public class InterfaceWindow extends jFrame {
 		setVisible(true);
 	}
 
+	private void addStudentPanelElements() {
+		final jPanel students = getFrameContainer().getPanel("students");
+		students.addTextField(null, "studentSearchField", BorderLayout.NORTH);
+		students.addList(
+				mainList.updateStudentList(students.getTextField(
+						"studentSearchField").getText()), "studentList");
+
+		students.getList("studentList").getList()
+				.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						if (e.getButton() == MouseEvent.BUTTON1) {
+							new InformationPopup(mainList.getStudent(students
+									.getList("studentList").getList()
+									.getSelectedIndex()));
+						}
+					}
+				});
+
+		students.getTextField("studentSearchField").getDocument()
+				.addDocumentListener(new DocumentListener() {
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+					}
+
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						students.getList("studentList").updateList(
+								mainList.updateStudentList(students
+										.getTextField("studentSearchField")
+										.getText()));
+					}
+
+					@Override
+					public void removeUpdate(DocumentEvent e) {
+						students.getList("studentList").updateList(
+								mainList.updateStudentList(students
+										.getTextField("studentSearchField")
+										.getText()));
+
+					}
+				});
+	}
+
 	private void initMenu() {
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
@@ -70,11 +109,11 @@ public class InterfaceWindow extends jFrame {
 				"Email to Students", "Email Settings" };
 		addMenu("Data", dataMenu);
 
-		getMenuItem("File", fileMenu[0])
-				.addActionListener(new CSVHandler(this, mainList));
+		getMenuItem("File", fileMenu[0]).addActionListener(
+				new CSVHandler(this, mainList));
 
-		getMenuItem("File", fileMenu[1])
-				.addActionListener(new CSVHandler(this, mainList));
+		getMenuItem("File", fileMenu[1]).addActionListener(
+				new CSVHandler(this, mainList));
 
 		getMenuItem("File", fileMenu[2]).addActionListener(
 				new ActionListener() {
@@ -139,49 +178,4 @@ public class InterfaceWindow extends jFrame {
 
 	}
 
-	private void addStudentPanelElements() {
-		final jPanel students = getFrameContainer().getPanel("students");
-		students.addTextField(null, "studentSearchField", BorderLayout.NORTH);
-		students.addList(
-				mainList.updateStudentList(students.getTextField(
-						"studentSearchField").getText()), "studentList");
-
-		students.getList("studentList").getList()
-				.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if (e.getButton() == MouseEvent.BUTTON1) {
-							new InformationPopup(mainList.getStudent(students
-									.getList("studentList").getList()
-									.getSelectedIndex()));
-						}
-					}
-				});
-
-		students.getTextField("studentSearchField").getDocument()
-				.addDocumentListener(new DocumentListener() {
-					@Override
-					public void changedUpdate(DocumentEvent e) {
-					}
-
-					@Override
-					public void insertUpdate(DocumentEvent e) {
-						students.getList("studentList").updateList(
-								mainList.updateStudentList(students
-										.getTextField("studentSearchField")
-										.getText()));
-					}
-
-					@Override
-					public void removeUpdate(DocumentEvent e) {
-						students.getList("studentList").updateList(
-								mainList.updateStudentList(students
-										.getTextField("studentSearchField")
-										.getText()));
-
-					}
-				});
-	}
-
-	
 }
