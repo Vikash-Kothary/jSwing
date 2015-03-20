@@ -45,7 +45,6 @@ public class InterfaceWindow extends jFrame {
 
 		JTabbedPane resultsPane = data.addPane("resultsPane",
 				BorderLayout.CENTER);
-		// resultsPane.sh
 
 		// This is an example of how the addTable/addPane class works
 		// data.getTabbedPane("resultsPane").addTab("Tab1",

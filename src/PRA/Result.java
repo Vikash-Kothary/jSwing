@@ -2,6 +2,7 @@ package PRA;
 
 public class Result {
 	private String examModule, assModule, candKey, examMark, examGrade;
+	private Student student;
 
 	public Result(String _examModule, String _assModule, String _candKey,
 			String _examMark, String _examGrade) {
@@ -9,8 +10,13 @@ public class Result {
 		assModule = _assModule;
 		candKey = _candKey;
 		examMark = _examMark;
-		// TODO convert examGrade to enum datatype
+		// possible extension: TODO convert examGrade to enum datatype
 		examGrade = _examGrade;
+		student = null;
+	}
+	
+	public Result() {
+		student = null;
 	}
 
 	@Override
@@ -20,8 +26,6 @@ public class Result {
 				+ ", examGrade=" + examGrade + "]";
 	}
 
-	public Result() {
-	}
 
 	public String getExamModule() {
 		return examModule;
@@ -40,7 +44,24 @@ public class Result {
 	}
 
 	public String getCandKey() {
+		if(student!=null){
+			return student.getStudentNumber();
+		}
 		return candKey;
+	}
+
+	/**
+	 * @return the student
+	 */
+	public Student getStudent() {
+		return student;
+	}
+
+	/**
+	 * @param student the student to set
+	 */
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public void setCandKey(String candKey) {

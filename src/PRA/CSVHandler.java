@@ -34,7 +34,7 @@ public class CSVHandler implements ActionListener {
 				ArrayList<Result> csvData = getCSVData(filePath);
 				if (csvData != null) {
 					ArrayList<Assessment> assData = addToAssessments(csvData);
-					assData = deAnonymiseData(assData);
+					deAnonymiseData(assData);
 
 					jPanel panel = frame.getFrameContainer().getPanel("data");
 					for (Assessment ass : assData) {
@@ -64,36 +64,30 @@ public class CSVHandler implements ActionListener {
 		return dataArray;
 	}
 
-	private ArrayList<Assessment> deAnonymiseData(ArrayList<Assessment> assData) {
-		for (int i = 0; i < assData.size(); i++) {
-			for (int j = 0; j < assData.get(i).size(); j++) {
-				Result result = assData.get(i).get(j);
+	private void deAnonymiseData(ArrayList<Assessment> assData){
+		for(Assessment ass : assData){
+			for(Result result : ass){
 				// if not a student number
-				if (!result.getCandKey().contains("/")) {
-					assData.get(i).set(j, deAnonymise(result));
-				}
+				deAnonymise(result);
 			}
 		}
-		return assData;
 	}
-
-	private Result deAnonymise(Result result) {
+	
+	private boolean deAnonymise(Result result){
 		// check every student
-		for (Student student : mainList) {
+		for(Student student : mainList){
 			// and all the anonymous marking codes for each student
-			for (String aMC : student.getAnonymousMarkingCodes()) {
+			for(String aMC : student.getAnonymousMarkingCodes()){
+
 				// if they are the same as the results
-				if (result.getCandKey().equals(aMC)) {
-					// and if they are, replace the cand key with that student's
-					// student number
-					result.setCandKey(student.getStudentNumber());
-					System.out.println(student.getStudentNumber());
-					System.out.println(result.getCandKey());
-					return result;
+				if(result.getCandKey().contains(aMC)){
+					// and if they are, replace the cand key with that student's student number
+					result.setStudent(student);;
+					return true;
 				}
 			}
 		}
-		return result;
+		return false;
 	}
 
 	private ArrayList<Assessment> addToAssessments(ArrayList<Result> data) {
