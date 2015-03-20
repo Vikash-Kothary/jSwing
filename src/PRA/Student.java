@@ -68,6 +68,14 @@ public class Student {
 	public ArrayList<Result> getResults() {
 		return results;
 	}
+	
+	public int resultsSize(){
+		return results.size();
+	}
+	
+	public Result getResult(int i){
+		return results.get(i);
+	}
 
 	public String getStudentName() {
 		return studentName;

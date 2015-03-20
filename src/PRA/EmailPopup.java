@@ -21,16 +21,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame {
 
-	private String body;
+	private String footerText;
 
 	boolean status = false;
 	ArrayList<String> studentEmails = new ArrayList<String>();
 
-	private String subject;
+	private String headerText;
 
 	public EmailPopup(final StudentList mainList) throws FileNotFoundException,
 			IOException {
@@ -64,8 +65,16 @@ public class EmailPopup extends jFrame {
 		jPanel emailComponents = makeEmailContainer.addPanel("emailComponents",
 				BorderLayout.CENTER);
 		emailComponents.setLayout(new BorderLayout());
-		emailComponents.addTextField(null, "Header", BorderLayout.NORTH);
-		emailComponents.addTextArea(null, "Footer");
+		jPanel textPanel = emailComponents.addPanel("textPanel", BorderLayout.CENTER);
+		textPanel.setLayout(new GridLayout(2,1));
+		jPanel header = textPanel.addPanel("header");
+		header.setLayout(new BorderLayout());
+		header.addLabel("Header:", BorderLayout.NORTH);
+		header.addTextArea(null, "Header");
+		jPanel footer = textPanel.addPanel("footer");
+		footer.setLayout(new BorderLayout());
+		footer.addLabel("Footer:", BorderLayout.NORTH);
+		footer.addTextArea(null, "Footer");
 		jPanel bottom = emailComponents.addPanel("bottom", BorderLayout.SOUTH);
 		bottom.setLayout(new BorderLayout());
 		bottom.addButton("Next", BorderLayout.EAST);
@@ -95,16 +104,18 @@ public class EmailPopup extends jFrame {
 					}
 				});
 		previewEmailContainer.setLayout(new BorderLayout());
-		jPanel emailPreview = previewEmailContainer.addPanel("EmailPreview",
+		final jPanel emailPreview = previewEmailContainer.addPanel("emailPreview",
 				BorderLayout.CENTER);
+		
 		jPanel previewButtons = previewEmailContainer.addPanel(
 				"PreviewButtons", BorderLayout.SOUTH);
 		bottom.getButton("Next").addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				subject = getFrameContainer().getPanel("makeEmailContainer")
-						.getPanel("emailComponents").getTextField("Header")
-						.getText();
+				headerText = wholeThing.getPanel("makeEmailContainer")
+						.getPanel("emailComponents").getPanel("textPanel").getPanel("header")
+						.getTextArea("Header")
+						.getTextArea().getText() + "<br/>";
 
 				for (int i = 0; i < mainList.size(); i++) {
 					if (scrollPanel.getCheckBox(
@@ -116,11 +127,28 @@ public class EmailPopup extends jFrame {
 					}
 				}
 
-				body = getFrameContainer().getPanel("makeEmailContainer")
-						.getPanel("emailComponents").getTextArea("Footer")
-						.getTextArea().getText();
+				footerText = wholeThing.getPanel("makeEmailContainer")
+						.getPanel("emailComponents").getPanel("textPanel").getPanel("footer")
+						.getTextArea("Footer")
+						.getTextArea().getText() + "<br/>";
+				
 				previewEmailContainer.getPanel("PreviewButtons")
-						.addProgressBar(1, studentEmails.size(), "progressBar");
+						.addProgressBar(0, studentEmails.size(), "progressBar");
+				
+				String resultsMessage = null;
+				for (int i = 0; i <studentEmails.size(); i++){
+					resultsMessage = "Candidate Key: " + mainList.getStudent(i).getStudentNumber() + "<br/>";;
+					for (int j = 0; j < mainList.getStudent(j).resultsSize(); j++){
+						resultsMessage +=	mainList.getStudent(i).getResult(j).toString() + "<br/>";
+						
+					}
+				}
+				resultsMessage = "<html>" + headerText + resultsMessage + footerText + "</html>";
+				emailPreview.addLabel(resultsMessage, BorderLayout.CENTER, "emailLabel");
+				
+				
+				
+				
 				wholeThing.remove(makeEmailContainer);
 				wholeThing.add(previewEmailContainer);
 				wholeThing.revalidate();
@@ -129,7 +157,9 @@ public class EmailPopup extends jFrame {
 		});
 		previewButtons.addButton("Previous");
 		previewButtons.addButton("Send");
-
+		
+		
+		
 		previewButtons.getButton("Previous").addActionListener(
 				new ActionListener() {
 					@Override
@@ -140,8 +170,8 @@ public class EmailPopup extends jFrame {
 						wholeThing.repaint();
 					}
 				});
-		// jPanel panel = previewEmailContainer.getPanel("PreviewButtons");
-		// final JProgressBar pb = panel.getProgressBar("progressBar");
+		 jPanel panel = previewEmailContainer.getPanel("PreviewButtons");
+		 final JProgressBar pb = panel.getProgressBar("progressBar");
 		previewButtons.getButton("Send").addActionListener(
 				new ActionListener() {
 					@Override
@@ -173,18 +203,24 @@ public class EmailPopup extends jFrame {
 													new String("passworddvt"));
 										}
 									});
+							
 							for (int i = 0; i < studentEmails.size(); i++) {
 								MimeMessage message = new MimeMessage(session);
 								try {
-
+									
+									
+									
+									
 									message.setFrom(new InternetAddress(
 											EmailSettings.getUserName()));
-									message.setSubject(subject);
-									message.setText(body);
-									message.addRecipient(
-											Message.RecipientType.TO,
-											new InternetAddress(studentEmails
-													.get(i)));
+									message.setSubject("Student Results");
+									
+						
+									message.setText(emailPreview.getLabel("emailLabel").getText(), "utf-8", "html");
+									
+									message.addRecipient(Message.RecipientType.TO, new InternetAddress(studentEmails.get(i)));
+									
+									
 									Transport.send(message);
 									previewEmailContainer
 											.getPanel("PreviewButtons")

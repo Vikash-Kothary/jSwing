@@ -142,7 +142,16 @@ public class jPanel extends JPanel {
 
 	public JLabel addLabel(String text) {
 		JLabel label = new JLabel(text);
+		label.setName(text);
 		add(label);
+		labels.add(label);
+		return label;
+	}
+	
+	public JLabel addLabel(String text, String format, String name) {
+		JLabel label = new JLabel(text);
+		label.setName(name);
+		add(label, format);
 		labels.add(label);
 		return label;
 	}
@@ -402,12 +411,14 @@ public class jPanel extends JPanel {
 
 	public JLabel getLabel(String text) {
 		for (JLabel label : labels) {
-			if (label.getText().contains(text)) {
+			if (label.getName().contains(text)) {
 				return label;
 			}
 		}
 		return null;
 	}
+	
+	
 
 	public jScrollPane getList(String name) {
 		for (jScrollPane list : lists) {
@@ -507,5 +518,7 @@ public class jPanel extends JPanel {
 	public void setPadding(int top, int left, int bottom, int right) {
 		setBorder(new EmptyBorder(top, left, bottom, right));
 	}
+
+	
 
 }

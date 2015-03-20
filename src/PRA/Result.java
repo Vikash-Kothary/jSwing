@@ -76,12 +76,21 @@ public class Result {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	
+
 
 	@Override
 	public String toString() {
-		return "Result [examModule=" + examModule + ", assModule=" + assModule
-				+ ", candKey=" + candKey + ", examMark=" + examMark
-				+ ", examGrade=" + examGrade + "]";
+		String returnString = "Exam Module: " + examModule + "<br/>" + "Mark: " + examMark + "<br/>";
+		if (examGrade.equals( "")){
+			
+		} else {
+			returnString += "Grade: " + examGrade + "<br/>";
+		}
+		
+		return returnString;
 	}
+	
+	
 
 }
