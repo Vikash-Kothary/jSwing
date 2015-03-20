@@ -3,6 +3,7 @@ package PRA;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
