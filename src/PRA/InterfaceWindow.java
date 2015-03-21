@@ -90,42 +90,8 @@ public class InterfaceWindow extends jFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						jTabbedPane tabbedPane = getFrameContainer().getPanel("data").getTabbedPane("resultsPane");
-						XYSeriesCollection studentData = new XYSeriesCollection();
-						String candKey = null;
 						if(tabbedPane.getSelectedIndex() != -1){
-							JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
-							
-							
-							for (int i = 0; i < selectedTable.getRowCount(); i++){
-								double average = 0;
-								candKey = (String) selectedTable.getValueAt(i, 2);
-								int numberOfAverageTabs = tabbedPane.getTabCount() -1;
-								for(int j = 0; j<tabbedPane.getTabCount(); j++){
-									tabbed_if : if (j != tabbedPane.getSelectedIndex()){
-													JTable nonSelectedTable = tabbedPane.getTab(j).getTable();
-													if ((String) nonSelectedTable.getValueAt(i, 2) != candKey){
-															numberOfAverageTabs-=1;
-															break tabbed_if;
-													}
-										
-									
-												average += Integer.valueOf((String) nonSelectedTable.getValueAt(i, 3));
-												}	
-								}
-									average = average / (numberOfAverageTabs);
-									
-									double x = (Double.valueOf((String) selectedTable.getValueAt(i, 3)));
-									series.add(x, average);
-									
-								}
-							
-								
-								
-							
-					
-							
-							studentData.addSeries(series);
-							new ScatterPlotWindow(studentData);	
+							new ScatterPlotWindow(mainList, tabbedPane);	
 						}
 					}
 				});

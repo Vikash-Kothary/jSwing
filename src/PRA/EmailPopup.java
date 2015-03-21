@@ -21,11 +21,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
+
 
 @SuppressWarnings("serial")
-public class EmailPopup extends jFrame {
+public class EmailPopup extends jFrame{
 
+	
 	private String footerText;
 
 	boolean status = false;
@@ -107,7 +108,7 @@ public class EmailPopup extends jFrame {
 		final jPanel emailPreview = previewEmailContainer.addPanel("emailPreview",
 				BorderLayout.CENTER);
 		
-		jPanel previewButtons = previewEmailContainer.addPanel(
+		final jPanel previewButtons = previewEmailContainer.addPanel(
 				"PreviewButtons", BorderLayout.SOUTH);
 		bottom.getButton("Next").addActionListener(new ActionListener() {
 			@Override
@@ -132,8 +133,7 @@ public class EmailPopup extends jFrame {
 						.getTextArea("Footer")
 						.getTextArea().getText() + "<br/>";
 				
-				previewEmailContainer.getPanel("PreviewButtons")
-						.addProgressBar(0, studentEmails.size(), "progressBar");
+				
 				
 				String resultsMessage = null;
 				for (int i = 0; i <studentEmails.size(); i++){
@@ -170,8 +170,8 @@ public class EmailPopup extends jFrame {
 						wholeThing.repaint();
 					}
 				});
-		 jPanel panel = previewEmailContainer.getPanel("PreviewButtons");
-		 final JProgressBar pb = panel.getProgressBar("progressBar");
+		
+		
 		previewButtons.getButton("Send").addActionListener(
 				new ActionListener() {
 					@Override
@@ -222,17 +222,16 @@ public class EmailPopup extends jFrame {
 									
 									
 									Transport.send(message);
-									previewEmailContainer
-											.getPanel("PreviewButtons")
-											.getProgressBar("progressBar")
-											.setValue(i);
+					
+									
+									
 								} catch (MessagingException e1) {
-									// TODO Auto-generated catch block
+								
 									e1.printStackTrace();
 								}
 							}
 
-							System.out.println("Done");
+							JOptionPane.showMessageDialog(null, studentEmails.size() + " emails successfully sent", "InfoBox: " + "Emails Sent" , JOptionPane.INFORMATION_MESSAGE);
 							exitFrame();
 
 						}
@@ -241,6 +240,8 @@ public class EmailPopup extends jFrame {
 				});
 
 		setVisible(true);
+		
+		
 
 	}
 
