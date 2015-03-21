@@ -2,8 +2,13 @@
 package jSwing;
 
 import java.awt.Frame;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,6 +19,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class jFrame extends JFrame {
 
+	private ArrayList<jPanel> containers;
 	private JMenuBar menuBar = new JMenuBar();
 	private String title;
 	private int width, height;
@@ -47,17 +53,23 @@ public class jFrame extends JFrame {
 
 		initFrame();
 	}
+	
+	public jFrame getFrame(){
+		return this;
+	}
 
 	public jPanel addContainer() {
 		jPanel panel = new jPanel();
-		getContentPane().removeAll(); // empties frame background
-		getContentPane().add(panel); // add panel to background
-		// refresh panel (optional)
-		panel.revalidate();
-		panel.repaint();
-		// refresh frame
-		revalidate(); // if error: validate();
-		repaint();
+		containers.add(panel);
+		setContainer(panel);
+		return panel;
+	}
+	
+	public jPanel addContainer(String name) {
+		jPanel panel = new jPanel();
+		panel.setName(name);
+		containers.add(panel);
+		setContainer(panel);
 		return panel;
 	}
 
@@ -148,6 +160,7 @@ public class jFrame extends JFrame {
 
 	private void initFrame() {
 		setJMenuBar(menuBar);
+		containers = new ArrayList<>();
 	}
 
 	// maximise frame
@@ -177,5 +190,25 @@ public class jFrame extends JFrame {
 		// refresh frame
 		revalidate(); // if error: validate();
 		repaint();
+	}
+	
+	public boolean changeContainer(String name) {
+		for(jPanel container : containers){
+			container.getName().equals(name);
+			setContainer(container);
+			return true;
+		}
+		return false;
+	}
+	
+	public String getClipboardData() {
+		try {
+			return (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+					.getData(DataFlavor.stringFlavor);
+		} catch (HeadlessException | UnsupportedFlavorException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

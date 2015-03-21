@@ -125,6 +125,21 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
+				
+				
+		getMenuItem("Data", dataMenu[3]).addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new WebScraper();
+						} catch (HeadlessException | UnsupportedFlavorException
+								| IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+
+				});
 		
 		getMenuItem("Data", dataMenu[4]).addActionListener(new ActionListener() {
 			@Override
@@ -132,6 +147,9 @@ public class InterfaceWindow extends jFrame {
 				new PDFExport(mainList);
 			}
 		});
+
+				});
+
 	}
 
 	private void addStudentPanelElements() {

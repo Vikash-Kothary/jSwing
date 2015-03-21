@@ -3,6 +3,8 @@ package PRA;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -13,29 +15,39 @@ public class InformationPopup extends jFrame {
 
 	public InformationPopup(Student student) {
 		super("Information");
-		setSize(300, 300);
+		this.setMinimumSize(new Dimension(400, 150));
 		jPanel container = addContainer();
 		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-		container.setPadding(5, 5, 5, 5);
+		container.setPadding(10, 10, 10, 10);
 
-		container.addLabel("<html>" + student.getStudentName() + "</html>")
+		jPanel labelPanel = container.addPanel("labelPanel");
+		labelPanel.setLayout(new GridLayout(4,1, 10,10));
+		labelPanel.addLabel("<html>" + student.getStudentName() + "</html>")
 				.setHorizontalAlignment(SwingConstants.CENTER);
 
-		container.addLabel(
+		labelPanel.addLabel(
 				"<html><i>" + student.getEmailAddress() + "</i></html>")
 				.setHorizontalAlignment(SwingConstants.CENTER);
 
-		container.addLabel("Student No.: " + student.getStudentNumber())
+		labelPanel.addLabel("Student No.: " + student.getStudentNumber())
 				.setHorizontalAlignment(SwingConstants.LEFT);
 
-		container.addLabel("Tutor: " + student.getTutorEmail())
+		labelPanel.addLabel("Tutor: " + student.getTutorEmail())
 				.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		if(student.getLastAccessed()!=null){
+			labelPanel.addLabel("Last Accessed: " + student.getLastAccessed())
+			.setHorizontalAlignment(SwingConstants.LEFT);
+		}
 
-		jPanel results = container.addPanel("resultsPopup");
-		results.setPadding(5, 0, 0, 0);
-		String[] headers = { "Module", "Ass", "Mark", "Grade" };
+
 		String[][] dataArray = toStringArray(student.getResults());
-		results.addTable("Student Results", dataArray, headers);
+		if(dataArray.length!=0){
+			jPanel results = container.addPanel("resultsPopup");
+			results.setPadding(5, 0, 0, 0);
+			String[] headers = { "Module", "Ass", "Mark", "Grade" };
+			results.addTable("Student Results", dataArray, headers);
+		}
 
 		pack();
 		centreFrame();
