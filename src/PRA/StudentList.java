@@ -7,9 +7,8 @@ package PRA;
 
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class StudentList.
+ * The Class StudentList. Stores all the student.
  */
 public class StudentList extends ArrayList<Student> {
 

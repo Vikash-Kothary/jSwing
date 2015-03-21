@@ -1,4 +1,8 @@
-// Vikash Kothary
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package jSwing;
 
 import java.awt.Dimension;
@@ -37,7 +41,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class jPanel.
  */

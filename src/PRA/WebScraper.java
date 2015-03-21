@@ -40,14 +40,13 @@ import org.jsoup.nodes.Document;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WebScraper.
  */
 @SuppressWarnings("serial")
 public class WebScraper extends jFrame {
 	
-	/** The uri. */
+	/** The uri of the page to be scraped. */
 	private URI uri;
 
 	/**
@@ -176,7 +175,7 @@ public class WebScraper extends jFrame {
 	}
 
 	/**
-	 * Scrape.
+	 * TODO Scrapes data.
 	 *
 	 * @param url
 	 *            the url

@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class jTabbedPane.
  */

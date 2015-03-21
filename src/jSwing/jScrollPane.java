@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class jScrollPane.
  */

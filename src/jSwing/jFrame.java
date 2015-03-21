@@ -1,4 +1,8 @@
-// Vikash Kothary
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package jSwing;
 
 import java.awt.Frame;
@@ -17,16 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 /**
- * The class jFrame is a derived class of JFrame. It is a base
- * class for the creating and handling swing windows. It also
- * handles the adding of a menu bar to all windows.
- * @author  Vikash Kothary
- * @author  Toby Birkett
- * @see JFrame
- * @see JPanel
- * @see JMenuBar
- * @see JMenu
- * @see JMenuItem
+ * The Class jFrame.
  */
 @SuppressWarnings("serial")
 public class jFrame extends JFrame {
@@ -40,35 +35,24 @@ public class jFrame extends JFrame {
 	/** The title. */
 	private String title;
 	
-	/** The height. */
+	/** The height */
 	private int width, height;
 
 	/**
-	 * Class constructor. Instantiates a new jFrame.
+	 * Class constructor. Instantiates a new jFrame object.
 	 */
 	public jFrame() {
 		initFrame();
 	}
 
-	/*
-	 * Class constructor that sets the JFrame component's size.
-	 * @param width width of JFrame window
-	 * @param height
-	 * @param _width
-	 * @param _width
-	 * @see JFrame
-	 */
 	/**
-	 * Instantiates a new j frame.
+	 * Class constructor. Instantiates a new jFrame object and sets its size.
 	 *
 	 * @param _width
-	 *            the _width
+	 *            the width you would like to set the window
 	 * @param _height
-	 *            the _height
-	 */
-	/**
-	 * @param _width
-	 * @param _height
+	 *            the height you would like to set the window
+	 * 
 	 */
 	public jFrame(int _width, int _height) {
 		width = _width;
@@ -79,10 +63,11 @@ public class jFrame extends JFrame {
 	}
 
 	/**
-	 * Instantiates a new j frame.
+	 * Class constructor. Instantiates a new jFrame object and sets the window title.
 	 *
 	 * @param _title
-	 *            the _title
+	 *            the window title
+	 *            
 	 */
 	public jFrame(String _title) {
 		title = _title;
@@ -92,14 +77,14 @@ public class jFrame extends JFrame {
 	}
 
 	/**
-	 * Instantiates a new j frame.
+	 * Class constructor. Instantiates a new jFrame object with a title and sets its size.
 	 *
 	 * @param _title
-	 *            the _title
+	 *            the window title
 	 * @param _width
-	 *            the _width
+	 *            the width of the frame
 	 * @param _height
-	 *            the _height
+	 *            the height of the frame
 	 */
 	public jFrame(String _title, int _width, int _height) {
 		title = _title;
@@ -112,7 +97,7 @@ public class jFrame extends JFrame {
 	}
 
 	/**
-	 * Inits the frame.
+	 * Initialise the global variables in the frame and add a empty menu bar.
 	 */
 	private void initFrame() {
 		menuBar = new JMenuBar();
@@ -121,7 +106,7 @@ public class jFrame extends JFrame {
 	}
 	
 	/**
-	 * Gets the frame.
+	 * Gets the frame object.
 	 *
 	 * @return the frame
 	 */
@@ -130,7 +115,7 @@ public class jFrame extends JFrame {
 	}
 
 	/**
-	 * Adds the container.
+	 * Adds a container panel to the frame.
 	 *
 	 * @return the j panel
 	 */
@@ -145,8 +130,8 @@ public class jFrame extends JFrame {
 	 * Adds the container.
 	 *
 	 * @param name
-	 *            the name
-	 * @return the j panel
+	 *            a name for the panel to be used to get it later
+	 * @return the new jPanel
 	 */
 	public jPanel addContainer(String name) {
 		jPanel panel = new jPanel();
@@ -162,8 +147,8 @@ public class jFrame extends JFrame {
 	 * @param menuTitle
 	 *            the menu title
 	 * @param menuItems
-	 *            the menu items
-	 * @return the j menu
+	 *            all the items in menu
+	 * @return the menu
 	 */
 	public JMenu addMenu(String menuTitle, String[] menuItems) {
 		if (menuItems != null) {
@@ -180,11 +165,10 @@ public class jFrame extends JFrame {
 
 	// frame's location is set to the centre to the screen
 	/**
-	 * Centre frame.
+	 * Centres the frame in the screen.
 	 */
 	public void centreFrame() {
-		// TODO multiple screens: should appear in the centre of the primary
-		// screen
+		// possible extension: TODO multiple screens: should appear in the centre of the primary screen
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int x = ((int) tk.getScreenSize().getWidth() - width) / 2;
 		int y = ((int) tk.getScreenSize().getHeight() - height) / 2;
@@ -192,7 +176,7 @@ public class jFrame extends JFrame {
 	}
 
 	/**
-	 * Exit frame.
+	 * Exit frame Simulates window close button.
 	 */
 	public void exitFrame() {
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -201,16 +185,11 @@ public class jFrame extends JFrame {
 		// dispose();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Window#setSize(int, int)
-	 */
-
 	/**
-	 * Gets the frame container.
+	 * Gets the frame container panel.
 	 *
-	 * @return the frame container
+	 * @return the frame container panel
+	 * 
 	 */
 	public jPanel getFrameContainer() {
 		return (jPanel) getContentPane().getComponent(0);
@@ -243,12 +222,12 @@ public class jFrame extends JFrame {
 	// }
 
 	/**
-	 * Gets the menu item.
+	 * Gets a menu item.
 	 *
 	 * @param menu
 	 *            the menu
 	 * @param menuItemName
-	 *            the menu item name
+	 *            the menu item's name
 	 * @return the menu item
 	 */
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {
@@ -278,17 +257,14 @@ public class jFrame extends JFrame {
 		}
 		return null;
 	}
-
-	// maximise frame
 	/**
-	 * Maximise frame.
+	 * Maximises frame.
 	 */
 	public void maximiseFrame() {
 		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
 	 * @see java.awt.Window#pack()
 	 */
@@ -343,7 +319,6 @@ public class jFrame extends JFrame {
 			return (String) Toolkit.getDefaultToolkit().getSystemClipboard()
 					.getData(DataFlavor.stringFlavor);
 		} catch (HeadlessException | UnsupportedFlavorException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -7,9 +7,8 @@ package PRA;
 
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Student.
+ * The Class Student. Stores the data for a single student.
  */
 public class Student {
 

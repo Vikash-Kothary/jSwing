@@ -21,9 +21,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CSVHandler.
+ * The Class CSVHandler. Reads csv files and handles data.
  */
 public class CSVHandler implements ActionListener {
 	
@@ -46,7 +45,7 @@ public class CSVHandler implements ActionListener {
 		mainList = _mainList;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
@@ -79,7 +78,7 @@ public class CSVHandler implements ActionListener {
 	}
 
 	/**
-	 * To string array.
+	 * Converts to a String array.
 	 *
 	 * @param assData
 	 *            the ass data
@@ -98,7 +97,7 @@ public class CSVHandler implements ActionListener {
 	}
 
 	/**
-	 * De anonymise.
+	 * De anonymised data.
 	 *
 	 * @param result
 	 *            the result

@@ -7,9 +7,8 @@ package PRA;
 
 import java.util.ArrayList;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Assessment.
+ * The Class Assessment. Stores all the results in a specific assessment or exam.
  */
 public class Assessment extends ArrayList<Result> {
 	
@@ -45,9 +44,7 @@ public class Assessment extends ArrayList<Result> {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/** 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -93,15 +90,11 @@ public class Assessment extends ArrayList<Result> {
 		this.examModule = examModule;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see java.util.AbstractCollection#toString()
 	 */
 	@Override
 	public String toString() {
 		return examModule + " " + assModule;
 	}
-
-	// public boolean sameAssessment(Assessment ass){
-	// return ass.getAssModule().equals(assModule);
-	// }
 }

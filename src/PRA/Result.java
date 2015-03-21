@@ -7,7 +7,7 @@ package PRA;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Result.
+ * The Class Result. Stores the data for a single exam or assessment.
  */
 public class Result {
 	
