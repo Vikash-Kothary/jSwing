@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
@@ -20,10 +22,9 @@ public class PDFExport {
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(filePath));
 			document.open();
-			addMetaData(document);
 			addContent(document);
 			document.close();
-		
+			JOptionPane.showMessageDialog(null, "PDF successfully created", "InfoBox: " + "Emails Sent" , JOptionPane.INFORMATION_MESSAGE);
 			
 		} catch (FileNotFoundException | DocumentException e) {
 			e.printStackTrace();
@@ -31,70 +32,59 @@ public class PDFExport {
 	}
 
 
-	  private static void addMetaData(Document document) {
-	  
-	  }
-
-	
-
 	  private static void addContent(Document document) throws DocumentException {
-	    Anchor anchor = new Anchor("First Chapter", font);
-	    anchor.setName("First Chapter");
+	    Anchor anchor = new Anchor("Student Results", font);
+	    anchor.setName("Student Results");
 
 	  
-	    Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+	    Chapter studentResults = new Chapter(new Paragraph(anchor), 1);
 
-	    Paragraph subPara = new Paragraph("Subcategory 1", font);
-	    Section subCatPart = catPart.addSection(subPara);
-	    subCatPart.add(new Paragraph("Hello"));
-
-	    subPara = new Paragraph("Subcategory 2", font);
-	    subCatPart = catPart.addSection(subPara);
+	    Section[] resultsTable = new Section[mainList.size()];
+	   
 
 
-	    // add a list
-	    createList(subCatPart);
-	    Paragraph paragraph = new Paragraph();
-	    addEmptyLine(paragraph, 5);
-	    subCatPart.add(paragraph);
-
-	    // add a table
 	    for (int s = 0; s < mainList.size(); s++){
-	    	createTable(subCatPart, s);
+	    	Paragraph subPara = new Paragraph(mainList.getStudent(s).getStudentName(), font);
 	    	
-	    }
-	    // now add all this to the document
-	    document.add(catPart);
+	    	if(mainList.getStudent(s).getResults().size() != 0){
+	    	
+	    		resultsTable[s] = studentResults.addSection(subPara);
+	    		resultsTable[s].add(new Paragraph(" "));
+	    		createTable(resultsTable[s], s);
+	    	}
+	    	
+	    	
+	     }	
+
+	    document.add(studentResults);
 
 
-
+	    																								
 	  }
 
 	  private static void createTable(Section subCatPart, int s)
 	      throws BadElementException {
 	    PdfPTable table = new PdfPTable(4);
 
-	    // t.setBorderColor(BaseColor.GRAY);
-	    // t.setPadding(4);
-	    // t.setSpacing(4);
-	    // t.setBorderWidth(1);
+
 
 	    PdfPCell c1 = new PdfPCell(new Phrase("Exam Module"));
 	    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	    table.addCell(c1);
 
-	    c1 = new PdfPCell(new Phrase("Assessment Module"));
-	    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-	    table.addCell(c1);
+	    PdfPCell c2 = new PdfPCell(new Phrase("Assessment Module"));
+	    c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+	    table.addCell(c2);
 
-	    c1 = new PdfPCell(new Phrase("Exam Mark"));
-	    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-	    table.addCell(c1);
-	    table.setHeaderRows(1);
+	    PdfPCell c3 = new PdfPCell(new Phrase("Exam Mark"));
+	    c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+	    table.addCell(c3);
 	    
-	    c1 = new PdfPCell(new Phrase("Exam Grade"));
-	    c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-	    table.addCell(c1);
+	    
+	    PdfPCell c4 = new PdfPCell(new Phrase("Exam Grade"));
+	    c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+	    table.addCell(c4);
+	    
 	    table.setHeaderRows(1);
 	    
 	    String[][] dataArray = toStringArray(mainList.getStudent(s).getResults());
@@ -120,17 +110,4 @@ public class PDFExport {
 			return dataArray;
 		}
 
-	  private static void createList(Section subCatPart) {
-	    List list = new List(true, false, 10);
-	    list.add(new ListItem("First point"));
-	    list.add(new ListItem("Second point"));
-	    list.add(new ListItem("Third point"));
-	    subCatPart.add(list);
-	  }
-
-	  private static void addEmptyLine(Paragraph paragraph, int number) {
-	    for (int i = 0; i < number; i++) {
-	      paragraph.add(new Paragraph(" "));
-	    }
-	  }
 }
