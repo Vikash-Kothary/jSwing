@@ -18,25 +18,17 @@ import jSwing.jFrame;
 import jSwing.jPanel;
 import jSwing.jTabbedPane;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ScatterPlotWindow.
- */
+
 public class ScatterPlotWindow extends jFrame{
 	
-	/** The rand. */
 	private Random rand = new Random();
-	
-	/** The series. */
 	private XYSeries series = new XYSeries("StudentData");
 	
+
 	/**
-	 * Instantiates a new scatter plot window.
-	 *
+	 *  Generates a window for display and pulls the series data from getData().
 	 * @param mainList
-	 *            the main list
 	 * @param tabbedPane
-	 *            the tabbed pane
 	 */
 	public ScatterPlotWindow(StudentList mainList, jTabbedPane tabbedPane ){
 		super("ScatterPlot");
@@ -55,14 +47,15 @@ public class ScatterPlotWindow extends jFrame{
 		setVisible(true);
 	}
 	
+
 	/**
-	 * Gets the data.
-	 *
+	 * This method generates the data used in the scatterplot
+	 * For the student in the table row being submitted it creates the sum of marks for every other table available
+	 * It generates the average mark of student and adds it to the series with the original mark
+	 * This repeats for every student in the table.
 	 * @param tabbedPane
-	 *            the tabbed pane
 	 * @param mainList
-	 *            the main list
-	 * @return the data
+	 * @return
 	 */
 	public XYSeries getData(jTabbedPane tabbedPane, StudentList mainList){
 		JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();

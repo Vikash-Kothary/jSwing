@@ -28,24 +28,14 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class EmailPopup.
- */
+
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame{
 
 	
-	/** The footer text. */
 	private String footerText;
-
-	/** The status. */
 	boolean status = false;
-	
-	/** The student emails. */
 	ArrayList<String> studentEmails = new ArrayList<String>();
-
-	/** The header text. */
 	private String headerText;
 
 	/**
