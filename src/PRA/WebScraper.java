@@ -156,21 +156,21 @@ public class WebScraper extends jFrame {
 		String password = getFrameContainer().getPanel("loginPanel").getPanel("passwordField")
 				.getTextField("Password").getText();
 		
-		HtmlUnitDriver driver = new HtmlUnitDriver(true);
-		String baseUrl = "https://login-keats.kcl.ac.uk/";
-
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		driver.get(baseUrl);
-
-		driver.findElement(By.id("TextBoxUser")).clear();
-		driver.findElement(By.id("TextBoxUser")).sendKeys("username");
-		driver.findElement(By.id("TextBoxPass")).clear();
-		driver.findElement(By.id("TextBoxPass")).sendKeys("password");
-		driver.findElement(By.id("Button1")).click();
-		
-		String htmlContent = driver.getPageSource();
-		Document document = Jsoup.parse(htmlContent);
+//		HtmlUnitDriver driver = new HtmlUnitDriver(true);
+//		String baseUrl = "https://login-keats.kcl.ac.uk/";
+//
+//		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//
+//		driver.get(baseUrl);
+//
+//		driver.findElement(By.id("TextBoxUser")).clear();
+//		driver.findElement(By.id("TextBoxUser")).sendKeys("username");
+//		driver.findElement(By.id("TextBoxPass")).clear();
+//		driver.findElement(By.id("TextBoxPass")).sendKeys("password");
+//		driver.findElement(By.id("Button1")).click();
+//		
+//		String htmlContent = driver.getPageSource();
+//		Document document = Jsoup.parse(htmlContent);
 		
 //		Connection.Response loginForm = Jsoup.connect("https://login-keats.kcl.ac.uk/")
 //	            .method(Connection.Method.GET)
