@@ -64,7 +64,7 @@ public class InterfaceWindow extends jFrame {
 				"Load exam results", "Exit" };
 		addMenu("File", fileMenu);
 		String[] dataMenu = new String[] { "Compare To Average",
-				"Email to Students", "Email Settings" };
+				"Email to Students", "Email Settings", "Fetch Participation", "Export To PDF" };
 		addMenu("Data", dataMenu);
 
 		getMenuItem("File", fileMenu[0]).addActionListener(
@@ -159,6 +159,13 @@ public class InterfaceWindow extends jFrame {
 						}
 					}
 				});
+		
+		getMenuItem("Data", dataMenu[4]).addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new PDFExport(mainList);
+			}
+		});
 	}
 
 	private void addStudentPanelElements() {
