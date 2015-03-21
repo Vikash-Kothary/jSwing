@@ -37,30 +37,68 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class jPanel.
+ */
 @SuppressWarnings("serial")
 public class jPanel extends JPanel {
 	// TODO remove dependency on jScrollPane as deprecated
+	/** The bg image. */
 	private Image bgImage = null;
+	
+	/** The buttons. */
 	private ArrayList<JButton> buttons;
+	
+	/** The check boxes. */
 	private ArrayList<JCheckBox> checkBoxes;
+	
+	/** The combo boxes. */
 	private ArrayList<JComboBox<?>> comboBoxes;
+	
+	/** The labels. */
 	private ArrayList<JLabel> labels;
+	
+	/** The lists. */
 	private ArrayList<jScrollPane> lists;
+	
+	/** The panels. */
 	private ArrayList<jPanel> panels;
+	
+	/** The password fields. */
 	private ArrayList<JPasswordField> passwordFields;
+	
+	/** The progress bars. */
 	private ArrayList<JProgressBar> progressBars;
+	
+	/** The rand. */
 	private Random rand = new Random();
+	
+	/** The scroll panels. */
 	private ArrayList<jScrollPane> scrollPanels;
+	
+	/** The series. */
 	private final XYSeries series = new XYSeries("StudentData");
+	
+	/** The spinners. */
 	private ArrayList<JSpinner> spinners;
 
+	/** The tabbed panes. */
 	private ArrayList<jTabbedPane> tabbedPanes;
+	
+	/** The tables. */
 	private ArrayList<jScrollPane> tables;
 
+	/** The text areas. */
 	private ArrayList<jScrollPane> textAreas;
+	
+	/** The text fields. */
 	private ArrayList<JTextField> textFields;
 
 	// Constructor
+	/**
+	 * Instantiates a new j panel.
+	 */
 	public jPanel() {
 		super();
 		_init();
@@ -74,6 +112,9 @@ public class jPanel extends JPanel {
 	//
 	// }
 
+	/**
+	 * _init.
+	 */
 	private void _init() {
 		panels = new ArrayList<>();
 		scrollPanels = new ArrayList<>();
@@ -91,6 +132,13 @@ public class jPanel extends JPanel {
 		progressBars = new ArrayList<>();
 	}
 
+	/**
+	 * Adds the button.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the j button
+	 */
 	public JButton addButton(String text) {
 		JButton button = new JButton(text);
 		add(button);
@@ -98,6 +146,15 @@ public class jPanel extends JPanel {
 		return button;
 	}
 
+	/**
+	 * Adds the button.
+	 *
+	 * @param text
+	 *            the text
+	 * @param format
+	 *            the format
+	 * @return the j button
+	 */
 	public JButton addButton(String text, String format) {
 		JButton button = new JButton(text);
 		add(button, format);
@@ -105,6 +162,13 @@ public class jPanel extends JPanel {
 		return button;
 	}
 
+	/**
+	 * Adds the check box.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the j check box
+	 */
 	public JCheckBox addCheckBox(String text) {
 		JCheckBox checkBox = new JCheckBox(text);
 
@@ -113,6 +177,15 @@ public class jPanel extends JPanel {
 		return checkBox;
 	}
 
+	/**
+	 * Adds the combo box.
+	 *
+	 * @param fields
+	 *            the fields
+	 * @param name
+	 *            the name
+	 * @return the j combo box
+	 */
 	public JComboBox<?> addComboBox(String[] fields, String name) {
 		JComboBox<?> comboBox = new JComboBox<>(fields);
 		comboBox.setName(name);
@@ -121,6 +194,12 @@ public class jPanel extends JPanel {
 		return comboBox;
 	}
 
+	/**
+	 * Adds the image.
+	 *
+	 * @param file
+	 *            the file
+	 */
 	public void addImage(File file) {
 		try {
 			Image image = ImageIO.read(file);
@@ -132,6 +211,12 @@ public class jPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds the image.
+	 *
+	 * @param url
+	 *            the url
+	 */
 	public void addImage(URL url) {
 		try {
 			Image image = ImageIO.read(url);
@@ -143,6 +228,13 @@ public class jPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds the label.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the j label
+	 */
 	public JLabel addLabel(String text) {
 		JLabel label = new JLabel(text);
 		label.setName(text);
@@ -151,6 +243,17 @@ public class jPanel extends JPanel {
 		return label;
 	}
 	
+	/**
+	 * Adds the label.
+	 *
+	 * @param text
+	 *            the text
+	 * @param format
+	 *            the format
+	 * @param name
+	 *            the name
+	 * @return the j label
+	 */
 	public JLabel addLabel(String text, String format, String name) {
 		JLabel label = new JLabel(text);
 		label.setName(name);
@@ -159,6 +262,15 @@ public class jPanel extends JPanel {
 		return label;
 	}
 
+	/**
+	 * Adds the label.
+	 *
+	 * @param text
+	 *            the text
+	 * @param format
+	 *            the format
+	 * @return the j label
+	 */
 	public JLabel addLabel(String text, String format) {
 		JLabel label = new JLabel(text);
 		add(label, format);
@@ -166,6 +278,15 @@ public class jPanel extends JPanel {
 		return label;
 	}
 
+	/**
+	 * Adds the list.
+	 *
+	 * @param text
+	 *            the text
+	 * @param name
+	 *            the name
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addList(String[] text, String name) {
 		if (text != null) {
 			JList<?> list = new JList<>(text);
@@ -178,6 +299,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Adds the pane.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the j tabbed pane
+	 */
 	public jTabbedPane addPane(String text) {
 		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
@@ -186,6 +314,15 @@ public class jPanel extends JPanel {
 		return pane;
 	}
 
+	/**
+	 * Adds the pane.
+	 *
+	 * @param text
+	 *            the text
+	 * @param format
+	 *            the format
+	 * @return the j tabbed pane
+	 */
 	public jTabbedPane addPane(String text, String format) {
 		jTabbedPane pane = new jTabbedPane();
 		pane.setName(text);
@@ -194,6 +331,13 @@ public class jPanel extends JPanel {
 		return pane;
 	}
 
+	/**
+	 * Adds the panel.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the j panel
+	 */
 	public jPanel addPanel(String name) {
 		jPanel panel = new jPanel();
 		panel.setName(name);
@@ -212,6 +356,15 @@ public class jPanel extends JPanel {
 	// return scrollPane;
 	// }
 
+	/**
+	 * Adds the panel.
+	 *
+	 * @param name
+	 *            the name
+	 * @param format
+	 *            the format
+	 * @return the j panel
+	 */
 	public jPanel addPanel(String name, String format) {
 		jPanel panel = new jPanel();
 		panel.setName(name);
@@ -241,6 +394,13 @@ public class jPanel extends JPanel {
 	// }
 	// }
 
+	/**
+	 * Adds the password field.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the j password field
+	 */
 	public JPasswordField addPasswordField(String name) {
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setName(name);
@@ -249,6 +409,17 @@ public class jPanel extends JPanel {
 		return passwordField;
 	}
 
+	/**
+	 * Adds the progress bar.
+	 *
+	 * @param min
+	 *            the min
+	 * @param max
+	 *            the max
+	 * @param name
+	 *            the name
+	 * @return the j progress bar
+	 */
 	public JProgressBar addProgressBar(int min, int max, String name) {
 		JProgressBar progressBar = new JProgressBar(min, max);
 		progressBar.setName(name);
@@ -257,6 +428,16 @@ public class jPanel extends JPanel {
 		return progressBar;
 	}
 
+	/**
+	 * Adds the scaled image.
+	 *
+	 * @param path
+	 *            the path
+	 * @param imgWidth
+	 *            the img width
+	 * @param imgHeight
+	 *            the img height
+	 */
 	public void addScaledImage(String path, int imgWidth, int imgHeight) {
 		try {
 			Image image = ImageIO.read(new File(path));
@@ -270,6 +451,13 @@ public class jPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Adds the scroll panel.
+	 *
+	 * @param panelName
+	 *            the panel name
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addScrollPanel(String panelName) {
 		jPanel panel = new jPanel();
 		panel.setName(panelName);
@@ -279,6 +467,15 @@ public class jPanel extends JPanel {
 		return scrollPane;
 	}
 
+	/**
+	 * Adds the scroll panel.
+	 *
+	 * @param panelName
+	 *            the panel name
+	 * @param format
+	 *            the format
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addScrollPanel(String panelName, String format) {
 		jPanel panel = new jPanel();
 		panel.setName(panelName);
@@ -288,6 +485,13 @@ public class jPanel extends JPanel {
 		return scrollPane;
 	}
 
+	/**
+	 * Adds the spinner.
+	 *
+	 * @param spinnerModel
+	 *            the spinner model
+	 * @return the j spinner
+	 */
 	public JSpinner addSpinner(SpinnerModel spinnerModel) {
 		JSpinner spinner = new JSpinner(spinnerModel);
 		spinners.add(spinner);
@@ -296,6 +500,15 @@ public class jPanel extends JPanel {
 
 	}
 
+	/**
+	 * Adds the spinner.
+	 *
+	 * @param spinnerModel
+	 *            the spinner model
+	 * @param name
+	 *            the name
+	 * @return the j spinner
+	 */
 	public JSpinner addSpinner(SpinnerModel spinnerModel, String name) {
 		JSpinner spinner = new JSpinner(spinnerModel);
 		spinner.setName(name);
@@ -304,6 +517,17 @@ public class jPanel extends JPanel {
 		return spinner;
 	}
 
+	/**
+	 * Adds the table.
+	 *
+	 * @param name
+	 *            the name
+	 * @param data
+	 *            the data
+	 * @param headers
+	 *            the headers
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addTable(String name, Object[][] data, String[] headers) {
 		JTable table = new JTable(data, headers);
 		table.setName(name);
@@ -314,6 +538,15 @@ public class jPanel extends JPanel {
 
 	}
 
+	/**
+	 * Adds the text area.
+	 *
+	 * @param text
+	 *            the text
+	 * @param name
+	 *            the name
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addTextArea(String text, String name) {
 		JTextArea textArea = new JTextArea(text);
 		textArea.setName(name);
@@ -323,6 +556,17 @@ public class jPanel extends JPanel {
 		return scrollPane;
 	}
 
+	/**
+	 * Adds the text field.
+	 *
+	 * @param text
+	 *            the text
+	 * @param name
+	 *            the name
+	 * @param format
+	 *            the format
+	 * @return the j text field
+	 */
 	public JTextField addTextField(String text, String name, String format) {
 		JTextField textField = new JTextField();
 		textField.setName(name);
@@ -333,6 +577,19 @@ public class jPanel extends JPanel {
 
 
 
+	/**
+	 * Creates the chart panel.
+	 *
+	 * @param studentData
+	 *            the student data
+	 * @param name
+	 *            the name
+	 * @param axis
+	 *            the axis
+	 * @param dimensions
+	 *            the dimensions
+	 * @return the chart panel
+	 */
 	public ChartPanel createChartPanel(XYDataset studentData, String name, String[] axis, int[] dimensions) {
 		JFreeChart chartPanel1 = ChartFactory.createScatterPlot(
 				name, axis[0], axis[1],
@@ -351,6 +608,11 @@ public class jPanel extends JPanel {
 	// return button;
 	// }
 
+	/**
+	 * Creates the data.
+	 *
+	 * @return the XY dataset
+	 */
 	private XYDataset createData() {
 		XYSeriesCollection studentData = new XYSeriesCollection();
 		for (int i = 0; i < 25; i++) {
@@ -360,6 +622,13 @@ public class jPanel extends JPanel {
 		return studentData;
 	}
 
+	/**
+	 * Gets the button.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the button
+	 */
 	public JButton getButton(String text) {
 		for (JButton button : buttons) {
 			if (button.getText().contains(text)) {
@@ -393,6 +662,13 @@ public class jPanel extends JPanel {
 	// }
 	// }
 
+	/**
+	 * Gets the check box.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the check box
+	 */
 	public JCheckBox getCheckBox(String text) {
 		for (JCheckBox cBox : checkBoxes) {
 			if (cBox.getText().contains(text)) {
@@ -402,6 +678,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the combo box.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the combo box
+	 */
 	public JComboBox<?> getComboBox(String text) {
 		for (int i = 0; i < comboBoxes.size(); i++) {
 			if (comboBoxes.get(i).getName().contains(text)) {
@@ -411,6 +694,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the label.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the label
+	 */
 	public JLabel getLabel(String text) {
 		for (JLabel label : labels) {
 			if (label.getName().contains(text)) {
@@ -422,6 +712,13 @@ public class jPanel extends JPanel {
 	
 	
 
+	/**
+	 * Gets the list.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the list
+	 */
 	public jScrollPane getList(String name) {
 		for (jScrollPane list : lists) {
 			if (list.getName().equals(name)) {
@@ -431,6 +728,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the panel.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the panel
+	 */
 	public jPanel getPanel(String name) {
 		for (jPanel panel : panels) {
 			if (panel.getName().equals(name)) {
@@ -440,6 +744,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the password field.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the password field
+	 */
 	public JPasswordField getPasswordField(String text) {
 		for (JPasswordField passwordField : passwordFields) {
 			if (passwordField.getName().contains(text)) {
@@ -449,6 +760,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the progress bar.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the progress bar
+	 */
 	public JProgressBar getProgressBar(String text) {
 		for (JProgressBar progressBar : progressBars) {
 			if (progressBar.getName().contains(text)) {
@@ -458,6 +776,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the scroll panel.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the scroll panel
+	 */
 	public jScrollPane getScrollPanel(String name) {
 		for (jScrollPane panel : scrollPanels) {
 			if (panel.getName().equals(name)) {
@@ -467,6 +792,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the spinner.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the spinner
+	 */
 	public JSpinner getSpinner(String text) {
 		for (JSpinner spinner : spinners) {
 			if (spinner.getName().contains(text)) {
@@ -476,6 +808,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the tabbed pane.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the tabbed pane
+	 */
 	public jTabbedPane getTabbedPane(String text) {
 		for (jTabbedPane tPane : tabbedPanes) {
 			if (tPane.getName().contains(text)) {
@@ -485,6 +824,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the text area.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the text area
+	 */
 	public jScrollPane getTextArea(String name) {
 		for (jScrollPane tArea : textAreas) {
 			if (tArea.getName().equals(name)) {
@@ -494,6 +840,13 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/**
+	 * Gets the text field.
+	 *
+	 * @param text
+	 *            the text
+	 * @return the text field
+	 */
 	public JTextField getTextField(String text) {
 		for (JTextField tField : textFields) {
 			if (tField.getName().contains(text)) {
@@ -503,6 +856,9 @@ public class jPanel extends JPanel {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -511,12 +867,30 @@ public class jPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Sets the background.
+	 *
+	 * @param path
+	 *            the new background
+	 */
 	public void setBackground(String path) {
 		bgImage = new ImageIcon(path).getImage().getScaledInstance(
 				this.getWidth(), getHeight(), Image.SCALE_FAST);
 		repaint();
 	}
 
+	/**
+	 * Sets the padding.
+	 *
+	 * @param top
+	 *            the top
+	 * @param left
+	 *            the left
+	 * @param bottom
+	 *            the bottom
+	 * @param right
+	 *            the right
+	 */
 	public void setPadding(int top, int left, int bottom, int right) {
 		setBorder(new EmptyBorder(top, left, bottom, right));
 	}

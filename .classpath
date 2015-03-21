@@ -14,5 +14,14 @@
 	<classpathentry kind="lib" path="D:/Documents/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="D:/Documents/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="D:/Documents/selenium-java-2.9.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itextpdf-5.5.5.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itextpdf-5.5.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itextpdf-5.5.5-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-pdfa-5.5.5.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-pdfa-5.5.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-pdfa-5.5.5-sources.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-xtra-5.5.5.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-xtra-5.5.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Documents/itext-xtra-5.5.5-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

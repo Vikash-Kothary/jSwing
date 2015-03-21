@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import jSwing.jFrame;
@@ -21,12 +26,25 @@ import javax.swing.event.DocumentListener;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InterfaceWindow.
+ */
 @SuppressWarnings("serial")
 public class InterfaceWindow extends jFrame {
+	
+	/** The main list. */
 	private StudentList mainList;
 	
+	/** The series. */
 	private final XYSeries series = new XYSeries("StudentData");
 
+	/**
+	 * Instantiates a new interface window.
+	 *
+	 * @param _mainList
+	 *            the _main list
+	 */
 	public InterfaceWindow(StudentList _mainList) {
 		super("PRA Coursework - Deep Vein Thrombosis");
 		mainList = _mainList;
@@ -59,6 +77,9 @@ public class InterfaceWindow extends jFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inits the menu.
+	 */
 	private void initMenu() {
 		String[] fileMenu = new String[] { "Load anonymous marking codes",
 				"Load exam results", "Exit" };
@@ -152,6 +173,9 @@ public class InterfaceWindow extends jFrame {
 
 	}
 
+	/**
+	 * Adds the student panel elements.
+	 */
 	private void addStudentPanelElements() {
 		final jPanel students = getFrameContainer().getPanel("students");
 		students.addTextField(null, "studentSearchField", BorderLayout.NORTH);

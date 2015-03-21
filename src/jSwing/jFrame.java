@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+// TODO: Auto-generated Javadoc
 /*
  * jFrame class is a derived class of JFrame. It is a base
  * class for the creating and handling swing windows. It also
@@ -28,18 +29,31 @@ import javax.swing.JPanel;
  * @see JMenu
  * @see JMenuItem
  */
+/**
+ * The Class jFrame.
+ */
 @SuppressWarnings("serial")
 public class jFrame extends JFrame {
 
+	/** The containers. */
 	private ArrayList<jPanel> containers;
+	
+	/** The menu bar. */
 	private JMenuBar menuBar;
+	
+	/** The title. */
 	private String title;
+	
+	/** The height. */
 	private int width, height;
 
 	// Constructors
 	/*
-	 * Class constructor.
+	 * Class constructor. Calls initFrame() function.
 	 * @see JFrame
+	 */
+	/**
+	 * Instantiates a new j frame.
 	 */
 	public jFrame() {
 		initFrame();
@@ -47,9 +61,23 @@ public class jFrame extends JFrame {
 
 	/*
 	 * Class constructor that sets the JFrame component's size.
-	 * @param width
+	 * @param width width of JFrame window
 	 * @param height
+	 * @param _width
+	 * @param _width
 	 * @see JFrame
+	 */
+	/**
+	 * Instantiates a new j frame.
+	 *
+	 * @param _width
+	 *            the _width
+	 * @param _height
+	 *            the _height
+	 */
+	/**
+	 * @param _width
+	 * @param _height
 	 */
 	public jFrame(int _width, int _height) {
 		width = _width;
@@ -59,6 +87,12 @@ public class jFrame extends JFrame {
 		initFrame();
 	}
 
+	/**
+	 * Instantiates a new j frame.
+	 *
+	 * @param _title
+	 *            the _title
+	 */
 	public jFrame(String _title) {
 		title = _title;
 		setTitle(title); // set the frame title
@@ -66,6 +100,16 @@ public class jFrame extends JFrame {
 		initFrame();
 	}
 
+	/**
+	 * Instantiates a new j frame.
+	 *
+	 * @param _title
+	 *            the _title
+	 * @param _width
+	 *            the _width
+	 * @param _height
+	 *            the _height
+	 */
 	public jFrame(String _title, int _width, int _height) {
 		title = _title;
 		width = _width;
@@ -76,16 +120,29 @@ public class jFrame extends JFrame {
 		initFrame();
 	}
 
+	/**
+	 * Inits the frame.
+	 */
 	private void initFrame() {
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		containers = new ArrayList<>();
 	}
 	
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public jFrame getFrame(){
 		return this;
 	}
 
+	/**
+	 * Adds the container.
+	 *
+	 * @return the j panel
+	 */
 	public jPanel addContainer() {
 		jPanel panel = new jPanel();
 		containers.add(panel);
@@ -93,6 +150,13 @@ public class jFrame extends JFrame {
 		return panel;
 	}
 	
+	/**
+	 * Adds the container.
+	 *
+	 * @param name
+	 *            the name
+	 * @return the j panel
+	 */
 	public jPanel addContainer(String name) {
 		jPanel panel = new jPanel();
 		panel.setName(name);
@@ -101,6 +165,15 @@ public class jFrame extends JFrame {
 		return panel;
 	}
 
+	/**
+	 * Adds the menu.
+	 *
+	 * @param menuTitle
+	 *            the menu title
+	 * @param menuItems
+	 *            the menu items
+	 * @return the j menu
+	 */
 	public JMenu addMenu(String menuTitle, String[] menuItems) {
 		if (menuItems != null) {
 			JMenu menu = new JMenu(menuTitle);
@@ -115,6 +188,9 @@ public class jFrame extends JFrame {
 	}
 
 	// frame's location is set to the centre to the screen
+	/**
+	 * Centre frame.
+	 */
 	public void centreFrame() {
 		// TODO multiple screens: should appear in the centre of the primary
 		// screen
@@ -124,6 +200,9 @@ public class jFrame extends JFrame {
 		setLocation(x, y);
 	}
 
+	/**
+	 * Exit frame.
+	 */
 	public void exitFrame() {
 		dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		// // Alternative method to close frame
@@ -137,6 +216,11 @@ public class jFrame extends JFrame {
 	 * @see java.awt.Window#setSize(int, int)
 	 */
 
+	/**
+	 * Gets the frame container.
+	 *
+	 * @return the frame container
+	 */
 	public jPanel getFrameContainer() {
 		return (jPanel) getContentPane().getComponent(0);
 	}
@@ -167,10 +251,28 @@ public class jFrame extends JFrame {
 	// });
 	// }
 
+	/**
+	 * Gets the menu item.
+	 *
+	 * @param menu
+	 *            the menu
+	 * @param menuItemName
+	 *            the menu item name
+	 * @return the menu item
+	 */
 	public JMenuItem getMenuItem(JMenu menu, String menuItemName) {
 		return menuBar.getMenu(0).getItem(0);
 	}
 
+	/**
+	 * Gets the menu item.
+	 *
+	 * @param menuName
+	 *            the menu name
+	 * @param menuItemName
+	 *            the menu item name
+	 * @return the menu item
+	 */
 	public JMenuItem getMenuItem(String menuName, String menuItemName) {
 		for (int i = 0; i < menuBar.getMenuCount(); i++) {
 			JMenu menu = menuBar.getMenu(i);
@@ -187,6 +289,9 @@ public class jFrame extends JFrame {
 	}
 
 	// maximise frame
+	/**
+	 * Maximise frame.
+	 */
 	public void maximiseFrame() {
 		setExtendedState(getExtendedState() | Frame.MAXIMIZED_BOTH); // maximise
 	}
@@ -204,6 +309,12 @@ public class jFrame extends JFrame {
 	}
 
 	// changes jpanel container in frame
+	/**
+	 * Sets the container.
+	 *
+	 * @param panel
+	 *            the new container
+	 */
 	public void setContainer(JPanel panel) {
 		getContentPane().removeAll(); // empties frame background
 		getContentPane().add(panel); // add panel to background
@@ -215,6 +326,13 @@ public class jFrame extends JFrame {
 		repaint();
 	}
 	
+	/**
+	 * Change container.
+	 *
+	 * @param name
+	 *            the name
+	 * @return true, if successful
+	 */
 	public boolean changeContainer(String name) {
 		for(jPanel container : containers){
 			container.getName().equals(name);
@@ -224,6 +342,11 @@ public class jFrame extends JFrame {
 		return false;
 	}
 	
+	/**
+	 * Gets the clipboard data.
+	 *
+	 * @return the clipboard data
+	 */
 	public String getClipboardData() {
 		try {
 			return (String) Toolkit.getDefaultToolkit().getSystemClipboard()

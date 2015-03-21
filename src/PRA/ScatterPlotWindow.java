@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import java.awt.BorderLayout;
@@ -13,11 +18,26 @@ import jSwing.jFrame;
 import jSwing.jPanel;
 import jSwing.jTabbedPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ScatterPlotWindow.
+ */
 public class ScatterPlotWindow extends jFrame{
 	
+	/** The rand. */
 	private Random rand = new Random();
+	
+	/** The series. */
 	private XYSeries series = new XYSeries("StudentData");
 	
+	/**
+	 * Instantiates a new scatter plot window.
+	 *
+	 * @param mainList
+	 *            the main list
+	 * @param tabbedPane
+	 *            the tabbed pane
+	 */
 	public ScatterPlotWindow(StudentList mainList, jTabbedPane tabbedPane ){
 		super("ScatterPlot");
 		setSize(1000,600);
@@ -35,6 +55,15 @@ public class ScatterPlotWindow extends jFrame{
 		setVisible(true);
 	}
 	
+	/**
+	 * Gets the data.
+	 *
+	 * @param tabbedPane
+	 *            the tabbed pane
+	 * @param mainList
+	 *            the main list
+	 * @return the data
+	 */
 	public XYSeries getData(jTabbedPane tabbedPane, StudentList mainList){
 		JTable selectedTable = tabbedPane.getTab(tabbedPane.getSelectedIndex()).getTable();
 //		String candKey = null;

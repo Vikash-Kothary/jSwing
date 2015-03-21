@@ -1,10 +1,25 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import studentdata.Connector;
 import studentdata.DataTable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainAPP.
+ */
 public class MainAPP {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		StudentList studentList = new StudentList();
 

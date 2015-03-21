@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import java.awt.BorderLayout;
@@ -37,10 +42,26 @@ import jSwing.jPanel;
 
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebScraper.
+ */
 @SuppressWarnings("serial")
 public class WebScraper extends jFrame {
+	
+	/** The uri. */
 	private URI uri;
 
+	/**
+	 * Instantiates a new web scraper.
+	 *
+	 * @throws HeadlessException
+	 *             the headless exception
+	 * @throws UnsupportedFlavorException
+	 *             the unsupported flavor exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public WebScraper() throws HeadlessException, UnsupportedFlavorException,
 			IOException {
 		super("Fetch Participation");
@@ -54,6 +75,9 @@ public class WebScraper extends jFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Adds the url page.
+	 */
 	private void addURLPage() {
 		setMinimumSize(new Dimension(400, 100));
 		jPanel container = addContainer("URL");
@@ -106,6 +130,9 @@ public class WebScraper extends jFrame {
 				});
 	}
 
+	/**
+	 * Adds the login page.
+	 */
 	private void addLoginPage() {
 		setMinimumSize(new Dimension(400, 150));
 		jPanel container = addContainer("Login");
@@ -150,6 +177,14 @@ public class WebScraper extends jFrame {
 
 	}
 
+	/**
+	 * Scrape.
+	 *
+	 * @param url
+	 *            the url
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private void scrape(URI url) throws IOException {
 		String username = getFrameContainer().getPanel("loginPanel").getPanel("usernameField")
 				.getTextField("Username").getText();

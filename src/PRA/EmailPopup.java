@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import jSwing.jFrame;
@@ -23,17 +28,36 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailPopup.
+ */
 @SuppressWarnings("serial")
 public class EmailPopup extends jFrame{
 
 	
+	/** The footer text. */
 	private String footerText;
 
+	/** The status. */
 	boolean status = false;
+	
+	/** The student emails. */
 	ArrayList<String> studentEmails = new ArrayList<String>();
 
+	/** The header text. */
 	private String headerText;
 
+	/**
+	 * Instantiates a new email popup.
+	 *
+	 * @param mainList
+	 *            the main list
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public EmailPopup(final StudentList mainList) throws FileNotFoundException,
 			IOException {
 		super("Email");

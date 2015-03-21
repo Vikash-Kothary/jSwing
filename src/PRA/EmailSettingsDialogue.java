@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import java.awt.BorderLayout;
@@ -14,8 +19,20 @@ import javax.swing.SpinnerNumberModel;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailSettingsDialogue.
+ */
 public class EmailSettingsDialogue extends jFrame {
 
+	/**
+	 * Instantiates a new email settings dialogue.
+	 *
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public EmailSettingsDialogue() throws FileNotFoundException, IOException {
 		super("Settings");
 		this.setMinimumSize(new Dimension(300,150));
