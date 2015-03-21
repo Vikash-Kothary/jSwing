@@ -40,8 +40,6 @@ import org.jsoup.nodes.Document;
 import jSwing.jFrame;
 import jSwing.jPanel;
 
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class WebScraper.
