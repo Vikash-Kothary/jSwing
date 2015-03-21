@@ -3,7 +3,7 @@ package PRA;
 import studentdata.Connector;
 import studentdata.DataTable;
 
-public class MainProgram {
+public class MainApp {
 
 	public static void main(String[] args) {
 		StudentList studentList = new StudentList();
