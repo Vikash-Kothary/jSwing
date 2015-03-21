@@ -16,9 +16,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-// TODO: Auto-generated Javadoc
-/*
- * jFrame class is a derived class of JFrame. It is a base
+/**
+ * The class jFrame is a derived class of JFrame. It is a base
  * class for the creating and handling swing windows. It also
  * handles the adding of a menu bar to all windows.
  * @author  Vikash Kothary
@@ -28,9 +27,6 @@ import javax.swing.JPanel;
  * @see JMenuBar
  * @see JMenu
  * @see JMenuItem
- */
-/**
- * The Class jFrame.
  */
 @SuppressWarnings("serial")
 public class jFrame extends JFrame {
@@ -47,13 +43,8 @@ public class jFrame extends JFrame {
 	/** The height. */
 	private int width, height;
 
-	// Constructors
-	/*
-	 * Class constructor. Calls initFrame() function.
-	 * @see JFrame
-	 */
 	/**
-	 * Instantiates a new j frame.
+	 * Class constructor. Instantiates a new jFrame.
 	 */
 	public jFrame() {
 		initFrame();
