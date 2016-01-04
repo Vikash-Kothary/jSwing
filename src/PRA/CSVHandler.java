@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import jSwing.jFrame;
@@ -16,15 +21,33 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * The Class CSVHandler. Reads csv files and handles data.
+ */
 public class CSVHandler implements ActionListener {
+	
+	/** The frame. */
 	private jFrame frame;
+	
+	/** The main list. */
 	private StudentList mainList;
 
+	/**
+	 * Instantiates a new CSV handler.
+	 *
+	 * @param _frame
+	 *            the _frame
+	 * @param _mainList
+	 *            the _main list
+	 */
 	public CSVHandler(jFrame _frame, StudentList _mainList) {
 		frame = _frame;
 		mainList = _mainList;
 	}
 
+	/**
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		try {
@@ -54,6 +77,13 @@ public class CSVHandler implements ActionListener {
 		}
 	}
 
+	/**
+	 * Converts to a String array.
+	 *
+	 * @param assData
+	 *            the ass data
+	 * @return the string[][]
+	 */
 	private String[][] toStringArray(Assessment assData) {
 		String[][] dataArray = new String[assData.size()][5];
 		for (int i = 0; i < dataArray.length; i++) {
@@ -66,6 +96,13 @@ public class CSVHandler implements ActionListener {
 		return dataArray;
 	}
 
+	/**
+	 * De anonymised data.
+	 *
+	 * @param result
+	 *            the result
+	 * @return true, if successful
+	 */
 	private boolean deAnonymise(Result result) {
 		// check every student
 		for (Student student : mainList) {
@@ -85,6 +122,13 @@ public class CSVHandler implements ActionListener {
 		return false;
 	}
 
+	/**
+	 * Adds the to assessments.
+	 *
+	 * @param data
+	 *            the data
+	 * @return the array list
+	 */
 	private ArrayList<Assessment> addToAssessments(ArrayList<Result> data) {
 		ArrayList<Assessment> assData = new ArrayList<>();
 		int assIndex = -1;
@@ -106,6 +150,15 @@ public class CSVHandler implements ActionListener {
 		return assData;
 	}
 
+	/**
+	 * Gets the CSV data.
+	 *
+	 * @param filePath
+	 *            the file path
+	 * @return the CSV data
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	@SuppressWarnings("resource")
 	private ArrayList<Result> getCSVData(String filePath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -118,6 +171,13 @@ public class CSVHandler implements ActionListener {
 		}
 	}
 
+	/**
+	 * Gets the files.
+	 *
+	 * @return the files
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private File[] getFiles() throws IOException {
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter(
@@ -134,6 +194,13 @@ public class CSVHandler implements ActionListener {
 		return null;
 	}
 
+	/**
+	 * Read codes.
+	 *
+	 * @param filePath
+	 *            the file path
+	 * @return the array list
+	 */
 	private ArrayList<Result> readCodes(String filePath) {
 		BufferedReader br = null;
 		String line = " ";
@@ -193,6 +260,15 @@ public class CSVHandler implements ActionListener {
 
 	}
 
+	/**
+	 * Read results.
+	 *
+	 * @param filePath
+	 *            the file path
+	 * @return the array list
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	private ArrayList<Result> readResults(String filePath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 

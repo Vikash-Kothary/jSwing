@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package jSwing;
 
 import java.awt.Component;
@@ -11,10 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
+/**
+ * The Class jTabbedPane.
+ */
 @SuppressWarnings("serial")
 public class jTabbedPane extends JTabbedPane {
+	
+	/** The tabs. */
 	ArrayList<jScrollPane> tabs;
 
+	/**
+	 * Instantiates a new j tabbed pane.
+	 */
 	public jTabbedPane() {
 		tabs = new ArrayList<>();
 	}
@@ -24,12 +37,29 @@ public class jTabbedPane extends JTabbedPane {
 	 * 
 	 * @see javax.swing.JTabbedPane#add(java.lang.String, java.awt.Component)
 	 */
+	/**
+	 * Adds the.
+	 *
+	 * @param title
+	 *            the title
+	 * @param component
+	 *            the component
+	 * @return the j scroll pane
+	 */
 	public jScrollPane add(String title, jScrollPane component) {
 		Component success = super.add(title, component);
 		addCloseTabButton(title, component);
 		return (jScrollPane) success;
 	}
 
+	/**
+	 * Adds the close tab button.
+	 *
+	 * @param title
+	 *            the title
+	 * @param panel
+	 *            the panel
+	 */
 	private void addCloseTabButton(String title, final jScrollPane panel) {
 		final JTabbedPane tabbedPane = this;
 		jPanel titlePanel = new jPanel();
@@ -48,6 +78,15 @@ public class jTabbedPane extends JTabbedPane {
 		setTabComponentAt(indexOfComponent(panel), titlePanel);
 	}
 
+	/**
+	 * Adds the table tab.
+	 *
+	 * @param tabName
+	 *            the tab name
+	 * @param table
+	 *            the table
+	 * @return the j scroll pane
+	 */
 	public jScrollPane addTableTab(String tabName, JTable table) {
 		table.setName(tabName);
 		jScrollPane scrollTable = new jScrollPane(table, tabName);
@@ -57,8 +96,15 @@ public class jTabbedPane extends JTabbedPane {
 	}
 
 	/**
-	 * @param numOfTabs
-	 *            the numOftabs to set
+	 * Adds the table tab.
+	 *
+	 * @param tabName
+	 *            the tab name
+	 * @param results
+	 *            the results
+	 * @param columns
+	 *            the columns
+	 * @return the j scroll pane
 	 */
 
 	public jScrollPane addTableTab(String tabName, Object[][] results,
@@ -73,20 +119,41 @@ public class jTabbedPane extends JTabbedPane {
 	}
 
 	/**
-	 * @return the numOfTabs
+	 * Gets the number of tabs.
+	 *
+	 * @return the number of tabs
 	 */
 	public int getNumberOfTabs() {
 		return tabs.size();
 	}
 
+	/**
+	 * Gets the tab.
+	 *
+	 * @param index
+	 *            the index
+	 * @return the tab
+	 */
 	public jScrollPane getTab(int index) {
 		return tabs.get(index);
 	}
 
+	/**
+	 * Gets the tabs.
+	 *
+	 * @return the tabs
+	 */
 	public ArrayList<jScrollPane> getTabs() {
 		return tabs;
 	}
 
+	/**
+	 * Removes the tab.
+	 *
+	 * @param index
+	 *            the index
+	 * @return the j scroll pane
+	 */
 	public jScrollPane removeTab(int index) {
 		return tabs.remove(index);
 	}

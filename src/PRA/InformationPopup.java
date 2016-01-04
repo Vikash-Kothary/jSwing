@@ -1,3 +1,8 @@
+/*
+ * PRA Coursework - Deep Vein Thrombosis
+ * @author  Vikash Kothary
+ * @author  Toby Birkett
+ */
 package PRA;
 
 import jSwing.jFrame;
@@ -10,9 +15,19 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InformationPopup.
+ */
 @SuppressWarnings("serial")
 public class InformationPopup extends jFrame {
 
+	/**
+	 * Instantiates a new information popup.
+	 *
+	 * @param student
+	 *            the student
+	 */
 	public InformationPopup(Student student) {
 		super("Information");
 		this.setMinimumSize(new Dimension(400, 150));
@@ -54,6 +69,13 @@ public class InformationPopup extends jFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * To string array.
+	 *
+	 * @param resultsData
+	 *            the results data
+	 * @return the string[][]
+	 */
 	private String[][] toStringArray(ArrayList<Result> resultsData) {
 		String[][] dataArray = new String[resultsData.size()][4];
 		for (int i = 0; i < dataArray.length; i++) {

@@ -16,6 +16,11 @@ public class PDFExport {
 	private static Font font = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
 	private static StudentList mainList;
 	
+	/**
+	 * Creates an instance of a document which is saved in the given directory.
+	 * 
+	 * @param mainList
+	 */
 	public PDFExport(StudentList mainList){
 		this.mainList = mainList;
 		Document document = new Document();
@@ -32,7 +37,13 @@ public class PDFExport {
 	}
 
 
-	  private static void addContent(Document document) throws DocumentException {
+	  /**
+	   *  This method adds content by generating paragraphs and sections for each part of the pdf
+	   * The for loop cycles through each student being added to the pdf .
+	   * @param document
+	   * @throws DocumentException
+	   */
+	private static void addContent(Document document) throws DocumentException {
 	    Anchor anchor = new Anchor("Student Results", font);
 	    anchor.setName("Student Results");
 
@@ -62,7 +73,15 @@ public class PDFExport {
 	    																								
 	  }
 
-	  private static void createTable(Section subCatPart, int s)
+	  /**
+	   * creates a table of 4 columns and stores the data of each student in the table,
+	   * the cells are added one by one with each piece of information from the 2 dimensional array.
+	   * 
+	   * @param subCatPart
+	   * @param s
+	   * @throws BadElementException
+	   */
+	private static void createTable(Section subCatPart, int s)
 	      throws BadElementException {
 	    PdfPTable table = new PdfPTable(4);
 
@@ -99,6 +118,11 @@ public class PDFExport {
 
 	  }
 	  
+		/**
+		 * Generates a 2 dimensional array based on the data pulled from each results object.
+		 * @param resultsData
+		 * @return
+		 */
 		private static String[][] toStringArray(ArrayList<Result> resultsData) {
 			String[][] dataArray = new String[resultsData.size()][4];
 			for (int i = 0; i < dataArray.length; i++) {
